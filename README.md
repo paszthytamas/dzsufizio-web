@@ -31,6 +31,8 @@ Az Instagram- és TikTok-videók a szolgáltatók saját lejátszóját használ
 
 A Panaszok és a Módszerek médiahelyeit a src/pages.json oldalleírásainak mediaSlot mezői adják. A kész kép vagy videó jelölése az érintett src/pages/ fájlban a {{media-slot}} helyére kerül; ilyenkor töröld az oldal mediaSlot mezőjét is. A képeket a src/assets/images/ alatt tárold, a videókhoz kövesd a meglévő beágyazások mintáját. A Salonic foglalólinkek közös megjelenését a button booking-cta osztályok adják.
 
+Az átnéző nézet beállítását a review-backend/README.md írja le. A megjegyzések és a hozzáférést biztosító egyedi linkek adatai nem kerülnek a GitHub-tárhelyre.
+
 ## GitHub Pages
 
 1. Töltsd fel ezt a projektet egy új GitHub-repó main ágára. A .github/ mappa is kerüljön bele.

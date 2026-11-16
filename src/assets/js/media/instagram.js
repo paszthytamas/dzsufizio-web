@@ -23,7 +23,7 @@ function processInstagram(){
   try{window.instgrm?.Embeds?.process()}catch(error){/* The slot will use the direct player. */}
  });
 }
-function mountReel(slot){
+function mountReel(slot,useScript){
  if(reelMounts.has(slot)||slot.closest('[hidden],details:not([open])'))return;
  const permalink=new URL(slot.dataset.igPermalink);
  if(permalink.origin!=='https://www.instagram.com'||!/^\/reel\/[A-Za-z0-9_-]+\/$/.test(permalink.pathname))return;
@@ -66,6 +66,7 @@ function mountReel(slot){
   mount.replaceChildren(frame);
  }
  reelMounts.set(slot,stop);
+ if(!useScript){direct();return}
  loadInstagram().then(official=>{
   if(reelMounts.get(slot)!==stop)return;
   if(!official){direct();return}
@@ -88,12 +89,12 @@ function mountReel(slot){
   processInstagram();
  });
 }
-export function initInstagram(page){
+export function initInstagram(page,{useScript=true}={}){
  const slots=page.querySelectorAll('[data-ig-permalink]');
  if(!slots.length)return;
- if(!('IntersectionObserver' in window)){slots.forEach(mountReel);return}
+ if(!('IntersectionObserver' in window)){slots.forEach(slot=>mountReel(slot,useScript));return}
  const reelObserver=new IntersectionObserver(entries=>{
-  for(const {isIntersecting,target} of entries)if(isIntersecting){mountReel(target);reelObserver.unobserve(target)}
+  for(const {isIntersecting,target} of entries)if(isIntersecting){mountReel(target,useScript);reelObserver.unobserve(target)}
  },{rootMargin:'420px 0px'});
  slots.forEach(slot=>reelObserver.observe(slot));
 }
