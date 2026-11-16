@@ -7,16 +7,17 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAssets] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
   readSource('components/media-slot.html'),
   readSource('assets/js/main.js'),
   readSource('assets/css/site.css'),
+  Promise.all(['assets/js/review/panel.js', 'assets/js/review/resize.js', 'assets/css/review.css'].map(readSource)),
 ]);
 const revision = source => createHash('sha256').update(source).digest('hex').slice(0, 12);
-const mainRevision = revision(mainScript);
+const mainRevision = revision([mainScript, ...reviewAssets].join('\0'));
 const siteRevision = revision(siteStyles);
 const slotMarker = '{{media-slot}}';
 

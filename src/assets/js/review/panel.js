@@ -1,5 +1,4 @@
 import { elementTarget, pageTarget, revealNote, selectedTarget } from './anchors.js';
-import { initReviewResize } from './resize.js';
 import { reviewId } from './session.js';
 
 const messages = {
@@ -45,6 +44,9 @@ export async function initReview(main, session) {
   css.search = new URL(import.meta.url).search;
   stylesheet.href = css;
   document.head.append(stylesheet);
+  const resize = new URL('./resize.js', import.meta.url);
+  resize.search = css.search;
+  const { initReviewResize } = await import(resize.href);
 
   const toggle = add(document.body, 'button', 'review-toggle', 'Átnézés');
   toggle.type = 'button';

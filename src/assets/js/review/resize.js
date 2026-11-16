@@ -2,6 +2,8 @@ import { preference } from '../preferences.js';
 
 const DEFAULT_WIDTH = 360;
 const MIN_WIDTH = 280;
+const MIN_PAGE_WIDTH = 400;
+const MAX_VIEWPORT_SHARE = .8;
 
 export function initReviewResize(panel, root, onResize) {
   const handle = document.createElement('div');
@@ -16,16 +18,20 @@ export function initReviewResize(panel, root, onResize) {
 
   const settings = preference(root.pathname, 'review-width');
   const stored = Number(settings.read());
-  let preferred = stored >= MIN_WIDTH ? Math.min(700, stored) : DEFAULT_WIDTH;
+  let preferred = Number.isFinite(stored) && stored >= MIN_WIDTH ? stored : DEFAULT_WIDTH;
   let width = DEFAULT_WIDTH;
   let drag;
-  const upper = () => Math.max(MIN_WIDTH, Math.min(700, document.documentElement.clientWidth - 700));
+  const upper = () => {
+    const viewport = document.documentElement.clientWidth;
+    return Math.max(MIN_WIDTH, Math.min(Math.floor(viewport * MAX_VIEWPORT_SHARE), viewport - MIN_PAGE_WIDTH));
+  };
 
   function apply() {
-    width = Math.round(Math.min(upper(), Math.max(MIN_WIDTH, preferred)));
+    const max = upper();
+    width = Math.round(Math.min(max, Math.max(MIN_WIDTH, preferred)));
     document.body.style.setProperty('--review-rail', width + 'px');
     handle.setAttribute('aria-valuemin', String(MIN_WIDTH));
-    handle.setAttribute('aria-valuemax', String(upper()));
+    handle.setAttribute('aria-valuemax', String(max));
     handle.setAttribute('aria-valuenow', String(width));
     handle.setAttribute('aria-valuetext', width + ' képpont');
     onResize();

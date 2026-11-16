@@ -96,6 +96,47 @@
   .review-open .review-resize {
     display: block;
   }
+  .review-open :is(.site-header, main) {
+    container-type: inline-size;
+  }
+}
+
+@container (max-width: 700px) {
+  .review-open .header-inner {
+    min-height: 59px;
+    padding: .5rem .9rem;
+    flex-wrap: wrap;
+    gap: .45rem;
+  }
+  .review-open .menu-btn {
+    display: inline-flex;
+  }
+  .review-open .nav {
+    display: none;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+  .review-open .nav.is-open {
+    display: flex;
+  }
+  .review-open .reader {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .review-open .side {
+    position: static;
+    order: -1;
+    max-height: none;
+  }
+  .review-open .article-card {
+    padding: clamp(1rem, 4.3cqi, 1.6rem);
+  }
+  .review-open main h1 {
+    font-size: clamp(1.65rem, 7cqi, 2.75rem);
+    overflow-wrap: anywhere;
+  }
+  .review-open .profile-hero {
+    grid-template-columns: 85px minmax(0, 1fr);
+  }
 }
 
 .review-panel p {
