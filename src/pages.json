@@ -137,98 +137,154 @@
     "file": "panaszok.html",
     "title": "Mozgásszervi panaszok és fájdalmak",
     "nav": "aloldalak",
-    "description": "Indulj onnan, ahol a panaszt leginkább érzed. A testtájak szerinti leírásokból megtudhatod, milyen tünetekkel érdemes előbb orvoshoz fordulni, és mire…"
+    "description": "Indulj onnan, ahol a panaszt leginkább érzed. A testtájak szerinti leírásokból megtudhatod, milyen tünetekkel érdemes előbb orvoshoz fordulni, és mire…",
+    "mediaSlot": {
+      "title": "Panaszok testtáj szerint",
+      "note": "Fotó vagy videó arról, ahogy a vendég megmutatja, hol érzi a panaszt."
+    }
   },
   {
     "path": "derekfajas",
     "file": "derekfajas.html",
     "title": "Derékfájás és kezelése",
     "nav": "aloldalak",
-    "description": "Fáj a derekad hosszú ülés után, munka közben vagy edzést követően? A Dzsufiziónál az első alkalom elején átbeszéljük, mikor jelentkezik a panaszod, és…"
+    "description": "Fáj a derekad hosszú ülés után, munka közben vagy edzést követően? A Dzsufiziónál az első alkalom elején átbeszéljük, mikor jelentkezik a panaszod, és…",
+    "mediaSlot": {
+      "title": "Derékfájás egy hétköznapi mozdulatnál",
+      "note": "Fotó vagy videó arról, ahogy a vendég megmutatja, hol érzi a derekát mozgás közben."
+    }
   },
   {
     "path": "hatfajas",
     "file": "hatfajas.html",
     "title": "Hátfájás és kezelése",
     "nav": "aloldalak",
-    "description": "Munka közben befeszül a hátad a lapockáid között, vagy emelés után fáj a hátad közepén? Ez az oldal a hát felső és középső részén jelentkező panaszokról…"
+    "description": "Munka közben befeszül a hátad a lapockáid között, vagy emelés után fáj a hátad közepén? Ez az oldal a hát felső és középső részén jelentkező panaszokról…",
+    "mediaSlot": {
+      "title": "Hátfájás a lapocka körül",
+      "note": "Kép arról, ahogy a vendég megmutatja, hol érzi a hátfájdalmat a lapocka körül."
+    }
   },
   {
     "path": "nyakfajas",
     "file": "nyakfajas.html",
     "title": "Nyakfájás és kezelése",
     "nav": "aloldalak",
-    "description": "Reggel nehezebben fordítod a fejed, vagy a munkanap végére feszül a tarkód? A nyaki fájdalom a vezetéstől az edzésig sok hétköznapi mozdulatnál…"
+    "description": "Reggel nehezebben fordítod a fejed, vagy a munkanap végére feszül a tarkód? A nyaki fájdalom a vezetéstől az edzésig sok hétköznapi mozdulatnál…",
+    "mediaSlot": {
+      "title": "Nyakmozgás és a panasz helye",
+      "note": "Fotó vagy videó arról, ahogy a vendég elfordítja a fejét, és megmutatja, hol érez feszülést."
+    }
   },
   {
     "path": "vallfajdalom",
     "file": "vallfajdalom.html",
     "title": "Vállfájdalom és kezelése",
     "nav": "aloldalak",
-    "description": "Fáj a vállad, amikor a felső polcra nyúlsz, edzésen emeled a karod vagy éjjel a fájó oldaladra fordulsz? Az első alkalmon átbeszéljük, melyik…"
+    "description": "Fáj a vállad, amikor a felső polcra nyúlsz, edzésen emeled a karod vagy éjjel a fájó oldaladra fordulsz? Az első alkalmon átbeszéljük, melyik…",
+    "mediaSlot": {
+      "title": "Vállfájdalom karemeléskor",
+      "note": "Fotó vagy videó arról, ahogy a vendég karemelés közben megmutatja a panasz helyét."
+    }
   },
   {
     "path": "csipofajdalom",
     "file": "csipofajdalom.html",
     "title": "Csípőfájdalom és kezelése",
     "nav": "aloldalak",
-    "description": "Fáj a csípőd lépcsőzéskor, nehezebben állsz fel a székből, vagy éjjel zavar, amikor az oldaladra fordulsz? Az első alkalmon átbeszéljük, hol érzed a…"
+    "description": "Fáj a csípőd lépcsőzéskor, nehezebben állsz fel a székből, vagy éjjel zavar, amikor az oldaladra fordulsz? Az első alkalmon átbeszéljük, hol érzed a…",
+    "mediaSlot": {
+      "title": "A csípőpanasz helye",
+      "note": "Fotó vagy videó arról, ahogy a vendég megmutatja, hol érzi a csípőfájdalmat lépés vagy felállás közben."
+    }
   },
   {
     "path": "bokafajdalom",
     "file": "bokafajdalom.html",
     "title": "Bokafájdalom és kezelése",
     "nav": "aloldalak",
-    "description": "Lépcsőzésnél érzed a bokádat, futás után merevebbnek tűnik, vagy egy korábbi sérülés óta bizonytalanabb rajta a támasz? A bokafájdalom helye és az, hogy…"
+    "description": "Lépcsőzésnél érzed a bokádat, futás után merevebbnek tűnik, vagy egy korábbi sérülés óta bizonytalanabb rajta a támasz? A bokafájdalom helye és az, hogy…",
+    "mediaSlot": {
+      "title": "Bokafájdalom terheléskor",
+      "note": "Fotó vagy videó arról, ahogy a vendég megmutatja, hol jelentkezik a bokapanasz járás közben."
+    }
   },
   {
     "path": "csontkovacsolas",
     "file": "csontkovacsolas.html",
     "title": "Csontkovácsolás",
     "nav": "aloldalak",
-    "description": "Csontkovácsot keresel Budapesten? A Dzsufiziónál az ízületi kimozgatás a Dzsufizio módszer® egyik lehetséges eleme. Az alkalom elején átbeszéljük, mivel…"
+    "description": "Csontkovácsot keresel Budapesten? A Dzsufiziónál az ízületi kimozgatás a Dzsufizio módszer® egyik lehetséges eleme. Az alkalom elején átbeszéljük, mivel…",
+    "mediaSlot": {
+      "title": "Csontkovácsolás a stúdióban",
+      "note": "Fotó vagy videó az első egyeztetésről vagy az azután kiválasztott fogásról."
+    }
   },
   {
     "path": "trigger-pont-lazitas",
     "file": "trigger-pont-lazitas.html",
     "title": "Triggerpont-lazítás",
     "nav": "aloldalak",
-    "description": "Van egy pont a vállad vagy a lapockád körül, amely nyomásra különösen érzékeny? A triggerpont-lazítás során célzott nyomással dolgozunk egy érzékeny…"
+    "description": "Van egy pont a vállad vagy a lapockád körül, amely nyomásra különösen érzékeny? A triggerpont-lazítás során célzott nyomással dolgozunk egy érzékeny…",
+    "mediaSlot": {
+      "title": "Egy triggerpont-lazító fogás",
+      "note": "Fotó vagy videó arról, ahogy a terapeuta a váll környékén dolgozik."
+    }
   },
   {
     "path": "kopolyozes",
     "file": "kopolyozes.html",
     "title": "Köpölyözés",
     "nav": "aloldalak",
-    "description": "A köpölyözés során egy kis harangot helyezünk a bőrödre. Az eszköz szívóhatása enyhén megemeli a bőrt, amit húzásként érezhetsz. A Dzsufiziónál a…"
+    "description": "A köpölyözés során egy kis harangot helyezünk a bőrödre. Az eszköz szívóhatása enyhén megemeli a bőrt, amit húzásként érezhetsz. A Dzsufiziónál a…",
+    "mediaSlot": {
+      "title": "A köpöly felhelyezése",
+      "note": "Fotó vagy videó arról, ahogy a terapeuta felhelyezi a köpölyt a háton."
+    }
   },
   {
     "path": "flossing",
     "file": "flossing.html",
     "title": "Flossing",
     "nav": "aloldalak",
-    "description": "A flossing során rövid időre rugalmas szalagot helyezünk egy ízület köré vagy egy izomterületre. A szalag körkörös nyomást ad, miközben egy egyeztetett…"
+    "description": "A flossing során rövid időre rugalmas szalagot helyezünk egy ízület köré vagy egy izomterületre. A szalag körkörös nyomást ad, miközben egy egyeztetett…",
+    "mediaSlot": {
+      "title": "Flossing szalag a bokán",
+      "note": "Fotó vagy videó arról, ahogy a terapeuta igazítja a szalagot a boka körül."
+    }
   },
   {
     "path": "fascia-kes",
     "file": "fascia-kes.html",
     "title": "Fasciakéssel végzett kezelés",
     "nav": "aloldalak",
-    "description": "A fasciakés egy sima, lekerekített szélű fémeszköz. Finoman végigvezetjük a bőrön; a fogásnál az eszköz nyomását érezheted. A Dzsufiziónál ez a…"
+    "description": "A fasciakés egy sima, lekerekített szélű fémeszköz. Finoman végigvezetjük a bőrön; a fogásnál az eszköz nyomását érezheted. A Dzsufiziónál ez a…",
+    "mediaSlot": {
+      "title": "A fasciakés használata",
+      "note": "Fotó vagy videó arról, ahogy a terapeuta az alkaron használja a lekerekített eszközt."
+    }
   },
   {
     "path": "kinesio-tape",
     "file": "kinesio-tape.html",
     "title": "Kineziológiai tapasz",
     "nav": "aloldalak",
-    "description": "A kineziológiai tapasz, más néven kinesio tape, rugalmas szalag, amelyet közvetlenül a bőrre ragasztunk. A Dzsufiziónál felhelyezés előtt megnézzük…"
+    "description": "A kineziológiai tapasz, más néven kinesio tape, rugalmas szalag, amelyet közvetlenül a bőrre ragasztunk. A Dzsufiziónál felhelyezés előtt megnézzük…",
+    "mediaSlot": {
+      "title": "A kineziológiai tapasz felhelyezése",
+      "note": "Fotó vagy videó arról, ahogy a terapeuta a vállra igazítja a tapaszt."
+    }
   },
   {
     "path": "masszazs",
     "file": "masszazs.html",
     "title": "Masszázs",
     "nav": "aloldalak",
-    "description": "Ha egy sűrű munkanap vagy edzés után szeretnél időt szánni a pihenésre, a Dzsufiziónál 30, 60 vagy 90 perces masszázst foglalhatsz. Te választod az…"
+    "description": "Ha egy sűrű munkanap vagy edzés után szeretnél időt szánni a pihenésre, a Dzsufiziónál 30, 60 vagy 90 perces masszázst foglalhatsz. Te választod az…",
+    "mediaSlot": {
+      "title": "Masszázs a stúdióban",
+      "note": "Fotó vagy videó egy hátmasszázsról vagy arról, ahogy a terapeuta a vendéggel egyeztet az elején."
+    }
   },
   {
     "path": "akik-mar-nalunk-jartak",

@@ -6,11 +6,13 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
+  readSource('components/media-slot.html'),
 ]);
+const slotMarker = '{{media-slot}}';
 
 const menu = [
   ['', 'Áttekintés'],
@@ -39,6 +41,20 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'})[c]);
 }
 
+function renderMediaSlot(page, fragment) {
+  const slot = page.mediaSlot;
+  const count = fragment.split(slotMarker).length - 1;
+  if (count !== (slot ? 1 : 0)) {
+    throw new Error('A médiahely jelölése és az oldalleírás nem egyezik: ' + page.path);
+  }
+  if (!slot) return fragment;
+  if (['title', 'note'].some(key => typeof slot[key] !== 'string' || !slot[key].trim())) {
+    throw new Error('Hiányzik a médiahely címe vagy leírása: ' + page.path);
+  }
+  const component = mediaSlot.replace(/\{\{(TITLE|NOTE)\}\}/g, (_, key) => escapeHtml(slot[key.toLowerCase()]));
+  return fragment.replace(slotMarker, () => component.trimEnd());
+}
+
 function render(page, fragment, root) {
   const nav = menu.map(([path, label]) => (
     '<a href="' + escapeHtml(root + (path ? path + '/' : '')) + '"' +
@@ -50,7 +66,7 @@ function render(page, fragment, root) {
     DESCRIPTION: escapeHtml(page.description),
     ROOT: escapeHtml(root),
     NAV: nav,
-    CONTENT: fragment.replaceAll('{{root}}', escapeHtml(root)).trimEnd(),
+    CONTENT: renderMediaSlot(page, fragment).replaceAll('{{root}}', escapeHtml(root)).trimEnd(),
   };
   return layout.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
     if (!Object.hasOwn(values, key)) throw new Error('Ismeretlen sablonmező: ' + key);

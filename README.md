@@ -29,6 +29,8 @@ Az oldalak tartalmában a {{root}} jelölés a weboldal kezdőmappájára mutat.
 
 Az Instagram- és TikTok-videók a szolgáltatók saját lejátszóját használják. A kártyák az eredeti hivatkozást is megőrzik, ha a szolgáltató egy felvételt nem ad át beágyazásra.
 
+A Panaszok és a Módszerek médiahelyeit a src/pages.json oldalleírásainak mediaSlot mezői adják. A kész kép vagy videó jelölése az érintett src/pages/ fájlban a {{media-slot}} helyére kerül; ilyenkor töröld az oldal mediaSlot mezőjét is. A képeket a src/assets/images/ alatt tárold, a videókhoz kövesd a meglévő beágyazások mintáját. A Salonic foglalólinkek közös megjelenését a button booking-cta osztályok adják.
+
 ## GitHub Pages
 
 1. Töltsd fel ezt a projektet egy új GitHub-repó main ágára. A .github/ mappa is kerüljön bele.
