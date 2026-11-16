@@ -1291,3 +1291,57 @@ main:focus {
     scroll-behavior:auto;
   }
 }
+
+.profile-podcasts {
+  margin-block-start:clamp(2.2rem,5vw,3rem);
+  padding-block-start:1.3rem;
+  border-block-start:1px solid var(--line);
+}
+
+.profile-podcasts > h2 {
+  margin-block-start:0;
+}
+
+.profile-podcast {
+  margin-block-start:1.1rem;
+  padding:clamp(.85rem,2vw,1.35rem);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  background:#f7f8f1;
+}
+
+.profile-podcast h3 {
+  margin:.15rem 0 .58rem;
+}
+
+.profile-podcast .podcast-series {
+  margin:0 0 .34rem;
+  text-align:start;
+}
+
+.podcast-frame {
+  position:relative;
+  inline-size:100%;
+  aspect-ratio:16 / 9;
+  min-block-size:200px;
+  margin:.9rem 0 0;
+  overflow:hidden;
+  border-radius:12px;
+  background:#172c28;
+}
+
+.podcast-frame iframe {
+  position:absolute;
+  inset:0;
+  display:block;
+  inline-size:100%;
+  block-size:100%;
+  min-inline-size:0;
+  border:0;
+}
+
+.profile-podcast .podcast-source {
+  margin:.6rem 0 0;
+  text-align:start;
+  font-size:.86rem;
+}
