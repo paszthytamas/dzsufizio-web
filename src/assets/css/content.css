@@ -1,0 +1,64 @@
+main :is(p, .steps-list>li, .word-list>li, .article-sources li,blockquote,td) {
+  text-align:justify;
+  hyphens:auto;
+}
+
+main .byline {
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:.45rem .65rem;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:.84rem;
+  margin:.42rem 0 1rem;
+}
+
+.byline b {
+  color:var(--leaf);
+}
+
+.body-copy a {
+  overflow-wrap:anywhere;
+}
+
+.article-sources {
+  margin:2rem 0 0;
+  border-top:1px solid var(--line);
+}
+
+.article-sources li {
+  margin:.38rem 0;
+  font-size:.9rem;
+}
+
+.article-illus {
+  margin:1.2rem 0 1.35rem;
+}
+
+.team-cta {
+  margin:1rem 0;
+}
+
+.profile-extra {
+  margin:1.12rem 0;
+  padding:.78rem 1rem;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#f5f5eb;
+}
+
+.profile-extra summary {
+  cursor:pointer;
+  color:var(--leaf);
+  font-weight:750;
+}
+
+.missing b {
+  text-transform:none;
+  font-size:.87rem;
+  letter-spacing:0;
+}
+
+.image-frame { margin: 0; }
+.not-found { max-width: 44rem; margin: 3rem auto; }

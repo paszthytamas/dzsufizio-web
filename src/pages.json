@@ -1,0 +1,240 @@
+[
+  {
+    "path": "",
+    "file": "home.html",
+    "title": "Áttekintés",
+    "nav": "",
+    "description": "Olvasd el a cikkeinket, ismerd meg a munkatársainkat, és nézd meg, hogyan zajlik egy alkalom."
+  },
+  {
+    "path": "blog",
+    "file": "blog.html",
+    "title": "Blogok",
+    "nav": "blog",
+    "description": "Olvass a gyakori panaszokról és a Dzsufizio módszeréről, vagy nézz bele az otthoni gyakorlatok videóiba."
+  },
+  {
+    "path": "csapat",
+    "file": "csapat.html",
+    "title": "Bemutatkozások",
+    "nav": "csapat",
+    "description": "Mindegyik munkatársunk a Dzsufizio módszer® közös alapjaiból dolgozik. A kártyák a személyes történeteket emelik ki."
+  },
+  {
+    "path": "csapat/krasznai-mate",
+    "file": "csapat/krasznai-mate.html",
+    "title": "Krasznai Máté",
+    "nav": "csapat",
+    "description": "Krasznai Máté vagyok, a Dzsufizio alapítója. Huszonhárom éves birkózómúlt és saját felépülésem története formálta a szemléletemet. 2018 óta foglalkozom…"
+  },
+  {
+    "path": "csapat/virag-tamas",
+    "file": "csapat/virag-tamas.html",
+    "title": "Virág Tamás",
+    "nav": "csapat",
+    "description": "Virág Tamás vagyok. Gyerekkorom óta meghatározó része az életemnek a sport; sportedzői és személyi edzői háttérrel jutottam el a gyógymasszázs és a…"
+  },
+  {
+    "path": "csapat/kuti-gergo",
+    "file": "csapat/kuti-gergo.html",
+    "title": "Kuti Gergő",
+    "nav": "csapat",
+    "description": "Kuti Gergő vagyok, gyógymasszőr és csontkovács. Több mint egy évtizede foglalkozom vendégekkel. A birkózás, az erőemelés és a saját sérüléseim…"
+  },
+  {
+    "path": "csapat/kirilla-tibor",
+    "file": "csapat/kirilla-tibor.html",
+    "title": "Kirilla Tibor",
+    "nav": "csapat",
+    "description": "Kirilla Tibor vagyok, masszőr és csontkovács. Személyi edzőként kezdtem, majd egyre inkább a manuális és lágyszöveti technikák felé fordultam. Fontos…"
+  },
+  {
+    "path": "csapat/szilagyi-bianka",
+    "file": "csapat/szilagyi-bianka.html",
+    "title": "Szilágyi Bianka",
+    "nav": "csapat",
+    "description": "Szilágyi Bianka vagyok, gyógymasszőr. Számomra ez a munka olyan hivatás, amelyben nap mint nap emberekkel kapcsolódhatok, megismerhetem a történetüket…"
+  },
+  {
+    "path": "csapat/varga-zoltan",
+    "file": "csapat/varga-zoltan.html",
+    "title": "Varga Zoltán",
+    "nav": "csapat",
+    "description": "Varga Zoltán vagyok, gyógymasszőr és csontkovács. Gyógy- és sportmasszőri végzettségem megszerzése után, 2017-ben kezdtem dolgozni a szakmában. A sport…"
+  },
+  {
+    "path": "csapat/vizi-kristof",
+    "file": "csapat/vizi-kristof.html",
+    "title": "Vizi Kristóf",
+    "nav": "csapat",
+    "description": "Vizi Kristóf vagyok, masszőr és csontkovács, edzői háttérrel. A sport és az emberi test működése gyerekkorom óta érdekel. Az olimpiai súlyemelés és a…"
+  },
+  {
+    "path": "csapat/horvath-bence",
+    "file": "csapat/horvath-bence.html",
+    "title": "Horváth Bence",
+    "nav": "csapat",
+    "description": "Horváth Bence vagyok, gyógymasszőr és csontkovács. A jókedv és a közvetlen hangulat nálam fontos része a találkozásnak. Szeretném, ha bizalommal…"
+  },
+  {
+    "path": "csapat/bukovszki-mate",
+    "file": "csapat/bukovszki-mate.html",
+    "title": "Bukovszki Máté",
+    "nav": "csapat",
+    "description": "Bukovszki Máté vagyok, gyógymasszőr és csontkovács. 2020 óta dolgozom a szakmában. A saját térdműtétem utáni időszak indított el azon az úton, hogy a…"
+  },
+  {
+    "path": "csapat/doncsev-vitalij",
+    "file": "csapat/doncsev-vitalij.html",
+    "title": "Doncsev Vitalij",
+    "nav": "csapat",
+    "description": "Doncsev Vitalij vagyok, masszőr és csontkovács. A sportolóként szerzett tapasztalataim és a saját sérüléseim idején kapott segítség indítottak erre a…"
+  },
+  {
+    "path": "aloldalak",
+    "file": "aloldalak.html",
+    "title": "Aloldalak",
+    "nav": "aloldalak",
+    "description": "Válassz testtáj szerint, ismerd meg a fogásokat, vagy nézz bele a vendégeinkkel készült felvételekbe."
+  },
+  {
+    "path": "blog/csontkovacsolas-biztonsaga",
+    "file": "blog/csontkovacsolas-biztonsaga.html",
+    "title": "Biztonságos-e a csontkovácsolás?",
+    "nav": "blog",
+    "description": "Feszesek az izmaid, nehezebben fordítod a fejed, vagy derékfájás miatt keresel segítséget? Ha közben láttál már egy hangos roppanásokkal teli videót…"
+  },
+  {
+    "path": "blog/becsipodott-a-derekad",
+    "file": "blog/becsipodott-a-derekad.html",
+    "title": "Becsípődött a derekad? Mi állhat a hirtelen derékfájás mögött, és mit tehetsz?",
+    "nav": "blog",
+    "description": "Lehajoltál a cipődért, megemeltél egy szatyrot, vagy csak felálltál a székből, és hirtelen belenyilallt a derekad? Ilyenkor könnyű megijedni. Főleg, ha…"
+  },
+  {
+    "path": "blog/teniszkonyok",
+    "file": "blog/teniszkonyok.html",
+    "title": "Teniszkönyök: miért alakul ki, hogyan fáj, és mit tehetsz ellene?",
+    "nav": "blog",
+    "description": "Megemeled a bögrédet, kinyitnál egy befőttesüveget, vagy megszorítod valaki kezét, és belenyilall a könyököd külső oldalába? A teniszkönyök ilyen…"
+  },
+  {
+    "path": "blog/nyakfajas",
+    "file": "blog/nyakfajas.html",
+    "title": "Beállt a nyakad? Mi okozhatja a nyaki fájdalmat, és mit tehetsz otthon?",
+    "nav": "blog",
+    "description": "Reggel alig tudod oldalra fordítani a fejed, vagy egy hosszú munkanap végére feszül a tarkód? A merev nyak kellemetlen, de a „beállt” érzés önmagában…"
+  },
+  {
+    "path": "blog/vallfajdalom",
+    "file": "blog/vallfajdalom.html",
+    "title": "Vállfájdalom: miért fájhat a karod emeléskor vagy éjszaka?",
+    "nav": "blog",
+    "description": "Fáj felnyúlni a felső polcra, belebújni a kabátodba, vagy éjszaka ráfordulni a válladra? Ugyanaz a hétköznapi mozdulat többféle vállpanasznál is…"
+  },
+  {
+    "path": "panaszok",
+    "file": "panaszok.html",
+    "title": "Mozgásszervi panaszok és fájdalmak",
+    "nav": "aloldalak",
+    "description": "Indulj onnan, ahol a panaszt leginkább érzed. A testtájak szerinti leírásokból megtudhatod, milyen tünetekkel érdemes előbb orvoshoz fordulni, és mire…"
+  },
+  {
+    "path": "derekfajas",
+    "file": "derekfajas.html",
+    "title": "Derékfájás és kezelése",
+    "nav": "aloldalak",
+    "description": "Fáj a derekad hosszú ülés után, munka közben vagy edzést követően? A Dzsufiziónál az első alkalom elején átbeszéljük, mikor jelentkezik a panaszod, és…"
+  },
+  {
+    "path": "hatfajas",
+    "file": "hatfajas.html",
+    "title": "Hátfájás és kezelése",
+    "nav": "aloldalak",
+    "description": "Munka közben befeszül a hátad a lapockáid között, vagy emelés után fáj a hátad közepén? Ez az oldal a hát felső és középső részén jelentkező panaszokról…"
+  },
+  {
+    "path": "nyakfajas",
+    "file": "nyakfajas.html",
+    "title": "Nyakfájás és kezelése",
+    "nav": "aloldalak",
+    "description": "Reggel nehezebben fordítod a fejed, vagy a munkanap végére feszül a tarkód? A nyaki fájdalom a vezetéstől az edzésig sok hétköznapi mozdulatnál…"
+  },
+  {
+    "path": "vallfajdalom",
+    "file": "vallfajdalom.html",
+    "title": "Vállfájdalom és kezelése",
+    "nav": "aloldalak",
+    "description": "Fáj a vállad, amikor a felső polcra nyúlsz, edzésen emeled a karod vagy éjjel a fájó oldaladra fordulsz? Az első alkalmon átbeszéljük, melyik…"
+  },
+  {
+    "path": "csipofajdalom",
+    "file": "csipofajdalom.html",
+    "title": "Csípőfájdalom és kezelése",
+    "nav": "aloldalak",
+    "description": "Fáj a csípőd lépcsőzéskor, nehezebben állsz fel a székből, vagy éjjel zavar, amikor az oldaladra fordulsz? Az első alkalmon átbeszéljük, hol érzed a…"
+  },
+  {
+    "path": "bokafajdalom",
+    "file": "bokafajdalom.html",
+    "title": "Bokafájdalom és kezelése",
+    "nav": "aloldalak",
+    "description": "Lépcsőzésnél érzed a bokádat, futás után merevebbnek tűnik, vagy egy korábbi sérülés óta bizonytalanabb rajta a támasz? A bokafájdalom helye és az, hogy…"
+  },
+  {
+    "path": "csontkovacsolas",
+    "file": "csontkovacsolas.html",
+    "title": "Csontkovácsolás",
+    "nav": "aloldalak",
+    "description": "Csontkovácsot keresel Budapesten? A Dzsufiziónál az ízületi kimozgatás a Dzsufizio módszer® egyik lehetséges eleme. Az alkalom elején átbeszéljük, mivel…"
+  },
+  {
+    "path": "trigger-pont-lazitas",
+    "file": "trigger-pont-lazitas.html",
+    "title": "Triggerpont-lazítás",
+    "nav": "aloldalak",
+    "description": "Van egy pont a vállad vagy a lapockád körül, amely nyomásra különösen érzékeny? A triggerpont-lazítás során célzott nyomással dolgozunk egy érzékeny…"
+  },
+  {
+    "path": "kopolyozes",
+    "file": "kopolyozes.html",
+    "title": "Köpölyözés",
+    "nav": "aloldalak",
+    "description": "A köpölyözés során egy kis harangot helyezünk a bőrödre. Az eszköz szívóhatása enyhén megemeli a bőrt, amit húzásként érezhetsz. A Dzsufiziónál a…"
+  },
+  {
+    "path": "flossing",
+    "file": "flossing.html",
+    "title": "Flossing",
+    "nav": "aloldalak",
+    "description": "A flossing során rövid időre rugalmas szalagot helyezünk egy ízület köré vagy egy izomterületre. A szalag körkörös nyomást ad, miközben egy egyeztetett…"
+  },
+  {
+    "path": "fascia-kes",
+    "file": "fascia-kes.html",
+    "title": "Fasciakéssel végzett kezelés",
+    "nav": "aloldalak",
+    "description": "A fasciakés egy sima, lekerekített szélű fémeszköz. Finoman végigvezetjük a bőrön; a fogásnál az eszköz nyomását érezheted. A Dzsufiziónál ez a…"
+  },
+  {
+    "path": "kinesio-tape",
+    "file": "kinesio-tape.html",
+    "title": "Kineziológiai tapasz",
+    "nav": "aloldalak",
+    "description": "A kineziológiai tapasz, más néven kinesio tape, rugalmas szalag, amelyet közvetlenül a bőrre ragasztunk. A Dzsufiziónál felhelyezés előtt megnézzük…"
+  },
+  {
+    "path": "masszazs",
+    "file": "masszazs.html",
+    "title": "Masszázs",
+    "nav": "aloldalak",
+    "description": "Ha egy sűrű munkanap vagy edzés után szeretnél időt szánni a pihenésre, a Dzsufiziónál 30, 60 vagy 90 perces masszázst foglalhatsz. Te választod az…"
+  },
+  {
+    "path": "akik-mar-nalunk-jartak",
+    "file": "akik-mar-nalunk-jartak.html",
+    "title": "Akik már nálunk jártak",
+    "nav": "akik-mar-nalunk-jartak",
+    "description": "Az Akik már nálunk jártak válogatásban ismert vendégekkel készült felvételeket találsz. A videókba belenézve közelebbről is megismerheted, hogyan…"
+  }
+]
