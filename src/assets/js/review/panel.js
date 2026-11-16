@@ -1,4 +1,5 @@
 import { elementTarget, pageTarget, revealNote, selectedTarget } from './anchors.js';
+import { initReviewResize } from './resize.js';
 import { reviewId } from './session.js';
 
 const messages = {
@@ -40,7 +41,9 @@ function showBody(parent, body) {
 export async function initReview(main, session) {
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = new URL('../../css/review.css', import.meta.url);
+  const css = new URL('../../css/review.css', import.meta.url);
+  css.search = new URL(import.meta.url).search;
+  stylesheet.href = css;
   document.head.append(stylesheet);
 
   const toggle = add(document.body, 'button', 'review-toggle', 'Átnézés');
@@ -70,6 +73,8 @@ export async function initReview(main, session) {
     '<div class="review-filters"><button type="button" data-status="open" aria-pressed="true">Teendők</button>' +
     '<button type="button" data-status="done" aria-pressed="false">Kész</button>' +
     '<button type="button" class="review-refresh">Frissítés</button></div><div class="review-notes"></div></section></div>' +
+    '<div class="review-undo" hidden><span role="status"></span><button type="button" class="review-restore">Visszavonás</button>' +
+    '<button type="button" class="review-dismiss" aria-label="Törlésüzenet bezárása">×</button></div>' +
     '<footer class="review-panel__footer"><button type="button" class="review-exit">Kilépés az átnézésből</button></footer>';
 
   const form = panel.querySelector('form');
@@ -78,6 +83,8 @@ export async function initReview(main, session) {
   const message = panel.querySelector('.review-message');
   const noteList = panel.querySelector('.review-notes');
   const rangeQuote = panel.querySelector('.review-quote');
+  const undo = panel.querySelector('.review-undo');
+  const restore = undo.querySelector('.review-restore');
   const title = (main.querySelector('h1')?.textContent || document.title).trim().slice(0, 220);
   let notes = [];
   let owner = false;
@@ -87,6 +94,7 @@ export async function initReview(main, session) {
   let pointerTarget = null;
   let busy = false;
   let active = false;
+  let undoId = null;
 
   function notice(text, error = false) {
     message.textContent = text;
@@ -185,6 +193,25 @@ export async function initReview(main, session) {
           finally { mark.disabled = false; }
         });
       }
+      if (note.can_delete === true) {
+        const remove = add(row, 'button', 'review-delete', 'Törlés');
+        remove.type = 'button';
+        remove.addEventListener('click', async () => {
+          const buttons = [...row.querySelectorAll('button')];
+          buttons.forEach(button => { button.disabled = true; });
+          try {
+            await session.rpc('dzs_review_set_deleted', { p_id: note.id, p_deleted: true });
+            notes = notes.filter(n => n.id !== note.id);
+            renderNotes();
+            notice('');
+            undoId = note.id;
+            undo.hidden = false;
+            undo.querySelector('[role="status"]').textContent = 'Megjegyzés törölve.';
+            restore.focus({ preventScroll: true });
+          } catch (error) { notice(messages[error.message] || messages.network, true); }
+          finally { buttons.forEach(button => { button.disabled = false; }); }
+        });
+      }
     }
   }
 
@@ -198,6 +225,28 @@ export async function initReview(main, session) {
 
   toggle.addEventListener('click', () => openPanel(panel.hidden));
   panel.querySelector('.review-close').addEventListener('click', () => openPanel(false));
+  function dismissUndo() {
+    undoId = null;
+    undo.hidden = true;
+    undo.querySelector('[role="status"]').textContent = '';
+  }
+  undo.querySelector('.review-dismiss').addEventListener('click', dismissUndo);
+  restore.addEventListener('click', async () => {
+    const id = undoId;
+    if (!id) return;
+    restore.disabled = true;
+    try {
+      const { note } = await session.rpc('dzs_review_set_deleted', { p_id: id, p_deleted: false });
+      notes = [note, ...notes.filter(n => n.id !== id)].sort((a, b) => b.created_at.localeCompare(a.created_at));
+      if (undoId === id) dismissUndo();
+      const filter = panel.querySelector(note.status === 'done' ? '[data-status="done"]' : '[data-status="open"]');
+      filter.click();
+      filter.focus({ preventScroll: true });
+      notice('Megjegyzés visszaállítva.');
+    } catch (error) {
+      undo.querySelector('[role="status"]').textContent = 'Nem sikerült visszaállítani. Próbáld újra.';
+    } finally { restore.disabled = false; }
+  });
   panel.querySelector('.review-exit').addEventListener('click', () => {
     if (!input.value.trim() || window.confirm('Kilépsz mentés nélkül?')) session.clear();
   });
@@ -254,6 +303,7 @@ export async function initReview(main, session) {
     if (!pointerTarget) return;
     positionPin(pointerTarget?.locator.kind === 'text' ? selectedTarget(main) : elementTarget(main, pointerTarget?.element));
   }
+  initReviewResize(panel, session.root, movePin);
   window.addEventListener('scroll', movePin, { passive: true });
   window.addEventListener('resize', movePin);
   document.addEventListener('pointerdown', event => {

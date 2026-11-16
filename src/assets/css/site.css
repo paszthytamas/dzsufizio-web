@@ -1122,6 +1122,34 @@ main:focus {
   font-weight:750;
 }
 
+.toc-toggle {
+  display:inline-flex;
+  align-items:center;
+  gap:.38rem;
+  margin-inline-start:.28rem;
+  padding:.38rem .55rem;
+  border:1px solid #becdbf;
+  border-radius:9px;
+  background:var(--panel);
+  color:var(--green);
+  font-size:.81rem;
+  font-weight:720;
+  white-space:nowrap;
+}
+
+.toc-toggle:hover,.toc-toggle[aria-pressed="true"] {
+  background:#e0ebd7;
+  border-color:#aabfa8;
+}
+
+.toc-toggle[hidden],.reader > .side[hidden] {
+  display:none;
+}
+
+.reader.reader--without-toc {
+  grid-template-columns:minmax(0,1fr);
+}
+
 @media(max-width:970px) {
   .nav a {
     font-size:.82rem;

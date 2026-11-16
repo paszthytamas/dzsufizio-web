@@ -1,4 +1,5 @@
 import { initAnchors, initNavigation } from './navigation.js';
+import { initContents } from './toc.js';
 import { rotateTeam } from './team.js';
 import { initInstagram } from './media/instagram.js';
 import { initTikTok } from './media/tiktok.js';
@@ -13,8 +14,13 @@ window.addEventListener('hashchange', () => {
 const main = document.querySelector('main');
 const review = readReviewSession();
 initNavigation();
+initContents(main, { reviewing: Boolean(review) });
 initAnchors();
 rotateTeam(main);
 initInstagram(main, { useScript: !review });
 initTikTok(main);
-if (review) import('./review/panel.js').then(({ initReview }) => initReview(main, review));
+if (review) {
+  const panel = new URL('./review/panel.js', import.meta.url);
+  panel.search = new URL(import.meta.url).search;
+  import(panel.href).then(({ initReview }) => initReview(main, review));
+}
