@@ -513,6 +513,10 @@ main:focus {
   flex-direction:column;
 }
 
+.media-card > .card-picture-link:focus-visible {
+  outline-offset:-4px;
+}
+
 .media-card .card-picture {
   width:100%;
   height:auto;
