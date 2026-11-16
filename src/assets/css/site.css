@@ -1146,8 +1146,17 @@ main:focus {
   display:none;
 }
 
+.breadcrumb:has(+ .reader.reader--without-toc),.reader.reader--without-toc {
+  max-width:64rem;
+  margin-inline:auto;
+}
+
 .reader.reader--without-toc {
   grid-template-columns:minmax(0,1fr);
+}
+
+.reader.reader--without-toc > .article-card .body-copy {
+  max-width:none;
 }
 
 @media(max-width:970px) {

@@ -7,14 +7,17 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot, mainScript] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
   readSource('components/media-slot.html'),
   readSource('assets/js/main.js'),
+  readSource('assets/css/site.css'),
 ]);
-const mainRevision = createHash('sha256').update(mainScript).digest('hex').slice(0, 12);
+const revision = source => createHash('sha256').update(source).digest('hex').slice(0, 12);
+const mainRevision = revision(mainScript);
+const siteRevision = revision(siteStyles);
 const slotMarker = '{{media-slot}}';
 
 const menu = [
@@ -69,6 +72,7 @@ function render(page, fragment, root) {
     DESCRIPTION: escapeHtml(page.description),
     ROOT: escapeHtml(root),
     MAIN_REV: mainRevision,
+    SITE_REV: siteRevision,
     NAV: nav,
     CONTENT: renderMediaSlot(page, fragment).replaceAll('{{root}}', escapeHtml(root)).trimEnd(),
   };
