@@ -120,7 +120,7 @@ export async function initReview(main, session) {
     submission = null;
     showTarget(target);
     notice('');
-    pin.hidden = true;
+    positionPin(null);
     input.focus();
   }
 
@@ -251,20 +251,20 @@ export async function initReview(main, session) {
     if (selected || pointerTarget?.locator.kind === 'text') positionPin(selected);
   });
   function movePin() {
-    if (pin.hidden) return;
+    if (!pointerTarget) return;
     positionPin(pointerTarget?.locator.kind === 'text' ? selectedTarget(main) : elementTarget(main, pointerTarget?.element));
   }
   window.addEventListener('scroll', movePin, { passive: true });
   window.addEventListener('resize', movePin);
   document.addEventListener('pointerdown', event => {
     if (!pin.contains(event.target) && (pointerTarget?.locator.kind !== 'text' || !selectedTarget(main))) {
-      pin.hidden = true;
+      positionPin(null);
     }
   });
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (!panel.hidden) openPanel(false);
-    pin.hidden = true;
+    positionPin(null);
   });
 
   const retry = panel.querySelector('.review-retry');
