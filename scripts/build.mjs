@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,12 +7,14 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, mainScript] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
   readSource('components/media-slot.html'),
+  readSource('assets/js/main.js'),
 ]);
+const mainRevision = createHash('sha256').update(mainScript).digest('hex').slice(0, 12);
 const slotMarker = '{{media-slot}}';
 
 const menu = [
@@ -65,6 +68,7 @@ function render(page, fragment, root) {
     TITLE: escapeHtml(page.title),
     DESCRIPTION: escapeHtml(page.description),
     ROOT: escapeHtml(root),
+    MAIN_REV: mainRevision,
     NAV: nav,
     CONTENT: renderMediaSlot(page, fragment).replaceAll('{{root}}', escapeHtml(root)).trimEnd(),
   };
