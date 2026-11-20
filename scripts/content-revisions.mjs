@@ -115,7 +115,30 @@ function replaceParagraph(html, id, content, comparing) {
   return replaceOnce(html, original, mark('del', old, true) + '\n' + mark('ins', updated, true));
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints }) {
+function singleBlock(html, pattern, attribute) {
+  const matches = [...html.matchAll(pattern)].map(([block]) => block).filter(block => block.includes(attribute));
+  if (matches.length !== 1) throw new Error('A videó nem azonosítható egyértelműen: ' + attribute);
+  return matches[0];
+}
+
+function removeInstagramCard(html, id, comparing) {
+  const card = singleBlock(html, /<article class="guest-card">[\s\S]*?<\/article>/g,
+    'data-ig-permalink="https://www.instagram.com/reel/' + id + '/"');
+  return replaceOnce(html, card, comparing ? mark('del', card, true) : '');
+}
+
+function separateTikTok(html, { id, anchor, from, title, intro }, comparing) {
+  const video = singleBlock(html, /<figure class="media-player tiktok\b[^"]*">[\s\S]*?<\/figure>/g,
+    'data-embed="https://www.tiktok.com/player/v1/' + id + '?');
+  const renamed = replaceOnce(video, '<strong>' + from + '</strong>', '').replaceAll(from, title);
+  const section = '<section aria-labelledby="' + anchor + '">\n' +
+    '<h3 id="' + anchor + '">' + title + '</h3>\n' +
+    '<p class="word-p">' + intro + '</p>\n' + renamed + '\n</section>\n';
+  const updated = comparing ? mark('del', video, true) + '\n' + mark('ins', section.trimEnd(), true) + '\n' : section;
+  return replaceOnce(html, video, updated);
+}
+
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -148,6 +171,14 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
     const compactGrid = '<div class="complaints-grid complaints-grid--compact">';
     modified = replaceOnce(modified, grid, compactGrid);
     comparison = replaceOnce(comparison, grid, compactGrid);
+  }
+  if (removedReel) {
+    modified = removeInstagramCard(modified, removedReel, false);
+    comparison = removeInstagramCard(comparison, removedReel, true);
+  }
+  if (videoSection) {
+    modified = separateTikTok(modified, videoSection, false);
+    comparison = separateTikTok(comparison, videoSection, true);
   }
   return { modified, comparison };
 }

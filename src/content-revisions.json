@@ -373,7 +373,8 @@
     "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226"
   },
   "csapat/kuti-gergo.html": {
-    "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226"
+    "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226",
+    "removeInstagramCard": "DCXBoSDIhWs"
   },
   "csapat/virag-tamas.html": {
     "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226"
@@ -412,5 +413,14 @@
         "resz-32"
       ]
     ]
+  },
+  "blog/becsipodott-a-derekad.html": {
+    "separateTikTok": {
+      "id": "7542111066570951958",
+      "anchor": "mobilizacio-oldalt-fekve",
+      "from": "Finom medencebillentés hanyatt fekve",
+      "title": "Mobilizáció oldalt fekve",
+      "intro": "Az alábbi videó a mobilizáció egy másik változatát mutatja be."
+    }
   }
 }
