@@ -697,12 +697,11 @@ main:focus {
 }
 
 .prose-media {
-  margin:1.05rem 0 .45rem;
+  margin:1.05rem auto .45rem;
   border-radius:15px;
-  width:100%;
+  width:auto;
+  height:auto;
   max-height:500px;
-  object-fit:contain;
-  background:#e5ebe0;
 }
 
 .word-caption {
