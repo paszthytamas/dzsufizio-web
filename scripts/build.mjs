@@ -9,13 +9,14 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAssets, revisionPlan, imageRevisions, contentView] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, mediaStyles, reviewAssets, revisionPlan, imageRevisions, contentView] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
   readSource('components/media-slot.html'),
   readSource('assets/js/main.js'),
   readSource('assets/css/site.css'),
+  readSource('assets/css/media.css'),
   Promise.all([
     'assets/js/review/panel.js', 'assets/js/review/anchors.js', 'assets/js/review/order.js',
     'assets/js/review/page-navigation.js', 'assets/js/review/resize.js', 'assets/js/review/session.js',
@@ -27,7 +28,7 @@ const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAsse
 ]);
 const revision = source => createHash('sha256').update(source).digest('hex').slice(0, 12);
 const mainRevision = revision([mainScript, contentView, ...reviewAssets].join('\0'));
-const siteRevision = revision(siteStyles);
+const siteRevision = revision(siteStyles + '\n' + mediaStyles);
 const slotMarker = '{{media-slot}}';
 
 const menu = [

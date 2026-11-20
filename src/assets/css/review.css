@@ -135,9 +135,6 @@
     font-size: clamp(1.65rem, 7cqi, 2.75rem);
     overflow-wrap: anywhere;
   }
-  .review-open .profile-hero {
-    grid-template-columns: 85px minmax(0, 1fr);
-  }
 }
 
 .review-panel p {

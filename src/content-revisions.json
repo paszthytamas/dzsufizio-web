@@ -97,6 +97,7 @@
     ]
   },
   "csapat/kirilla-tibor.html": {
+    "remove": [ "resz-142" ],
     "insertAfter": [
       [ "resz-147", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/kirilla-tibor-kezeles.webp\" class=\"prose-media\" alt=\"Kirilla Tibor egy vendég alkarján dolgozik lekerekített fasciakéssel.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
@@ -109,6 +110,7 @@
     "booking": "https://dzsufizio.salonic.hu/employees/18448/?placeId=8226"
   },
   "csapat/varga-zoltan.html": {
+    "remove": [ "resz-182" ],
     "insertAfter": [
       [ "resz-188", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/varga-zoltan-kezeles.webp\" class=\"prose-media\" alt=\"Varga Zoltán egy hason fekvő vendég felső hátát masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
@@ -404,12 +406,14 @@
     ]
   },
   "csapat/krasznai-mate.html": {
+    "remove": [ "resz-68" ],
     "insertAfter": [
       [ "resz-76", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/krasznai-mate-kezeles.webp\" class=\"prose-media\" alt=\"Krasznai Máté egy oldalt fekvő vendég hátán és vállán dolgozik.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226"
   },
   "csapat/kuti-gergo.html": {
+    "remove": [ "resz-122" ],
     "insertAfter": [
       [ "resz-128", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/kuti-gergo-kezeles.webp\" class=\"prose-media\" alt=\"Kuti Gergő egy hason fekvő vendég vádliját masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
@@ -417,36 +421,42 @@
     "removeInstagramCard": "DCXBoSDIhWs"
   },
   "csapat/virag-tamas.html": {
+    "remove": [ "resz-89" ],
     "insertAfter": [
       [ "resz-97", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/virag-tamas-kezeles.webp\" class=\"prose-media\" alt=\"Virág Tamás egy hanyatt fekvő vendég karját vezeti és támasztja.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226"
   },
   "csapat/vizi-kristof.html": {
+    "remove": [ "resz-201" ],
     "insertAfter": [
       [ "resz-208", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/vizi-kristof-kezeles.webp\" class=\"prose-media\" alt=\"Vizi Kristóf egy ülő vendég csuklóját és alkarját támasztja meg.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31120/?placeId=8226"
   },
   "csapat/szilagyi-bianka.html": {
+    "remove": [ "resz-162" ],
     "insertAfter": [
       [ "resz-168", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/szilagyi-bianka-kezeles.webp\" class=\"prose-media\" alt=\"Szilágyi Bianka kineziológiai tapaszt helyez fel egy vendég vállára.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31270/?placeId=8226"
   },
   "csapat/bukovszki-mate.html": {
+    "remove": [ "resz-241" ],
     "insertAfter": [
       [ "resz-246", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/bukovszki-mate-kezeles.webp\" class=\"prose-media\" alt=\"Bukovszki Máté egy ülő vendég bokáját támasztja meg a kezelőágy mellett.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31375/?placeId=8226"
   },
   "csapat/horvath-bence.html": {
+    "remove": [ "resz-221" ],
     "insertAfter": [
       [ "resz-229", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/horvath-bence-kezeles.webp\" class=\"prose-media\" alt=\"Horváth Bence egy ülő vendég alkarját masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31377/?placeId=8226"
   },
   "csapat/doncsev-vitalij.html": {
+    "remove": [ "resz-260" ],
     "insertAfter": [
       [ "resz-268", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/doncsev-vitalij-kezeles.webp\" class=\"prose-media\" alt=\"Doncsev Vitalij egy oldalt fekvő vendég vállát kezeli.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
     ],
