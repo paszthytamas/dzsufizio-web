@@ -115,7 +115,53 @@ function replaceParagraph(html, id, content, comparing) {
   return replaceOnce(html, original, mark('del', old, true) + '\n' + mark('ins', updated, true));
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints }) {
+function singleBlock(html, pattern, attribute) {
+  const matches = [...html.matchAll(pattern)].map(([block]) => block).filter(block => block.includes(attribute));
+  if (matches.length !== 1) throw new Error('A videó nem azonosítható egyértelműen: ' + attribute);
+  return matches[0];
+}
+
+function removeInstagramCard(html, id, comparing) {
+  const card = singleBlock(html, /<article class="guest-card">[\s\S]*?<\/article>/g,
+    'data-ig-permalink="https://www.instagram.com/reel/' + id + '/"');
+  return replaceOnce(html, card, comparing ? mark('del', card, true) : '');
+}
+
+function separateTikTok(html, { id, anchor, from, title, intro }, comparing) {
+  const video = singleBlock(html, /<figure class="media-player tiktok\b[^"]*">[\s\S]*?<\/figure>/g,
+    'data-embed="https://www.tiktok.com/player/v1/' + id + '?');
+  const renamed = replaceOnce(video, '<strong>' + from + '</strong>', '').replaceAll(from, title);
+  const section = '<section aria-labelledby="' + anchor + '">\n' +
+    '<h3 id="' + anchor + '">' + title + '</h3>\n' +
+    '<p class="word-p">' + intro + '</p>\n' + renamed + '\n</section>\n';
+  const updated = comparing ? mark('del', video, true) + '\n' + mark('ins', section.trimEnd(), true) + '\n' : section;
+  return replaceOnce(html, video, updated);
+}
+
+function additionalTikToks(html, { before, title, videoIds }, comparing) {
+  const destination = '<h2 id="' + before + '">';
+  const videos = videoIds.map((id, index) => {
+    if (!/^\d+$/.test(id)) throw new Error('Hibás TikTok-azonosító: ' + id);
+    const label = (index + 1) + '. videó';
+    const player = 'https://www.tiktok.com/player/v1/' + id + '?autoplay=0&amp;controls=1&amp;description=1&amp;music_info=0';
+    const permalink = 'https://www.tiktok.com/@dzsufizio/video/' + id;
+    return '<figure class="media-player tiktok compact">\n' +
+      '<details class="video-embed" data-embed="' + player + '" data-title="' + title + ' – ' + label + '">\n' +
+      '<summary class="video-summary"><span class="video-closed-label">▶ ' + label + ' lejátszása</span>' +
+      '<span class="video-open-label">' + label + ' bezárása</span></summary>\n' +
+      '<div class="play-space" data-player></div>\n' +
+      '</details>\n' +
+      '<figcaption><a href="' + permalink + '" class="player-link" target="_blank" rel="noopener noreferrer" ' +
+      'aria-label="' + label + ' megnyitása a TikTokon">Megnyitás a TikTokon</a></figcaption>\n' +
+      '</figure>';
+  }).join('\n');
+  const block = '<section aria-labelledby="teniszkonyok-videok">\n' +
+    '<h3 id="teniszkonyok-videok">' + title + '</h3>\n' +
+    '<div class="gallery">\n' + videos + '\n</div>\n</section>';
+  return replaceOnce(html, destination, (comparing ? mark('ins', block, true) : block) + '\n' + destination);
+}
+
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, additionalTikToks: extraVideos }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -148,6 +194,18 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
     const compactGrid = '<div class="complaints-grid complaints-grid--compact">';
     modified = replaceOnce(modified, grid, compactGrid);
     comparison = replaceOnce(comparison, grid, compactGrid);
+  }
+  if (removedReel) {
+    modified = removeInstagramCard(modified, removedReel, false);
+    comparison = removeInstagramCard(comparison, removedReel, true);
+  }
+  if (videoSection) {
+    modified = separateTikTok(modified, videoSection, false);
+    comparison = separateTikTok(comparison, videoSection, true);
+  }
+  if (extraVideos) {
+    modified = additionalTikToks(modified, extraVideos, false);
+    comparison = additionalTikToks(comparison, extraVideos, true);
   }
   return { modified, comparison };
 }

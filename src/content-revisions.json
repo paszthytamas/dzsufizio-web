@@ -41,7 +41,16 @@
         "A kézzel végzett lazító vagy mobilizáló fogások kiegészítő szerepe egyénileg mérlegelhető. A Cochrane 2024-es áttekintése szerint a manuális módszerek és a gyakorlatok csökkenthetik a fájdalmat. Ebből nem következik, hogy egy adott fogás vagy a Dzsufizio módszer® biztos megoldást jelent teniszkönyökre.",
         "resz-40"
       ]
-    ]
+    ],
+    "additionalTikToks": {
+      "before": "resz-38",
+      "title": "További videók teniszkönyökre",
+      "videoIds": [
+        "7294967357460532512",
+        "7320614691858844960",
+        "7351795738755583265"
+      ]
+    }
   },
   "blog/vallfajdalom.html": {
     "replace": [
@@ -122,12 +131,12 @@
       ],
       [
         "Rövid nyomást vagy feszülést érezhetsz, és előfordulhat, hogy hangot is hallasz. Az érzet személyenként eltér. Ha fáj vagy kellemetlen, jelezd: megállunk, és megbeszéljük, hogyan tovább.",
-        "Rövid nyomást vagy feszülést érezhetsz, és előfordulhat, hogy hangot is hallasz. Az érzet személyenként eltér. Ha az előkészületek vagy a fogás közben fájdalmat vagy kellemetlenséget érzel, jelezd. Megállunk, és megbeszéljük, milyen másik testhelyzet vagy fogás illik hozzád.",
+        "Rövid nyomást vagy feszülést érezhetsz, és előfordulhat, hogy hangot is hallasz. Az érzet személyenként eltér, de általában teljesen fájdalommentes. Ha a fogás előkészületei során fáj vagy kellemetlen, jelezd: megállunk, és megbeszéljük, hogyan tovább. Mindig van másik opció, ami számodra testhezállóbb.",
         "resz-44"
       ],
       [
         "A hang nem jelenti azt, hogy egy csontot visszatettünk a helyére. A roppanásból azt sem lehet megmondani, hogy csökken-e a fájdalom. A fogás után arra figyelünk, mit érzel és hogyan esik a mozgás.",
-        "A hang nem jelenti azt, hogy egy csontot visszatettünk a helyére. A roppanás hangerejéből önmagában nem lehet megállapítani, változott-e a fájdalom. A fogás után megkérdezzük, mit érzel, és megnézzük, változott-e a mozgástartományod vagy egy korábban egyeztetett mozdulat kivitelezése.",
+        "A hang nem jelenti azt, hogy egy csontot visszatettünk a helyére. A roppanásból azt sem lehet megmondani, hogy megszűnt-e a fájdalom. Általában a nagyobb hang kíséretében nagyobb ízületi blokkoldás is történik. Ez visszaigazolja a kezelés elején végzett tesztek pontosságát. A fogás után arra figyelünk, hogy javult-e a mozgástartomány és az adott mozdulatba bekapcsolódnak-e az érintett izmok, ízületek.",
         "resz-19"
       ]
     ],
@@ -138,11 +147,11 @@
     "paragraphs": [
       [
         "resz-46",
-        "Átmeneti érzékenység, izomfájdalom vagy merevség előfordulhat. Az alkalom után egyeztethetünk a terhelésről és az otthoni teendőkről. Gerincen végzett kimozgatás után ritka, súlyos szövődményekről is beszámoltak. <strong>Ha erős, romló vagy szokatlan tünetet tapasztalsz, kérj orvosi segítséget.</strong> <a href=\"https://www.nccih.nih.gov/health/spinal-manipulation-what-you-need-to-know\" target=\"_blank\" rel=\"noopener noreferrer\">[3]</a>"
+        "Átmeneti érzékenység, izomfájdalom vagy merevség előfordulhat. Pár napig érdemes kerülni a nehéz fizikai munkát, az edzést, a forró fürdőt és a szaunát a gyulladásos folyamatok elkerülése érdekében. A kimozgatás kapcsán maradandó szövődményekről nem beszélhetünk. A körültekintő előkészítés és megfelelően választott fogások teljesen biztonságosak. Ha erős vagy szokatlan tünetet tapasztalsz, keress bennünket, és átbeszéljük a lehetséges okokat. <a href=\"https://www.nccih.nih.gov/health/spinal-manipulation-what-you-need-to-know\" target=\"_blank\" rel=\"noopener noreferrer\">[3]</a>"
       ],
       [
         "resz-10",
-        "Friss sérülés után jelentkező erős fájdalom, lázzal járó hátfájás, új vagy romló zsibbadás, érzéskiesés, romló mozgásképesség vagy izomgyengeség esetén előbb kérj orvosi segítséget. Ha a derékfájdalomhoz új vizeletürítési nehézség vagy vizelet- vagy széklettartási zavar társul, sürgős ellátásra van szükség. <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a> <strong>Hirtelen beszédzavar, féloldali gyengeség vagy eszméletvesztés esetén azonnal hívd a 112-t.</strong> Az Egészségvonal útmutatói <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/s-sz/stroke.html\" target=\"_blank\" rel=\"noopener noreferrer\">stroke</a> és <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/e-e/eszmeletvesztes.html\" target=\"_blank\" rel=\"noopener noreferrer\">eszméletvesztés</a> esetére."
+        "Friss sérülés után jelentkező erős fájdalom, lázzal járó hátfájás, új vagy romló zsibbadás, végtagokban érzéskiesés, indokolatlan eszméletvesztés, beszédközpontot érintő tünetek, motoros funkciók romlása, illetve drasztikus izomgyengeség esetén előbb kérj orvosi segítséget. <strong>Ha a derékfájáshoz új vizelet- vagy székletürítési zavar társul, sürgős orvosi ellátásra van szükség.</strong> <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
       ]
     ]
   },
@@ -154,14 +163,14 @@
     "replace": [
       [
         "A következő lépést az első alkalom és a visszajelzésed alapján beszéljük meg. Ha a fájdalom tartósan fennáll vagy erősödik, érdemes az okát orvossal tisztázni.",
-        "A következő lépést az első alkalom és a visszajelzésed alapján beszéljük meg. Ha a fájdalom tartósan fennáll vagy erősödik, érdemes orvossal tisztázni az okát. Akkor is kérj orvosi tanácsot, ha több alkalom után sincs számottevő javulás.",
+        "A következő lépést az első alkalom és a visszajelzésed alapján beszéljük meg. Ha több alkalom után sincs számottevő javulás és a fájdalom tartósan fennáll vagy erősödik, érdemes az okát orvossal tisztázni.",
         "resz-56"
       ]
     ],
     "paragraphs": [
       [
         "resz-54",
-        "Ha új lábzsibbadás társul a derékfájdalomhoz, foglalás előtt kérj orvosi vizsgálatot. <strong>Ha mindkét lábadban új zsibbadás vagy gyengeség jelentkezik, kérj azonnali sürgősségi ellátást.</strong> Új vagy romló izomgyengeséggel, illetve ha a lábadat egyre nehezebben mozgatod, sürgősen fordulj orvoshoz. <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
+        "Ha új lábzsibbadás társul a fájdalomhoz és egyszerre mindkét lábat érinti, akkor a foglalás előtt kérj orvosi vizsgálatot. <strong>Új vagy romló izomgyengeséggel és motoros funkciók romlásával járó állapotban sürgősen fordulj orvoshoz.</strong> <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
       ]
     ]
   },
@@ -193,7 +202,7 @@
       ],
       [
         "A fogás után megkérdezzük, mit érzel az adott területen. Ha erősödik a fájdalom, vagy nagyobb bevérzést, duzzanatot veszel észre, kérj egészségügyi tanácsot.",
-        "A fogás után megkérdezzük, mit érzel az adott területen. Enyhe fájdalom, érzékenység vagy kisebb véraláfutás előfordulhat. Ha erősödik a fájdalom, vagy nagyobb bevérzést, duzzanatot veszel észre, kérj egészségügyi tanácsot. Az alkalommal kapcsolatos kérdésekkel kereshetsz bennünket.",
+        "A fogás után megkérdezzük, mit érzel az adott területen. Kisebb fájdalom, érzékenység és véraláfutás előfordulhat a kezelés utáni napokban, de ezek nyom nélkül az eredeti tünet kíséretében eltűnnek. Ha valami szokatlant tapasztalsz vagy erős fájdalmad lenne, keress bennünket, és átbeszéljük a lehetséges okokat.",
         "resz-28"
       ],
       [
@@ -203,7 +212,7 @@
       ],
       [
         "Az eszközös lágyrész-mobilizációt vizsgáló kutatások egyes panaszoknál kisebb fájdalmat vagy a mindennapi mozgás javulását mérték. Az eredmények a vizsgált állapottól és az alkalmazástól függenek. Nálunk a cél, hogy az adott terület mozgását kényelmesebbnek érezd.",
-        "Az eszközös lágyrész-mobilizációt vizsgáló kutatások egyes mozgásszervi panaszoknál kisebb fájdalmat és jobb mindennapi működést mértek. Az eredmények a panasztól és az alkalmazástól függenek. A fogást a visszajelzésedhez igazítva végezzük.",
+        "Az eszközös lágyrész-mobilizációt vizsgáló kutatások mozgásszervi panaszoknál kisebb fájdalmat és a mindennapi mozgás javulását mérték. Egy hatékony és kíméletes technika, amely sokrétűen használható.",
         "resz-9"
       ]
     ],
@@ -224,14 +233,14 @@
       ],
       [
         "Egyes vizsgálatok rövid távú változást mértek a mozgástartományban. A tartós eredményekről és a különböző panaszokra gyakorolt hatásról kevesebbet tudunk. A flossing nálunk kiegészítő fogás a közérzetjavító alkalmon.",
-        "Egyes vizsgálatokban a flossing rövid távon javította a mozgástartományt. A regenerációra vonatkozó bizonyítékok korlátozottak. A flossing nálunk kiegészítő eszköz a közérzetjavító alkalmon.",
+        "A mozgástartomány javulása mellett hozzájárul az adott terület anyagcseréjének fokozásához és a regeneráció gyorsításához. A flossing nálunk kiegészítő eszköz a kezeléseink során.",
         "resz-9"
       ]
     ],
     "paragraphs": [
       [
         "resz-30",
-        "A szalag körkörös szorítást ad, az érzet mozgás közben változhat. <strong>Éles fájdalom, zsibbadás, bizsergés, hidegérzet vagy feltűnő elszíneződés esetén szólj azonnal.</strong> Ilyenkor levesszük a szalagot. <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10987303/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
+        "A szalag körkörös szorítást ad, az érzet mozgás közben változhat. Átmenetileg kis zsibbadás, bizsergés észlelhető. A szalag levétele után ez elmúlik. <strong>Éles fájdalom esetén szólj azonnal</strong>: levesszük a szalagot. <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10987303/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
       ]
     ]
   },
@@ -272,7 +281,7 @@
       ],
       [
         "A tapasz hatása panasztól függ. A kutatásokban egyes esetekben rövid távú javulást mértek, de az eredmények bizonytalanok. A tapasz önmagában nem helyettesíti a szükséges vizsgálatot vagy a gyógytornát.",
-        "A tapasz hatása a panasztól és a felhelyezés technikájától függ. Egyes panaszoknál kiegészítőként rövid távú enyhülést adhat, a vizsgálatok eredményei bizonytalanok. A tapasz önmagában nem helyettesíti a szükséges vizsgálatot, kezelést vagy gyógytornát.",
+        "A tapasz hatása panasztól és a felhelyezés technikájától függ. A tapasz önmagában nem helyettesíti a szükséges vizsgálatot, kezelést vagy a gyógytornát, de nagyon jó kiegészítője azoknak és gyorsítja a regeneráció idejét.",
         "resz-10"
       ]
     ]
@@ -294,7 +303,7 @@
       ],
       [
         "A köpölyözés nálunk a közérzetjavító alkalom egyik lehetséges fogása. Száraz köpölyözést alkalmazunk: a harang szívóhatással dolgozik a bőr felszínén, bemetszés nélkül. A cél, hogy az érintett területet kevésbé feszesnek érezd. A fájdalom enyhülését vizsgáló kutatások eredményei bizonytalanok, ezért előre nem lehet megmondani, nálad mit változtat az érzeten.",
-        "A köpölyözés nálunk a közérzetjavító alkalom egyik választható technikája. A száraz köpölyözésnél a harang szívóhatást fejt ki a bőr felszínén. A cél, hogy az érintett területet kevésbé feszesnek érezd. Egyes vizsgálatok fájdalomcsökkenést mértek, az eredmények bizonytalanok.",
+        "A köpölyözés nálunk a közérzetjavító alkalom egyik lehetséges eszköze. Száraz köpölyözést alkalmazunk: a harang szívóhatással dolgozik a bőr felszínén. A cél, hogy az érintett területet kevésbé feszesnek érezd. A fájdalom enyhülése mellett a helyi vérbőség fokozza az adott terület anyagcseréjét és gyorsítja a regenerációt.",
         "resz-8"
       ]
     ],
@@ -335,12 +344,12 @@
       ],
       [
         "A triggerpont egy nyomásérzékeny terület az izomban, amelyet hétköznapi nyelven gyakran izomcsomónak neveznek. Nyomásra lehet érzékeny ott, ahol megérintjük, és előfordulhat, hogy máshol is érzed a kellemetlenséget. Az érzet önmagában nem árulja el, mi okozza a panaszt.",
-        "A triggerpont egy nyomásérzékeny terület az izomban, amelyet hétköznapi nyelven gyakran izomcsomónak neveznek. Nyomásra lehet érzékeny ott, ahol megérintjük, és előfordulhat, hogy máshol is érzed a kellemetlenséget. A fájdalom helye és a visszajelzésed segít eldönteni, érdemes-e az adott területen lazítani.",
+        "A triggerpont egy nyomásérzékeny terület az izomban, amelyet hétköznapi nyelven gyakran izomcsomónak neveznek. Nyomásra lehet érzékeny ott, ahol megérintjük, és előfordulhat, hogy máshol is érzed a kellemetlenséget. Az érzet jelezheti, hogy az adott területen érdemes lazítani, mert érintett lehet a panaszod kialakulásában.",
         "resz-8"
       ],
       [
         "A fogás célja, hogy az adott területet kevésbé érzékenynek érezd. A hatás egyénenként változik, és a hosszú távú javulásról korlátozottak az adatok. A fogás a fizikai közérzet javítását szolgálja.",
-        "A fogás célja, hogy az adott területet kevésbé érzékenynek érezd. A hatás egyénenként változik. Ha indokolt, az alkalom végén otthon is követhető tanácsokat adunk a kényelmesebb mozgáshoz.",
+        "A fogás célja, hogy az adott területet kevésbé érzékenynek érezd. A hatás egyénenként változik, de nagymértékű javulás érhető el a technikával. Otthonra további hasznos tanácsokkal látunk el, amivel meghosszabbítható és fenntartható az állapot.",
         "resz-9"
       ]
     ],
@@ -373,7 +382,8 @@
     "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226"
   },
   "csapat/kuti-gergo.html": {
-    "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226"
+    "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226",
+    "removeInstagramCard": "DCXBoSDIhWs"
   },
   "csapat/virag-tamas.html": {
     "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226"
@@ -400,7 +410,7 @@
     "paragraphs": [
       [
         "resz-54",
-        "Átmeneti érzékenység, merevség vagy fájdalomfokozódás előfordulhat. Ez jellemzően néhány napon belül enyhül. <strong>Ha a tünet erős, romlik vagy szokatlan, kérj orvosi tanácsot.</strong> Ha az enyhébb tünetekkel kapcsolatban kérdésed van, keress bennünket, és átbeszéljük a további lépéseket."
+        "Átmeneti érzékenység, merevség vagy fájdalomfokozódás előfordulhat. Ez jellemzően néhány napon belül enyhül. Ha a tünet erős, romlik vagy szokatlan, keress bennünket, és átbeszéljük a további lépéseket."
       ]
     ]
   },
@@ -408,9 +418,18 @@
     "replace": [
       [
         "A végén megbeszéljük, hogyan érezted magad, és mi esett jól. Ha új vagy erősödő fájdalmat tapasztalsz, kérj egészségügyi tanácsot.",
-        "A végén megbeszéljük, hogyan érezted magad, és mi esett jól. Az alkalom után átmeneti izomérzékenységet vagy izomlázhoz hasonló érzetet tapasztalhatsz. Ha új, erősödő vagy szokatlan fájdalmat észlelsz, kérj egészségügyi tanácsot. Az alkalommal kapcsolatos kérdésekkel kereshetsz bennünket.",
+        "A végén megbeszéljük, hogyan érezted magad, és mi esett jól. Átmenetileg a következő napokban jelentkezhet fokozott fáradtság és izomláz, valamint minimális fájdalom. Ha bármi szokatlant észlelnél, keress bennünket, és megbeszéljük a lehetséges okokat.",
         "resz-32"
       ]
     ]
+  },
+  "blog/becsipodott-a-derekad.html": {
+    "separateTikTok": {
+      "id": "7542111066570951958",
+      "anchor": "mobilizacio-oldalt-fekve",
+      "from": "Finom medencebillentés hanyatt fekve",
+      "title": "Mobilizáció oldalt fekve",
+      "intro": "Az alábbi videó a mobilizáció egy másik változatát mutatja be."
+    }
   }
 }
