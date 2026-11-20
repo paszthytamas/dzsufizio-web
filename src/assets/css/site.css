@@ -1416,3 +1416,14 @@ main:focus {
   text-align:start;
   font-size:.86rem;
 }
+
+.revision-booking {
+  display:inline-flex;
+  border:2px solid currentColor;
+  border-radius:14px;
+  padding:.15rem;
+}
+
+.revision-booking .button {
+  text-decoration:inherit;
+}

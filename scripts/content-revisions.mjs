@@ -92,7 +92,22 @@ function moveSection(html, move, oldPlace = '', newPlace = section(html, move)) 
   return replaceOnce(replaceOnce(body, entry, ''), before, entry + before);
 }
 
-export function renderRevisions(source, { replace = [], remove = [], move }) {
+function replaceBookingLinks(html, destination, comparing) {
+  const defaultUrl = 'https://dzsufizio.salonic.hu/';
+  const pattern = /<a href="https:\/\/dzsufizio\.salonic\.hu\/"[^>]*\bclass="[^"]*\bbooking-cta\b[^"]*"[^>]*>[\s\S]*?<\/a>/g;
+  let matches = 0;
+  const updated = html.replace(pattern, link => {
+    matches++;
+    const personal = link.replace(defaultUrl, () => destination);
+    if (!comparing) return personal;
+    return '<del class="revision-booking" title="Általános foglaló">' + link + '</del> ' +
+      '<ins class="revision-booking" title="Személyes foglaló">' + personal + '</ins>';
+  });
+  if (!matches) throw new Error('Hiányzó foglalógomb a bemutatkozóoldalon.');
+  return updated;
+}
+
+export function renderRevisions(source, { replace = [], remove = [], move, booking }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -111,6 +126,10 @@ export function renderRevisions(source, { replace = [], remove = [], move }) {
       mark('del', old.trimEnd(), true) + '\n',
       mark('ins', section(modified, move).trimEnd(), true) + '\n');
     modified = moveSection(modified, move);
+  }
+  if (booking) {
+    modified = replaceBookingLinks(modified, booking, false);
+    comparison = replaceBookingLinks(comparison, booking, true);
   }
   return { modified, comparison };
 }

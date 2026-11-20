@@ -64,7 +64,8 @@
         "csatlakozva megfigyelőként",
         "csatlakozva először megfigyelőként"
       ]
-    ]
+    ],
+    "booking": "https://dzsufizio.salonic.hu/employees/18448/?placeId=8226"
   },
   "csapat/varga-zoltan.html": {
     "replace": [
@@ -72,7 +73,8 @@
         "a személyes alkalom előtt",
         "a kezelés előtt"
       ]
-    ]
+    ],
+    "booking": "https://dzsufizio.salonic.hu/employees/30630/?placeId=8226"
   },
   "csipofajdalom.html": {
     "move": [
@@ -272,5 +274,29 @@
         "Az egyeztetés alapján a csontkovácsolás mellett szóba jöhet például a vállöv és a lapocka körüli izmok masszírozása, a triggerpontok oldása és eszközös kötőszöveti technikák alkalmazása (fasciakés, köpölyözés, flossing)."
       ]
     ]
+  },
+  "csapat/krasznai-mate.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226"
+  },
+  "csapat/kuti-gergo.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226"
+  },
+  "csapat/virag-tamas.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226"
+  },
+  "csapat/vizi-kristof.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/31120/?placeId=8226"
+  },
+  "csapat/szilagyi-bianka.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/31270/?placeId=8226"
+  },
+  "csapat/bukovszki-mate.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/31375/?placeId=8226"
+  },
+  "csapat/horvath-bence.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/31377/?placeId=8226"
+  },
+  "csapat/doncsev-vitalij.html": {
+    "booking": "https://dzsufizio.salonic.hu/employees/31379/?placeId=8226"
   }
 }
