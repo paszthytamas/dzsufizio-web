@@ -1,0 +1,276 @@
+{
+  "home.html": {
+    "replace": [
+      [
+        "Hozzád illő alkalmat keresel?",
+        "Hozzád illő szolgáltatást keresel?"
+      ],
+      [
+        "Ismerd meg a fogásainkat",
+        "Ismerd meg a módszerünket"
+      ],
+      [
+        "A felvételeken belenézhetsz egy-egy alkalomba.",
+        "A felvételeken belenézhetsz egy-egy kezelésbe."
+      ]
+    ]
+  },
+  "blog/nyakfajas.html": {
+    "remove": [
+      "resz-51"
+    ],
+    "replace": [
+      [
+        "masszázst, lazító és mobilizáló fogásokat",
+        "masszázst, csontkovácsolást, lazító és mobilizáló fogásokat"
+      ]
+    ]
+  },
+  "blog/teniszkonyok.html": {
+    "replace": [
+      [
+        "masszázst, mobilizáló és lazító fogásokat",
+        "masszázst, csontkovácsolást, mobilizáló és lazító fogásokat"
+      ],
+      [
+        "A tapasz alkalmazását érdemes szakemberrel egyeztetni.",
+        "Rövid távon segíthet enyhíteni a panaszt, de a tapasz alkalmazását érdemes szakemberrel egyeztetni."
+      ]
+    ]
+  },
+  "blog/vallfajdalom.html": {
+    "replace": [
+      [
+        "masszázst, lazító és mobilizáló fogásokat",
+        "masszázst, csontkovácsolást, lazító és mobilizáló fogásokat"
+      ]
+    ]
+  },
+  "bokafajdalom.html": {
+    "move": [
+      "resz-7",
+      "resz-43"
+    ],
+    "replace": [
+      [
+        "az egyeztetés alapján szóba jöhet például a vádli körüli izmok masszírozása.",
+        "az egyeztetés alapján a csontkovácsolás mellett szóba jöhet például a vádli körüli izmok masszírozása, a triggerpontok oldása, a köpöllyel vagy fasciakéssel végzett eszközös mobilizáció és a kineziológiai tapasz felhelyezése is."
+      ]
+    ]
+  },
+  "csapat/kirilla-tibor.html": {
+    "replace": [
+      [
+        "csatlakozva megfigyelőként",
+        "csatlakozva először megfigyelőként"
+      ]
+    ]
+  },
+  "csapat/varga-zoltan.html": {
+    "replace": [
+      [
+        "a személyes alkalom előtt",
+        "a kezelés előtt"
+      ]
+    ]
+  },
+  "csipofajdalom.html": {
+    "move": [
+      "resz-7",
+      "resz-44"
+    ],
+    "replace": [
+      [
+        "A megbeszéltek alapján szóba jöhet a csípő körüli vagy a farizmokon végzett masszázsfogás.",
+        "A megbeszéltek alapján a csontkovácsolás mellett szóba jöhet a csípő körüli vagy a farizmokon végzett masszázsfogás, a triggerpontok oldása és a köpölyözés is."
+      ]
+    ]
+  },
+  "csontkovacsolas.html": {
+    "replace": [
+      [
+        "merevebbnek érzed a hátadat;",
+        "merevebbnek érzed a hátadat, a derekadat, a nyakadat vagy valamelyik végtagodat;"
+      ],
+      [
+        "például a hajolás vagy fordulás kényelmetlen.",
+        "például a hajolás, az öltözködés vagy a fordulás kényelmetlen."
+      ],
+      [
+        "Ha indokolt, masszázsfogásokkal vagy triggerpont-lazítással kezdünk.",
+        "Masszázsfogásokkal, triggerpont-oldással és eszközös kötőszöveti lazítással készítjük elő a kimozgatást. Az eszközös fogásokhoz például köpölyt, fasciakést vagy flossing szalagot használunk."
+      ],
+      [
+        "és csak akkor alkalmazzuk, ha beleegyezel.",
+        "és a beleegyezéseddel alkalmazzuk. Menet közben válthatunk kényelmesebb testhelyzetre vagy másik technikára."
+      ],
+      [
+        "Ha közben szünetet szeretnél, vagy azt kéred, hogy egy fogás maradjon ki, szólj nyugodtan.",
+        "Ha közben szünetet szeretnél, bármi kellemetlen, vagy azt kéred, hogy egy fogás maradjon ki, szólj nyugodtan."
+      ]
+    ],
+    "move": [
+      "resz-8",
+      "resz-51"
+    ]
+  },
+  "derekfajas.html": {
+    "move": [
+      "resz-8",
+      "resz-57"
+    ]
+  },
+  "fascia-kes.html": {
+    "replace": [
+      [
+        "egy sima, lekerekített szélű fémeszköz.",
+        "egy sima, lekerekített szélű eszköz, amely rozsdamentes fémből készül."
+      ],
+      [
+        "Finoman végigvezetjük a bőrön; a fogásnál az eszköz nyomását érezheted.",
+        "Kis nyomással vezetjük végig a bőrön, hogy lazítsuk a feszesnek érzett területet."
+      ],
+      [
+        "A bőr kipirosodhat; a bevérzés nem cél.",
+        "A bőr kipirosodhat, és enyhe véraláfutás is előfordulhat."
+      ],
+      [
+        "A fasciakéssel végzett fogás a ",
+        "A fasciakés a "
+      ],
+      [
+        "egyik választható fogása. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel az eszközös lazítás.",
+        "egyik választható eszköze. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel ez a technika."
+      ],
+      [
+        "milyen helyzetben változik a kellemetlenség.",
+        "milyen helyzetben változik a fájdalom."
+      ]
+    ],
+    "move": [
+      "resz-31",
+      "resz-50"
+    ]
+  },
+  "flossing.html": {
+    "move": [
+      "resz-31",
+      "resz-50"
+    ],
+    "replace": [
+      [
+        "egyik választható fogása. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel a szalagos fogás.",
+        "egyik választható eszköze. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel a szalagos technika."
+      ]
+    ]
+  },
+  "hatfajas.html": {
+    "replace": [
+      [
+        "érdemes előbb a háziorvosodhoz fordulni.",
+        "érdemes előbb orvoshoz fordulni."
+      ],
+      [
+        "A megbeszéltek alapján szóba jöhet például masszázsfogás a lapocka körüli vagy a háti izmokon.",
+        "A megbeszéltek alapján a csontkovácsolás mellett szóba jöhet például a lapocka körüli vagy a háti izmokon végzett masszázs, triggerpont-oldás, köpölyözés és fasciakéssel végzett lazítás."
+      ]
+    ],
+    "move": [
+      "resz-7",
+      "resz-46"
+    ]
+  },
+  "kinesio-tape.html": {
+    "replace": [
+      [
+        " Ha fáj, nem erőltetjük tovább.",
+        ""
+      ],
+      [
+        "A felhelyezés előtt áttöröljük és zsírtalanítjuk a bőrt, majd szárazra töröljük.",
+        "Ha kineziológiai tapaszt szeretnél, az érintett területre az alkalom előtt ne kenj krémet vagy más kozmetikumot. Erős szőrzet esetén érdemes előre rövidre nyírni a szőrt. A felhelyezés előtt áttöröljük és zsírtalanítjuk a bőrt, majd szárazra töröljük."
+      ],
+      [
+        "Ha az irritáció a levétel után is fennáll vagy romlik, kérj egészségügyi tanácsot.",
+        "Ha az irritáció a levétel után is fennáll vagy romlik, kérj egészségügyi tanácsot. A tapasz ragasztója allergiás reakciót is kiválthat."
+      ]
+    ]
+  },
+  "kopolyozes.html": {
+    "replace": [
+      [
+        "Egy helyben hagyott köpöly",
+        "Statikus köpöly"
+      ],
+      [
+        "A köpölyözés a ",
+        "A köpöly a ",
+        "resz-34"
+      ],
+      [
+        "egyik választható fogása. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel a köpölyözés.",
+        "egyik választható eszköze. A foglalóban csomagot válassz, és az egyeztetéskor jelezd, ha érdekel a köpölyözés."
+      ]
+    ],
+    "move": [
+      "resz-31",
+      "resz-50"
+    ]
+  },
+  "nyakfajas.html": {
+    "replace": [
+      [
+        "feszül a tarkód?",
+        "feszül a nyakad egészen a tarkódig?"
+      ]
+    ],
+    "move": [
+      "resz-7",
+      "resz-45"
+    ]
+  },
+  "trigger-pont-lazitas.html": {
+    "replace": [
+      [
+        "ha illik az alkalomhoz.",
+        "ha a felmérés alapján úgy látjuk, hogy segíthet."
+      ],
+      [
+        "Ha a fogás szóba jön,",
+        "Ha a fogás indokolt,"
+      ],
+      [
+        "Ha hasznos, megnézzük, hogyan érzed magad egy korábban egyeztetett mozdulatnál.",
+        "A kezelés további részében megnézzük, hogyan érzed magad egy korábban egyeztetett mozdulatnál. Ha szükséges, megismételjük a fogást, vagy más technikát választunk."
+      ],
+      [
+        "Így tudunk dönteni arról, hogy az adott területen dolgozzunk-e.",
+        "Így tudjuk eldönteni, mely technikák alkalmazhatók az adott területen."
+      ]
+    ],
+    "move": [
+      "resz-30",
+      "resz-50"
+    ]
+  },
+  "vallfajdalom.html": {
+    "move": [
+      "resz-7",
+      "resz-45"
+    ],
+    "replace": [
+      [
+        "amikor a felső polcra nyúlsz, edzésen emeled a karod vagy éjjel a fájó oldaladra fordulsz?",
+        "amikor a felső polcra nyúlsz, öltözködéskor vagy edzésen emeled a karod, esetleg éjjel a fájó oldaladra fordulsz?"
+      ],
+      [
+        "A felső polcra nyúlásnál, teregetésnél vagy fej fölött végzett munkánál",
+        "A felső polcra nyúlásnál, öltözködésnél, teregetésnél vagy fej fölött végzett munkánál"
+      ],
+      [
+        "Az egyeztetés alapján szóba jöhet például a vállöv és a lapocka körüli izmok masszírozása.",
+        "Az egyeztetés alapján a csontkovácsolás mellett szóba jöhet például a vállöv és a lapocka körüli izmok masszírozása, a triggerpontok oldása és eszközös kötőszöveti technikák alkalmazása (fasciakés, köpölyözés, flossing)."
+      ]
+    ]
+  }
+}

@@ -1,4 +1,5 @@
 import { initAnchors, initNavigation } from './navigation.js';
+import { initContentView } from './content-view.js';
 import { initContents } from './toc.js';
 import { rotateTeam } from './team.js';
 import { initInstagram } from './media/instagram.js';
@@ -13,6 +14,7 @@ window.addEventListener('hashchange', () => {
 
 const main = document.querySelector('main');
 const review = readReviewSession();
+await initContentView(main);
 initNavigation();
 initContents(main, { reviewing: Boolean(review) });
 initAnchors();

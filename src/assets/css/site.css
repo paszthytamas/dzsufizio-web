@@ -246,6 +246,77 @@ td p:last-child,th p:last-child {
   color:var(--green);
 }
 
+.content-view {
+  min-height:40px;
+  margin-inline:.25rem;
+  padding:.42rem 1.8rem .42rem .7rem;
+  appearance:none;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:
+    linear-gradient(45deg,transparent 50%,var(--green) 50%) right .73rem center / .29rem .29rem no-repeat,
+    linear-gradient(135deg,var(--green) 50%,transparent 50%) right .45rem center / .29rem .29rem no-repeat,
+    var(--panel);
+  color:var(--ink);
+  font:inherit;
+  font-size:.875rem;
+  font-weight:680;
+  cursor:pointer;
+}
+
+.content-view:focus-visible {
+  outline:2px solid var(--green);
+  outline-offset:2px;
+}
+
+.revision-legend {
+  max-width:1320px;
+  margin:.8rem auto 0;
+  padding:0 clamp(.9rem,3.1vw,2.65rem);
+  font-size:.875rem;
+}
+
+.revision-legend del,.revision-legend ins {
+  display:inline-block;
+  margin-inline-end:.4rem;
+  padding:.15rem .5rem;
+  border-radius:5px;
+}
+
+main[data-revisions] del,.revision-legend del {
+  background:#fde3e0;
+  color:#852522;
+  text-decoration:line-through;
+}
+
+main[data-revisions] ins,.revision-legend ins {
+  background:#def2df;
+  color:#236038;
+  text-decoration:underline;
+  text-decoration-thickness:.08em;
+  text-underline-offset:.14em;
+}
+
+main[data-revisions] del + ins {
+  margin-inline-start:.15em;
+}
+
+main[data-revisions] .revision-block {
+  display:block;
+  margin-block:1rem;
+  padding:.7rem .85rem;
+  border-inline-start:3px solid currentColor;
+  border-radius:5px;
+}
+
+main[data-revisions] .revision-block > :first-child {
+  margin-block-start:0;
+}
+
+main[data-revisions] .revision-block > :last-child {
+  margin-block-end:0;
+}
+
 main {
   max-width:1320px;
   padding:1.65rem clamp(.9rem,3.1vw,2.65rem) 4.2rem;
