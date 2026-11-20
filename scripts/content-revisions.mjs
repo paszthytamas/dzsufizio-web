@@ -127,15 +127,34 @@ function removeInstagramCard(html, id, comparing) {
   return replaceOnce(html, card, comparing ? mark('del', card, true) : '');
 }
 
-function separateTikTok(html, { id, anchor, from, title, intro }, comparing) {
+function replaceVideoExercise(html, { id, headingId, anchor, from, title, steps }, comparing) {
   const video = singleBlock(html, /<figure class="media-player tiktok\b[^"]*">[\s\S]*?<\/figure>/g,
     'data-embed="https://www.tiktok.com/player/v1/' + id + '?');
-  const renamed = replaceOnce(video, '<strong>' + from + '</strong>', '').replaceAll(from, title);
-  const section = '<section aria-labelledby="' + anchor + '">\n' +
-    '<h3 id="' + anchor + '">' + title + '</h3>\n' +
-    '<p class="word-p">' + intro + '</p>\n' + renamed + '\n</section>\n';
-  const updated = comparing ? mark('del', video, true) + '\n' + mark('ins', section.trimEnd(), true) + '\n' : section;
-  return replaceOnce(html, video, updated);
+  const start = html.indexOf('<h3 id="' + headingId + '">');
+  const end = html.indexOf('</h3>', start);
+  const playerStart = html.indexOf(video);
+  if (start === -1 || end === -1 || playerStart <= end) {
+    throw new Error('A gyakorlat címe nem azonosítható: ' + headingId);
+  }
+  const descriptionStart = end + '</h3>'.length;
+  const previousDescription = html.slice(descriptionStart, playerStart).trim();
+  if (!previousDescription.startsWith('<ol class="word-list">') || /<h[1-6]\b/.test(previousDescription)) {
+    throw new Error('Megváltozott a gyakorlat szerkezete: ' + headingId);
+  }
+
+  const name = escapeExerciseText(title);
+  const newTitle = '<span id="' + anchor + '">' + name + '</span>';
+  const heading = replaceOnce(html.slice(start, descriptionStart), from,
+    comparing ? mark('del', from) + ' ' + mark('ins', newTitle) : newTitle);
+  const instructions = '<ol class="word-list">\n' +
+    steps.map(step => '<li>' + escapeExerciseText(step) + '</li>').join('\n') + '\n</ol>';
+  const description = comparing
+    ? mark('del', previousDescription, true) + '\n' + mark('ins', instructions, true)
+    : instructions;
+  const renamed = replaceOnce(video, '<strong>' + from + '</strong>', '').replaceAll(from, () => name);
+
+  return replaceOnce(html, html.slice(start, playerStart + video.length),
+    [heading, description, renamed].join('\n'));
 }
 
 function escapeExerciseText(value) {
@@ -205,7 +224,7 @@ function renderExerciseChapter(html, items, comparing) {
   return replaceOnce(updatedChapter, '<a href="#resz-27">' + oldTitle + '</a>', '<a href="#resz-27">' + title + '</a>');
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, exerciseChapter }) {
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -243,9 +262,9 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
     modified = removeInstagramCard(modified, removedReel, false);
     comparison = removeInstagramCard(comparison, removedReel, true);
   }
-  if (videoSection) {
-    modified = separateTikTok(modified, videoSection, false);
-    comparison = separateTikTok(comparison, videoSection, true);
+  if (videoExercise) {
+    modified = replaceVideoExercise(modified, videoExercise, false);
+    comparison = replaceVideoExercise(comparison, videoExercise, true);
   }
   if (exerciseChapter) {
     modified = renderExerciseChapter(modified, exerciseChapter.items, false);
