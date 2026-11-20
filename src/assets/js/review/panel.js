@@ -72,9 +72,11 @@ export async function initReview(main, session) {
     '<div class="review-actions"><button class="review-primary" type="submit">Mentés</button>' +
     '<button class="review-reset" type="button">Az egész oldalhoz</button></div></form>' +
     '<section class="review-log" aria-label="Közös megjegyzések"><h3>Közös megjegyzések</h3>' +
-    '<div class="review-filters"><button type="button" data-status="open" aria-pressed="true">Teendők</button>' +
+    '<div class="review-navigation"><div class="review-filters"><button type="button" data-status="open" aria-pressed="true">Teendők</button>' +
     '<button type="button" data-status="done" aria-pressed="false">Kész</button>' +
-    '<button type="button" class="review-refresh">Frissítés</button></div><div class="review-notes"></div></section></div>' +
+    '<button type="button" class="review-refresh">Frissítés</button></div>' +
+    '<div class="review-actions"><button type="button" class="review-primary review-next" disabled>Következő</button><span class="review-position" aria-live="polite"></span></div></div>' +
+    '<div class="review-notes"></div></section></div>' +
     '<div class="review-undo" hidden><span role="status"></span><button type="button" class="review-restore">Visszavonás</button>' +
     '<button type="button" class="review-dismiss" aria-label="Törlésüzenet bezárása">×</button></div>' +
     '<footer class="review-panel__footer"><button type="button" class="review-exit">Kilépés az átnézésből</button></footer>';
@@ -84,6 +86,8 @@ export async function initReview(main, session) {
   const save = form.querySelector('[type="submit"]');
   const message = panel.querySelector('.review-message');
   const noteList = panel.querySelector('.review-notes');
+  const nextButton = panel.querySelector('.review-next');
+  const position = panel.querySelector('.review-position');
   const rangeQuote = panel.querySelector('.review-quote');
   const undo = panel.querySelector('.review-undo');
   const restore = undo.querySelector('.review-restore');
@@ -91,6 +95,10 @@ export async function initReview(main, session) {
   let notes = [];
   let owner = false;
   let status = 'open';
+  const cursors = { open: { id: null, following: [] }, done: { id: null, following: [] } };
+  let visibleNotes = [];
+  let nextNote;
+  const noteRows = new Map();
   let focusTarget = pageTarget(main);
   let submission = null;
   let pointerTarget = null;
@@ -147,24 +155,81 @@ export async function initReview(main, session) {
     pin.style.top = Math.max(8, Math.min(innerHeight - pin.offsetHeight - 8, desiredY)) + 'px';
   }
 
+  function noteUrl(note) {
+    const address = new URL(note.route, session.root);
+    const view = new URL(location.href).searchParams.get('nezet');
+    if (view) address.searchParams.set('nezet', view);
+    address.searchParams.set('review-note', note.id);
+    return address;
+  }
+
+  function updateStep() {
+    const cursor = cursors[status];
+    const index = visibleNotes.findIndex(note => note.id === cursor.id);
+    if (index !== -1) cursor.following = visibleNotes.slice(index + 1).map(note => note.id);
+    // Remember the continuation when the selected note leaves this filter.
+    const nextId = cursor.following.find(id => noteRows.has(id));
+    nextNote = cursor.id ? visibleNotes.find(note => note.id === nextId) : visibleNotes[0];
+    nextButton.disabled = !nextNote;
+    nextButton.setAttribute('aria-label', status === 'done' ? 'Következő kész megjegyzés' : 'Következő teendő');
+    nextButton.title = nextNote ? '' : 'Nincs következő megjegyzés.';
+    position.textContent = index < 0 ? '' : (index + 1) + ' / ' + visibleNotes.length;
+    for (const [id, item] of noteRows) {
+      const link = item.querySelector('.review-jump');
+      const selected = id === cursor.id;
+      item.classList.toggle('is-current', selected);
+      if (selected) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+    }
+  }
+
+  function showNote(note) {
+    const address = new URL(location.href);
+    address.searchParams.set('review-note', note.id);
+    history.replaceState(history.state, '', address);
+    cursors[status].id = note.id;
+    updateStep();
+    revealNote(main, note);
+    noteRows.get(note.id)?.scrollIntoView({ block: 'nearest' });
+  }
+
+  nextButton.addEventListener('click', () => {
+    if (!nextNote) return;
+    if (nextNote.route === session.route) {
+      showNote(nextNote);
+      return;
+    }
+    if (busy || input.value.trim()) {
+      notice('Az oldalváltás előtt mentsd el a megjegyzésedet.', true);
+      input.focus();
+      return;
+    }
+    location.assign(noteUrl(nextNote));
+  });
+
   function renderNotes() {
     noteList.replaceChildren();
+    noteRows.clear();
+    visibleNotes = [];
     panel.querySelector('[data-status="open"]').textContent = 'Teendők (' + notes.filter(n => n.status === 'open').length + ')';
     panel.querySelector('[data-status="done"]').textContent = 'Kész (' + notes.filter(n => n.status === 'done').length + ')';
-    const shown = notes.filter(n => n.status === status);
+    const shown = notes.filter(n => n.status === status && reviewId.test(n.id) && routePattern.test(n.route));
     if (!shown.length) {
       add(noteList, 'p', 'review-empty', status === 'open' ? 'Még nincs nyitott megjegyzés.' : 'Még nincs késznek jelölt megjegyzés.');
+      updateStep();
       return;
     }
     const groups = new Map();
+    const byId = new Map(shown.map(note => [note.id, note]));
     for (const note of shown) {
-      if (!reviewId.test(note.id) || !routePattern.test(note.route)) continue;
       if (!groups.has(note.route)) {
         const group = add(noteList, 'section', 'review-group');
         add(group, 'h4', '', note.page_title);
         groups.set(note.route, group);
       }
       const item = add(groups.get(note.route), 'article', 'review-note');
+      item.dataset.noteId = note.id;
+      noteRows.set(note.id, item);
       if (note.section && note.section !== note.page_title) add(item, 'p', 'review-section', note.section);
       const target = note.locator?.quote || note.locator?.label;
       if (target && note.locator?.kind !== 'page') add(item, 'blockquote', 'review-quote', target);
@@ -173,13 +238,11 @@ export async function initReview(main, session) {
       add(item, 'p', 'review-author', note.author + (Number.isNaN(+time) ? '' : ' · ' + dateFmt.format(time)));
       const row = add(item, 'div', 'review-actions');
       const jump = add(row, 'a', 'review-jump', 'Ugrás a helyére');
-      const url = new URL(note.route, session.root);
-      url.searchParams.set('review-note', note.id);
-      jump.href = url;
-      if (note.route === session.route) jump.addEventListener('click', e => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        e.preventDefault();
-        revealNote(main, note);
+      jump.href = noteUrl(note);
+      if (note.route === session.route) jump.addEventListener('click', event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        showNote(note);
       });
       if (owner) {
         const mark = add(row, 'button', 'review-mark', note.status === 'open' ? 'Kész' : 'Újranyitás');
@@ -215,6 +278,8 @@ export async function initReview(main, session) {
         });
       }
     }
+    visibleNotes = [...noteList.querySelectorAll('[data-note-id]')].map(item => byId.get(item.dataset.noteId));
+    updateStep();
   }
 
   async function refresh() {
@@ -333,7 +398,10 @@ export async function initReview(main, session) {
       if (jump) {
         openPanel(true);
         if (jump.status === 'done') panel.querySelector('[data-status="done"]').click();
-        requestAnimationFrame(() => revealNote(main, jump));
+        requestAnimationFrame(() => {
+          showNote(jump);
+          if (!nextButton.disabled) nextButton.focus({ preventScroll: true });
+        });
       }
     } catch (error) {
       openPanel(true);

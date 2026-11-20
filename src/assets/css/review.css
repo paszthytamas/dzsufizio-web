@@ -267,6 +267,37 @@
   margin-top: 1.25rem;
 }
 
+.review-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: .15rem .55rem;
+  background: #fcfdf8;
+}
+
+.review-panel button.review-next {
+  font-size: .875rem;
+}
+
+.review-panel button.review-next:disabled {
+  cursor: default;
+}
+
+.review-position {
+  color: var(--muted);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-note {
+  scroll-margin-block-start: 6.2rem;
+}
+
+.review-note.is-current {
+  border-color: #81a08d;
+  box-shadow: inset 3px 0 #21563f;
+}
+
 .review-log h3,.review-log h4 {
   font-size: 1rem;
   margin: .56rem 0;
