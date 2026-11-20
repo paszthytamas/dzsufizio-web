@@ -9,7 +9,7 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAssets, revisionPlan, contentView] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAssets, revisionPlan, imageRevisions, contentView] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
@@ -22,6 +22,7 @@ const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAsse
     'assets/js/media/instagram.js', 'assets/css/review.css', 'pages.json',
   ].map(readSource)),
   readSource('content-revisions.json').then(JSON.parse),
+  readSource('image-revisions.json').then(JSON.parse),
   readSource('assets/js/content-view.js'),
 ]);
 const revision = source => createHash('sha256').update(source).digest('hex').slice(0, 12);
@@ -73,8 +74,13 @@ function renderMediaSlot(page, fragment) {
   return fragment.replace(slotMarker, () => component.trimEnd());
 }
 
-function renderContent(page, fragment, root) {
-  return renderMediaSlot(page, fragment).replaceAll('{{root}}', escapeHtml(root)).trimEnd();
+function renderContent(page, fragment, root, useRevisedImages = false) {
+  let content = renderMediaSlot(page, fragment);
+  if (useRevisedImages) {
+    content = content.replace(/(<img\b[^>]*?\ssrc="\{\{root\}\})(assets\/images\/[^"]+)(")/gi,
+      (match, prefix, path, suffix) => imageRevisions[path] ? prefix + imageRevisions[path] + suffix : match);
+  }
+  return content.replaceAll('{{root}}', escapeHtml(root)).trimEnd();
 }
 
 function render(page, fragment, root, revisions = '') {
@@ -109,17 +115,21 @@ for (const page of manifest) {
   const back = posix.relative('/' + page.path, '/');
   const root = back ? back + '/' : './';
   const fragment = await readSource('pages/' + page.file);
-  reviewPaths.set(page.path, reviewAnchorPaths(renderContent(page, fragment, root)));
+  const original = renderContent(page, fragment, root);
+  reviewPaths.set(page.path, reviewAnchorPaths(original));
   await mkdir(folder, { recursive: true });
   const plan = revisionPlan[page.file];
+  const withRevisedImages = renderContent(page, fragment, root, true);
   let revisions;
-  if (plan) {
+  if (plan || withRevisedImages !== original) {
     try {
-      const { modified, comparison } = renderRevisions(fragment, plan);
-      const data = JSON.stringify({
-        modified: renderContent(page, modified, root),
-        comparison: renderContent(page, comparison, root),
-      });
+      const views = { modified: withRevisedImages, comparison: withRevisedImages };
+      if (plan) {
+        const { modified, comparison } = renderRevisions(fragment, plan);
+        views.modified = renderContent(page, modified, root, true);
+        views.comparison = renderContent(page, comparison, root, true);
+      }
+      const data = JSON.stringify(views);
       revisions = 'assets/revisions/' + revision(data) + '.json';
       await writeFile(join(dist, revisions), data, 'utf8');
     } catch (cause) {
