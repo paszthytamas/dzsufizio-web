@@ -31,7 +31,7 @@ function activateArticle() {
   }
   initContents(main, { reviewing: Boolean(review) });
   rotateTeam(main);
-  disposeInstagram = initInstagram(main, { useScript: !review });
+  disposeInstagram = initInstagram(main);
 }
 
 await initContentView(main);

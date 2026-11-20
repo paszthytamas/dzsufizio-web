@@ -482,9 +482,8 @@
   background:#e9eee7;
 }
 
-.ig-shell>:is(.ig-poster,.ig-mount) {
-  grid-area:1/1;
-  min-width:0;
+.ig-shell.has-poster {
+  aspect-ratio:4/5;
 }
 
 .ig-poster {
@@ -497,10 +496,6 @@
   background:#dfe9de;
   text-decoration:none;
   color:var(--leaf);
-}
-
-.ig-shell.has-poster .ig-poster {
-  aspect-ratio:9/16;
 }
 
 .ig-poster img {
@@ -532,27 +527,23 @@
   font-weight:740;
 }
 
-.ig-mount :is(.instagram-media,iframe) {
-  display:block!important;
-  box-sizing:border-box!important;
-  width:100%!important;
-  min-width:0!important;
-  max-width:100%!important;
-  margin:0!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-
-.ig-mount .ig-direct:not([height]) {
-  aspect-ratio:9/20;
-  min-height:255px;
-}
-
-.ig-shell:not(.is-ready) .ig-mount {
+.ig-mount {
   position:absolute;
   inset:0;
   overflow:hidden;
+  overflow:clip;
+}
+
+.ig-mount iframe {
+  position:absolute;
+  inset:calc(0px - var(--ig-header-height)) 0 auto;
+  width:100%;
+  /* Keep the embed at full height so starting playback cannot scroll the frame. */
+  height:calc(100% + var(--ig-header-height) + var(--ig-footer-height));
+  border:0;
+}
+
+.ig-shell:not(.is-ready) .ig-mount {
   pointer-events:none;
 }
 
