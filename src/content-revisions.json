@@ -41,7 +41,16 @@
         "A kézzel végzett lazító vagy mobilizáló fogások kiegészítő szerepe egyénileg mérlegelhető. A Cochrane 2024-es áttekintése szerint a manuális módszerek és a gyakorlatok csökkenthetik a fájdalmat. Ebből nem következik, hogy egy adott fogás vagy a Dzsufizio módszer® biztos megoldást jelent teniszkönyökre.",
         "resz-40"
       ]
-    ]
+    ],
+    "additionalTikToks": {
+      "before": "resz-38",
+      "title": "További videók teniszkönyökre",
+      "videoIds": [
+        "7294967357460532512",
+        "7320614691858844960",
+        "7351795738755583265"
+      ]
+    }
   },
   "blog/vallfajdalom.html": {
     "replace": [
