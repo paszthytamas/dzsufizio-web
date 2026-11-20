@@ -138,30 +138,43 @@ function separateTikTok(html, { id, anchor, from, title, intro }, comparing) {
   return replaceOnce(html, video, updated);
 }
 
-function additionalTikToks(html, { before, title, videoIds }, comparing) {
+function escapeExerciseText(value) {
+  return value.replace(/[&<>"]/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+  })[character]);
+}
+
+function renderExercise({ id, title, intro, steps }) {
+  if (!/^\d+$/.test(id)) throw new Error('Hibás TikTok-azonosító: ' + id);
+  const heading = escapeExerciseText(title);
+  const description = intro ? '<p>' + escapeExerciseText(intro) + '</p>\n' : '';
+  const instructions = steps.map(step => '<li>' + escapeExerciseText(step) + '</li>').join('\n');
+  const player = 'https://www.tiktok.com/player/v1/' + id + '?autoplay=0&amp;controls=1&amp;description=1&amp;music_info=0';
+  const permalink = 'https://www.tiktok.com/@dzsufizio/video/' + id;
+  return '<section class="exercise" aria-labelledby="gyakorlat-' + id + '">\n' +
+    '<div class="exercise-instructions">\n<h4 id="gyakorlat-' + id + '">' + heading + '</h4>\n' +
+    description + '<ol class="steps-list">\n' + instructions + '\n</ol>\n</div>\n' +
+    '<figure class="media-player tiktok compact">\n' +
+    '<details class="video-embed" data-embed="' + player + '" data-title="' + heading + '">\n' +
+    '<summary class="video-summary"><span class="video-closed-label">▶ Videó lejátszása</span>' +
+    '<span class="video-open-label">Lejátszó bezárása</span></summary>\n' +
+    '<div class="play-space" data-player></div>\n' +
+    '</details>\n' +
+    '<figcaption><a href="' + permalink + '" class="player-link" target="_blank" rel="noopener noreferrer" ' +
+    'aria-label="' + heading + ' megnyitása a TikTokon">Megnyitás a TikTokon</a></figcaption>\n' +
+    '</figure>\n</section>';
+}
+
+function additionalExercises(html, { before, title, items }, comparing) {
   const destination = '<h2 id="' + before + '">';
-  const videos = videoIds.map((id, index) => {
-    if (!/^\d+$/.test(id)) throw new Error('Hibás TikTok-azonosító: ' + id);
-    const label = (index + 1) + '. videó';
-    const player = 'https://www.tiktok.com/player/v1/' + id + '?autoplay=0&amp;controls=1&amp;description=1&amp;music_info=0';
-    const permalink = 'https://www.tiktok.com/@dzsufizio/video/' + id;
-    return '<figure class="media-player tiktok compact">\n' +
-      '<details class="video-embed" data-embed="' + player + '" data-title="' + title + ' – ' + label + '">\n' +
-      '<summary class="video-summary"><span class="video-closed-label">▶ ' + label + ' lejátszása</span>' +
-      '<span class="video-open-label">' + label + ' bezárása</span></summary>\n' +
-      '<div class="play-space" data-player></div>\n' +
-      '</details>\n' +
-      '<figcaption><a href="' + permalink + '" class="player-link" target="_blank" rel="noopener noreferrer" ' +
-      'aria-label="' + label + ' megnyitása a TikTokon">Megnyitás a TikTokon</a></figcaption>\n' +
-      '</figure>';
-  }).join('\n');
-  const block = '<section aria-labelledby="teniszkonyok-videok">\n' +
-    '<h3 id="teniszkonyok-videok">' + title + '</h3>\n' +
-    '<div class="gallery">\n' + videos + '\n</div>\n</section>';
+  const exercises = items.map(renderExercise).join('\n');
+  const block = '<section class="exercise-group" aria-labelledby="teniszkonyok-videok">\n' +
+    '<h3 id="teniszkonyok-videok">' + escapeExerciseText(title) + '</h3>\n' +
+    exercises + '\n</section>';
   return replaceOnce(html, destination, (comparing ? mark('ins', block, true) : block) + '\n' + destination);
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, additionalTikToks: extraVideos }) {
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, additionalExercises: extraExercises }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -203,9 +216,9 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
     modified = separateTikTok(modified, videoSection, false);
     comparison = separateTikTok(comparison, videoSection, true);
   }
-  if (extraVideos) {
-    modified = additionalTikToks(modified, extraVideos, false);
-    comparison = additionalTikToks(comparison, extraVideos, true);
+  if (extraExercises) {
+    modified = additionalExercises(modified, extraExercises, false);
+    comparison = additionalExercises(comparison, extraExercises, true);
   }
   return { modified, comparison };
 }

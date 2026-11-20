@@ -42,13 +42,44 @@
         "resz-40"
       ]
     ],
-    "additionalTikToks": {
+    "additionalExercises": {
       "before": "resz-38",
-      "title": "További videók teniszkönyökre",
-      "videoIds": [
-        "7294967357460532512",
-        "7320614691858844960",
-        "7351795738755583265"
+      "title": "Három otthoni gyakorlat videóval",
+      "items": [
+        {
+          "id": "7294967357460532512",
+          "title": "Alkarnyújtás összefűzött ujjakkal",
+          "steps": [
+            "Állj egyenesen, és emeld a két karod magad elé. A tenyered nézzen előre.",
+            "Keresztezd a két karod, és fűzd össze az ujjaidat úgy, hogy a nyújtani kívánt kéz legyen alul.",
+            "Engedd le az összekulcsolt kezed magad elé. A másik kezeddel finoman húzd felfelé az alul lévő kezet, amíg enyhe húzódást érzel az alkarodban. Tartsd lazán nyújtva a könyököd.",
+            "Tartsd meg a kényelmes nyújtást legfeljebb 30 másodpercig, majd lassan engedd fel, és bontsd a fogást."
+          ]
+        },
+        {
+          "id": "7320614691858844960",
+          "title": "Az alkar átmozgatása kislabdával",
+          "steps": [
+            "Tegyél egy kemény kislabdát stabil asztalra. Támaszd rá az alkarod húsos, könyökhöz közeli részét úgy, hogy a tenyered felfelé nézzen.",
+            "Gördítsd át finoman az alkarod a labdán, majd állj meg egy enyhén érzékeny ponton. A labda az izom alatt legyen, a csontos részt kerüld.",
+            "A szabad kezeddel stabilizáld finoman az alkarod. Hajlítsd be a csuklód néhányszor lassan, és minden ismétlésnél térj vissza a kiinduló helyzetbe.",
+            "Engedd fel a nyomást, és emeld le a karod a labdáról. Ha éles fájdalmat, zsibbadást vagy bizsergést érzel, állj meg."
+          ]
+        },
+        {
+          "id": "7351795738755583265",
+          "title": "Ujj-, csukló- és alkarbemelegítés",
+          "intro": "A hosszabb felvétel terhelés előtti bemelegítést mutat. Az ujj- és csuklómozgatást könnyű asztali támasz követi.",
+          "steps": [
+            "Érintsd meg a hüvelykujjaddal sorban a többi ujjad hegyét. Először nyisd szét az ujjaidat két érintés között, majd próbáld kisebb mozdulatokkal is. Kezdd egy kézzel, aztán próbáld mindkettővel egyszerre.",
+            "Nyisd ki, majd lazán zárd a kezed. A hüvelykujjad felváltva maradjon kívül, illetve simuljon a behajlított ujjak alá. Közelítsd egymáshoz az ujjbegyeket, hajlítsd át az ujjaidat, majd mozgasd őket egyenként, mintha zongoráznál. Végül terpeszd szét, majd zárd őket.",
+            "Nyújtsd előre a karod lefelé néző tenyérrel. Billentsd a kézfejed fel és le, majd mozdítsd mindkét oldalra. A mozdulat a csuklódból induljon, a vállad és a könyököd maradjon nyugodtan.",
+            "Állj egy stabil asztal elé. Tedd rá az egyik tenyered, a másik kezeddel pedig finoman tartsd a helyén a kézfejed. Majdnem nyújtott könyökkel mozdítsd a törzsedet egy kicsit előre, oldalra, majd vissza. Ha kényelmes, fordulj is egy kicsit a törzseddel.",
+            "Támaszkodj könnyedén mindkét tenyeredre, az ujjaid nézzenek előre. Helyezd át finoman a súlyod előre és hátra, majd jobbra és balra. Ha kényelmes, kis köröket is végezhetsz a törzseddel.",
+            "Tehermentesítsd a kezed, fordítsd az ujjaidat kifelé, majd tedd vissza a tenyered, és ismételd meg a kis súlyáthelyezéseket. A következő változatban az ujjaid a tested felé néznek. Akkora mozdulatot végezz, amekkora kényelmes a csuklódnak.",
+            "A kézháton végzett változatnál először egymás felé, majd magad felé fordítsd az ujjaidat. A testsúlyod maradjon a lábadon, a kézhátad csak finoman érintse az asztalt. Hagyd ki ezt a részt, ha a kéztartás kellemetlen."
+          ]
+        }
       ]
     }
   },
