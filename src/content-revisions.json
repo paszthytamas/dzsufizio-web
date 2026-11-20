@@ -443,12 +443,18 @@
     ]
   },
   "blog/becsipodott-a-derekad.html": {
-    "separateTikTok": {
+    "videoExercise": {
       "id": "7542111066570951958",
+      "headingId": "resz-39",
       "anchor": "mobilizacio-oldalt-fekve",
       "from": "Finom medencebillentés hanyatt fekve",
       "title": "Mobilizáció oldalt fekve",
-      "intro": "Az alábbi videó a mobilizáció egy másik változatát mutatja be."
+      "steps": [
+        "Feküdj az oldaladra, hajlítsd be mindkét lábadat, és tedd egymásra a térdeidet.",
+        "Az alul lévő kezeddel finoman fogd meg a felső térdedet, hogy a lábaid a helyükön maradjanak.",
+        "Nyúlj előre a felső karoddal, majd lassan vezesd a fejed fölött hátra egy kis ívben. A mellkasod kövesse a karod mozgását, miközben a térdeid egymáson maradnak.",
+        "Lassan térj vissza a kiinduló helyzetbe, majd ismételd meg a mozdulatot a másik oldalon is. Csak addig fordulj, amíg kényelmes. Ha a kiinduló helyzet vagy a gyakorlat fájdalmat okoz, hagyd abba."
+      ]
     }
   }
 }
