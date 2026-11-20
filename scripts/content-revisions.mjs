@@ -14,38 +14,109 @@ function mark(tag, content, block = false) {
   return '<' + tag + attrs + '>' + content + '</' + tag + '>';
 }
 
-function compareText(before, after) {
-  const oldWords = Array.from(words.segment(before), ({ segment }) => segment);
-  const newWords = Array.from(words.segment(after), ({ segment }) => segment);
-  const scores = Array.from({ length: oldWords.length + 1 }, () => new Uint32Array(newWords.length + 1));
+const inlineMarkup = /<!--[\s\S]*?-->|<\/?[a-z][a-z0-9-]*(?:[^"'<>]|"[^"]*"|'[^']*')*>|&(?:#[0-9]+|#x[a-f0-9]+|[a-z][a-z0-9]+);/gi;
+const voidTags = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 
-  // Align unchanged words and punctuation before grouping each deletion and insertion.
+function textTokens(html) {
+  const tokens = [];
+  const wrappers = [];
+  let space = [];
+  function append(value) {
+    const part = { value, wrappers: wrappers.slice() };
+    if (/^(?:\s|&nbsp;|&#160;)+$/i.test(value)) {
+      space.push(part);
+      return;
+    }
+    tokens.push({ value, parts: [...space, part] });
+    space = [];
+  }
+  function appendText(text) {
+    for (const { segment } of words.segment(text)) append(segment);
+  }
+
+  let offset = 0;
+  for (const match of html.matchAll(inlineMarkup)) {
+    appendText(html.slice(offset, match.index));
+    const markup = match[0];
+    offset = match.index + markup.length;
+    const tag = markup.match(/^<(\/?)([a-z][a-z0-9-]*)\b/i);
+    if (!tag || voidTags.has(tag[2].toLowerCase()) || markup.endsWith('/>')) {
+      append(markup);
+    } else if (tag[1]) {
+      wrappers.pop();
+    } else {
+      wrappers.push({ open: markup, close: '</' + tag[2] + '>' });
+    }
+  }
+  appendText(html.slice(offset));
+  if (tokens.length) tokens.at(-1).parts.push(...space);
+  return tokens;
+}
+
+function renderTokens(tokens) {
+  let html = '';
+  let previous = [];
+  for (const token of tokens) {
+    for (const { value, wrappers } of token.parts) {
+      let shared = 0;
+      while (shared < previous.length && previous[shared] === wrappers[shared]) shared++;
+      for (let i = previous.length - 1; i >= shared; i--) html += previous[i].close;
+      for (let i = shared; i < wrappers.length; i++) html += wrappers[i].open;
+      html += value;
+      previous = wrappers;
+    }
+  }
+  for (let i = previous.length - 1; i >= 0; i--) html += previous[i].close;
+  return html;
+}
+
+function compareText(before, after) {
+  const oldWords = textTokens(before);
+  const newWords = textTokens(after);
+  const scores = Array.from({ length: oldWords.length + 1 }, () => new Uint32Array(newWords.length + 1));
+  function equal(old, next) {
+    return oldWords[old] && newWords[next] && oldWords[old].value === newWords[next].value;
+  }
+
+  // Whitespace follows the next word, so changed phrases stay together.
   for (let old = oldWords.length - 1; old >= 0; old--) {
     for (let next = newWords.length - 1; next >= 0; next--) {
-      scores[old][next] = oldWords[old] === newWords[next]
+      scores[old][next] = equal(old, next)
         ? scores[old + 1][next + 1] + 1
         : Math.max(scores[old + 1][next], scores[old][next + 1]);
     }
   }
 
   let result = '';
-  let deleted = '';
-  let inserted = '';
+  let common = [];
+  let deleted = [];
+  let inserted = [];
+  function flushChanges() {
+    result += mark('del', renderTokens(deleted)) + mark('ins', renderTokens(inserted));
+    deleted = [];
+    inserted = [];
+  }
   let old = 0;
   let next = 0;
   while (old < oldWords.length || next < newWords.length) {
-    if (oldWords[old] === newWords[next]) {
-      result += mark('del', deleted) + mark('ins', inserted) + oldWords[old];
-      deleted = inserted = '';
+    if (equal(old, next)) {
+      flushChanges();
+      common.push(newWords[next++]);
       old++;
-      next++;
-    } else if (old < oldWords.length && (next === newWords.length || scores[old + 1][next] >= scores[old][next + 1])) {
-      deleted += oldWords[old++];
+      continue;
+    }
+    if (common.length) {
+      result += renderTokens(common);
+      common = [];
+    }
+    if (old < oldWords.length && (next === newWords.length || scores[old + 1][next] >= scores[old][next + 1])) {
+      deleted.push(oldWords[old++]);
     } else {
-      inserted += newWords[next++];
+      inserted.push(newWords[next++]);
     }
   }
-  return result + mark('del', deleted) + mark('ins', inserted);
+  flushChanges();
+  return result + renderTokens(common);
 }
 
 function paragraph(html, id) {
@@ -109,10 +180,10 @@ function replaceBookingLinks(html, destination, comparing) {
 
 function replaceParagraph(html, id, content, comparing) {
   const original = paragraph(html, id);
-  const updated = original.slice(0, original.indexOf('>') + 1) + content + '</p>';
-  if (!comparing) return replaceOnce(html, original, updated);
-  const old = original.replace(/\s+id="[^"]+"/g, '');
-  return replaceOnce(html, original, mark('del', old, true) + '\n' + mark('ins', updated, true));
+  const textStart = original.indexOf('>') + 1;
+  const before = original.slice(textStart, -'</p>'.length);
+  const updated = comparing ? compareText(before, content) : content;
+  return replaceOnce(html, original, original.slice(0, textStart) + updated + '</p>');
 }
 
 function singleBlock(html, pattern, attribute) {

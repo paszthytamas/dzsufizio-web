@@ -37,6 +37,7 @@
   inline-size: min(360px, 100vw);
   overflow-y: auto;
   overscroll-behavior: contain;
+  overflow-anchor: none;
   padding: 1.05rem 1.1rem 1.4rem;
   border-inline-start: 1px solid #cbd8ca;
   background: #fcfdf8;
@@ -275,11 +276,48 @@
   background: #fcfdf8;
 }
 
-.review-panel button.review-next {
-  font-size: .875rem;
+.review-order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .45rem;
 }
 
-.review-panel button.review-next:disabled {
+.review-order label {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  color: var(--muted);
+  font-size: .79rem;
+}
+
+.review-sort {
+  border: 1px solid #cedccd;
+  border-radius: 8px;
+  background: white;
+  color: var(--green);
+  padding: .23rem .3rem;
+  font: inherit;
+}
+
+.review-filters {
+  gap: .25rem;
+  margin-top: .4rem;
+}
+
+.review-panel .review-filters button {
+  font-size: .76rem;
+  padding: .38rem .4rem;
+  white-space: nowrap;
+}
+
+.review-panel .review-filters .review-refresh {
+  min-inline-size: 1.8rem;
+  font-size: .97rem;
+  line-height: 1;
+}
+
+.review-panel button:is(.review-prev, .review-next):disabled {
   cursor: default;
 }
 
@@ -287,15 +325,6 @@
   color: var(--muted);
   font-size: .85rem;
   font-variant-numeric: tabular-nums;
-}
-
-.review-note {
-  scroll-margin-block-start: 6.2rem;
-}
-
-.review-note.is-current {
-  border-color: #81a08d;
-  box-shadow: inset 3px 0 #21563f;
 }
 
 .review-log h3,.review-log h4 {
@@ -318,6 +347,23 @@
   border: 1px solid #d8dfd2;
   border-radius: 11px;
   background: white;
+}
+
+.review-note.is-current {
+  border-color: #2b64ac;
+  background: #f0f6ff;
+  box-shadow: inset 4px 0 #2b64ac;
+}
+
+.review-current {
+  display: inline-flex;
+  margin-block-end: .25rem;
+  border-radius: 4px;
+  background: #25558c;
+  color: white;
+  padding: .08rem .42rem;
+  font-size: .76rem;
+  font-weight: 700;
 }
 
 .review-note__body {
@@ -378,12 +424,15 @@
 }
 
 .review-marked {
-  outline: 2px solid #5e8b62;
+  outline: 2px solid #2b64ac;
   outline-offset: 4px;
   border-radius: 4px;
 }
 
-::highlight(dzs-review-quote) {
-  background: #d6eab0;
-  color: #172c28;
+.review-marked-range {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  border: 2px solid #2b64ac;
+  border-radius: 6px;
 }

@@ -3,6 +3,7 @@ import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderRevisions } from './content-revisions.mjs';
+import { reviewAnchorPaths, reviewIndex } from './review-index.mjs';
 
 const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
@@ -15,7 +16,11 @@ const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, reviewAsse
   readSource('components/media-slot.html'),
   readSource('assets/js/main.js'),
   readSource('assets/css/site.css'),
-  Promise.all(['assets/js/review/panel.js', 'assets/js/review/resize.js', 'assets/css/review.css'].map(readSource)),
+  Promise.all([
+    'assets/js/review/panel.js', 'assets/js/review/anchors.js', 'assets/js/review/order.js',
+    'assets/js/review/page-navigation.js', 'assets/js/review/resize.js', 'assets/js/review/session.js',
+    'assets/js/media/instagram.js', 'assets/css/review.css', 'pages.json',
+  ].map(readSource)),
   readSource('content-revisions.json').then(JSON.parse),
   readSource('assets/js/content-view.js'),
 ]);
@@ -98,11 +103,13 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 await cp(join(src, 'assets'), join(dist, 'assets'), { recursive: true });
 await mkdir(join(dist, 'assets', 'revisions'), { recursive: true });
+const reviewPaths = new Map();
 for (const page of manifest) {
   const folder = join(dist, page.path);
   const back = posix.relative('/' + page.path, '/');
   const root = back ? back + '/' : './';
   const fragment = await readSource('pages/' + page.file);
+  reviewPaths.set(page.path, reviewAnchorPaths(renderContent(page, fragment, root)));
   await mkdir(folder, { recursive: true });
   const plan = revisionPlan[page.file];
   let revisions;
@@ -121,6 +128,7 @@ for (const page of manifest) {
   }
   await writeFile(join(folder, 'index.html'), render(page, fragment, root, revisions), 'utf8');
 }
+await writeFile(join(dist, 'assets', 'review-index.json'), JSON.stringify(reviewIndex(manifest, reviewPaths)), 'utf8');
 // GitHub Pages can serve this document under any missing URL, so use its actual base path.
 await writeFile(join(dist, '404.html'), render({
   title: 'Az oldal nem található',

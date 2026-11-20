@@ -33,8 +33,9 @@ export function readReviewSession() {
     jumpTo: current.searchParams.get('review-note'),
     clear() {
       try { sessionStorage.removeItem(key); } catch { /* Storage may be disabled. */ }
-      current.searchParams.delete('review-note');
-      location.replace(current);
+      const address = new URL(location.href);
+      address.searchParams.delete('review-note');
+      location.replace(address);
     },
     async rpc(name, args = {}) {
       const response = await fetch(config.restUrl + '/rpc/' + name, {
