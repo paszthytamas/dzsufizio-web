@@ -1416,3 +1416,24 @@ main:focus {
   text-align:start;
   font-size:.86rem;
 }
+
+.revision-booking {
+  display:inline-flex;
+  border:2px solid currentColor;
+  border-radius:14px;
+  padding:.15rem;
+}
+
+.revision-booking .button {
+  text-decoration:inherit;
+}
+
+.complaints-grid.complaints-grid--compact {
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+}
+
+.complaints-grid--compact .complaint-image {
+  display:block;
+  block-size:clamp(112px,15vw,168px);
+  aspect-ratio:auto;
+}

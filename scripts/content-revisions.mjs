@@ -92,7 +92,30 @@ function moveSection(html, move, oldPlace = '', newPlace = section(html, move)) 
   return replaceOnce(replaceOnce(body, entry, ''), before, entry + before);
 }
 
-export function renderRevisions(source, { replace = [], remove = [], move }) {
+function replaceBookingLinks(html, destination, comparing) {
+  const defaultUrl = 'https://dzsufizio.salonic.hu/';
+  const pattern = /<a href="https:\/\/dzsufizio\.salonic\.hu\/"[^>]*\bclass="[^"]*\bbooking-cta\b[^"]*"[^>]*>[\s\S]*?<\/a>/g;
+  let matches = 0;
+  const updated = html.replace(pattern, link => {
+    matches++;
+    const personal = link.replace(defaultUrl, () => destination);
+    if (!comparing) return personal;
+    return '<del class="revision-booking" title="Általános foglaló">' + link + '</del> ' +
+      '<ins class="revision-booking" title="Személyes foglaló">' + personal + '</ins>';
+  });
+  if (!matches) throw new Error('Hiányzó foglalógomb a bemutatkozóoldalon.');
+  return updated;
+}
+
+function replaceParagraph(html, id, content, comparing) {
+  const original = paragraph(html, id);
+  const updated = original.slice(0, original.indexOf('>') + 1) + content + '</p>';
+  if (!comparing) return replaceOnce(html, original, updated);
+  const old = original.replace(/\s+id="[^"]+"/g, '');
+  return replaceOnce(html, original, mark('del', old, true) + '\n' + mark('ins', updated, true));
+}
+
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -105,12 +128,26 @@ export function renderRevisions(source, { replace = [], remove = [], move }) {
     modified = replaceOnce(modified, block + '\n', '');
     comparison = replaceOnce(comparison, block, mark('del', block, true));
   }
+  for (const [id, content] of paragraphs) {
+    modified = replaceParagraph(modified, id, content, false);
+    comparison = replaceParagraph(comparison, id, content, true);
+  }
   if (move) {
     const old = section(source, move).replace(/\s+id="[^"]+"/g, '');
     comparison = moveSection(comparison, move,
       mark('del', old.trimEnd(), true) + '\n',
       mark('ins', section(modified, move).trimEnd(), true) + '\n');
     modified = moveSection(modified, move);
+  }
+  if (booking) {
+    modified = replaceBookingLinks(modified, booking, false);
+    comparison = replaceBookingLinks(comparison, booking, true);
+  }
+  if (compactComplaints) {
+    const grid = '<div class="complaints-grid">';
+    const compactGrid = '<div class="complaints-grid complaints-grid--compact">';
+    modified = replaceOnce(modified, grid, compactGrid);
+    comparison = replaceOnce(comparison, grid, compactGrid);
   }
   return { modified, comparison };
 }
