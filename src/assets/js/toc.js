@@ -1,6 +1,6 @@
 import { preference } from './preferences.js';
 
-export function initContents(main, { reviewing } = {}) {
+export function initContents(main) {
   const toggle = document.getElementById('toc-toggle');
   const indexes = [...main.querySelectorAll('.reader > .side')].filter(aside => aside.querySelector('.quick-sidebar'));
   if (!indexes.length) return;
@@ -11,21 +11,20 @@ export function initContents(main, { reviewing } = {}) {
   toggle.setAttribute('aria-controls', indexes.map(aside => aside.id).join(' '));
   toggle.hidden = false;
 
-  function show(next, expand = false) {
+  function show(next) {
     visible = next;
     toggle.setAttribute('aria-pressed', String(visible));
     toggle.title = visible ? 'Tartalomjegyzék elrejtése' : 'Tartalomjegyzék megjelenítése';
     for (const aside of indexes) {
       aside.hidden = !visible;
       aside.parentElement.classList.toggle('reader--without-toc', !visible);
-      if (visible && expand) aside.querySelector('.quick-sidebar').open = true;
+      if (visible) aside.querySelector('.quick-sidebar').open = true;
     }
   }
 
   toggle.addEventListener('click', () => {
-    show(!visible, true);
+    show(!visible);
     settings.write(visible ? 'on' : 'off');
   });
-  const saved = settings.read();
-  show(saved === 'on' || (saved !== 'off' && !reviewing), saved === 'on');
+  show(settings.read() === 'on');
 }

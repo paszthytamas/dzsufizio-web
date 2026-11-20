@@ -20,7 +20,7 @@ const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, mediaStyle
   Promise.all([
     'assets/js/review/panel.js', 'assets/js/review/anchors.js', 'assets/js/review/order.js',
     'assets/js/review/page-navigation.js', 'assets/js/review/resize.js', 'assets/js/review/session.js',
-    'assets/js/media/instagram.js', 'assets/css/review.css', 'pages.json',
+    'assets/js/toc.js', 'assets/js/media/instagram.js', 'assets/css/review.css', 'pages.json',
   ].map(readSource)),
   readSource('content-revisions.json').then(JSON.parse),
   readSource('image-revisions.json').then(JSON.parse),
@@ -81,7 +81,11 @@ function renderContent(page, fragment, root, useRevisedImages = false) {
     content = content.replace(/(<img\b[^>]*?\ssrc="\{\{root\}\})(assets\/images\/[^"]+)(")/gi,
       (match, prefix, path, suffix) => imageRevisions[path] ? prefix + imageRevisions[path] + suffix : match);
   }
-  return content.replaceAll('{{root}}', escapeHtml(root)).trimEnd();
+  return content
+    .replaceAll('<div class="reader">', '<div class="reader reader--without-toc">')
+    .replaceAll('<aside class="side">', '<aside class="side" hidden>')
+    .replaceAll('{{root}}', escapeHtml(root))
+    .trimEnd();
 }
 
 function render(page, fragment, root, revisions = '') {
