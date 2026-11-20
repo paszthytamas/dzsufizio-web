@@ -1,5 +1,4 @@
 import { initAnchors, initNavigation } from './navigation.js';
-import { initContents } from './toc.js';
 import { rotateTeam } from './team.js';
 import { initTikTok } from './media/tiktok.js';
 
@@ -15,12 +14,17 @@ window.addEventListener('hashchange', () => {
   if (new URLSearchParams(location.hash.slice(1)).has('review')) location.reload();
 });
 
-const [{ initContentView, loadContentView, showContentView }, { initInstagram }, { readReviewSession }] =
-  await Promise.all([
-    currentModule('./content-view.js'),
-    currentModule('./media/instagram.js'),
-    currentModule('./review/session.js'),
-  ]);
+const [
+  { initContentView, loadContentView, showContentView },
+  { initContents },
+  { initInstagram },
+  { readReviewSession },
+] = await Promise.all([
+  currentModule('./content-view.js'),
+  currentModule('./toc.js'),
+  currentModule('./media/instagram.js'),
+  currentModule('./review/session.js'),
+]);
 const main = document.querySelector('main');
 const review = readReviewSession();
 let disposeInstagram;
@@ -29,7 +33,7 @@ function activateArticle() {
   if (matchMedia('(max-width: 760px)').matches) {
     for (const index of main.querySelectorAll('.quick-sidebar')) index.open = false;
   }
-  initContents(main, { reviewing: Boolean(review) });
+  initContents(main);
   rotateTeam(main);
   disposeInstagram = initInstagram(main);
 }
