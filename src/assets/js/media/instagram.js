@@ -92,9 +92,15 @@ function mountReel(slot,useScript){
 export function initInstagram(page,{useScript=true}={}){
  const slots=page.querySelectorAll('[data-ig-permalink]');
  if(!slots.length)return;
- if(!('IntersectionObserver' in window)){slots.forEach(slot=>mountReel(slot,useScript));return}
- const reelObserver=new IntersectionObserver(entries=>{
-  for(const {isIntersecting,target} of entries)if(isIntersecting){mountReel(target,useScript);reelObserver.unobserve(target)}
- },{rootMargin:'420px 0px'});
- slots.forEach(slot=>reelObserver.observe(slot));
+ let reelObserver;
+ if('IntersectionObserver' in window){
+  reelObserver=new IntersectionObserver(entries=>{
+   for(const {isIntersecting,target} of entries)if(isIntersecting){mountReel(target,useScript);reelObserver.unobserve(target)}
+  },{rootMargin:'420px 0px'});
+  slots.forEach(slot=>reelObserver.observe(slot));
+ }else slots.forEach(slot=>mountReel(slot,useScript));
+ return ()=>{
+  reelObserver?.disconnect();
+  slots.forEach(slot=>reelMounts.get(slot)?.());
+ };
 }

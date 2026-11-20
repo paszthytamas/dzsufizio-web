@@ -1,5 +1,11 @@
-import { elementTarget, pageTarget, revealNote, selectedTarget } from './anchors.js';
+import { preference } from '../preferences.js';
 import { reviewId } from './session.js';
+
+function currentModule(relative) {
+  const url = new URL(relative, import.meta.url);
+  url.search = new URL(import.meta.url).search;
+  return import(url.href);
+}
 
 const messages = {
   access: 'Az átnéző link lejárt vagy nem érvényes.',
@@ -37,16 +43,19 @@ function showBody(parent, body) {
   parent.append(text.slice(end));
 }
 
-export async function initReview(main, session) {
+export async function initReview(main, session, { openPage, reviewRoute }) {
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
   const css = new URL('../../css/review.css', import.meta.url);
   css.search = new URL(import.meta.url).search;
   stylesheet.href = css;
   document.head.append(stylesheet);
-  const resize = new URL('./resize.js', import.meta.url);
-  resize.search = css.search;
-  const { initReviewResize } = await import(resize.href);
+  const [{ initReviewResize }, { clearNote, elementTarget, pageTarget, revealNote, selectedTarget },
+    { compareNotes, loadReviewOrder }] = await Promise.all([
+    currentModule('./resize.js'), currentModule('./anchors.js'), currentModule('./order.js'),
+  ]);
+  const sortPreference = preference(session.root.pathname, 'review-sort');
+  const orderReady = loadReviewOrder(session.root, css.search).catch(() => new Map());
 
   const toggle = add(document.body, 'button', 'review-toggle', 'Átnézés');
   toggle.type = 'button';
@@ -72,10 +81,14 @@ export async function initReview(main, session) {
     '<div class="review-actions"><button class="review-primary" type="submit">Mentés</button>' +
     '<button class="review-reset" type="button">Az egész oldalhoz</button></div></form>' +
     '<section class="review-log" aria-label="Közös megjegyzések"><h3>Közös megjegyzések</h3>' +
-    '<div class="review-navigation"><div class="review-filters"><button type="button" data-status="open" aria-pressed="true">Teendők</button>' +
+    '<div class="review-navigation"><div class="review-order"><label>Rendezés ' +
+    '<select class="review-sort"><option value="page">Oldalsorrend</option><option value="time">Időrend</option></select></label>' +
+    '<span class="review-position" aria-live="polite"></span></div>' +
+    '<div class="review-filters"><button type="button" data-status="open" aria-pressed="true">Teendők</button>' +
     '<button type="button" data-status="done" aria-pressed="false">Kész</button>' +
-    '<button type="button" class="review-refresh">Frissítés</button></div>' +
-    '<div class="review-actions"><button type="button" class="review-primary review-next" disabled>Következő</button><span class="review-position" aria-live="polite"></span></div></div>' +
+    '<button type="button" class="review-refresh" aria-label="Frissítés" title="Frissítés">↻</button>' +
+    '<button type="button" class="review-prev" disabled>Előző</button>' +
+    '<button type="button" class="review-primary review-next" disabled>Következő</button></div></div>' +
     '<div class="review-notes"></div></section></div>' +
     '<div class="review-undo" hidden><span role="status"></span><button type="button" class="review-restore">Visszavonás</button>' +
     '<button type="button" class="review-dismiss" aria-label="Törlésüzenet bezárása">×</button></div>' +
@@ -86,17 +99,32 @@ export async function initReview(main, session) {
   const save = form.querySelector('[type="submit"]');
   const message = panel.querySelector('.review-message');
   const noteList = panel.querySelector('.review-notes');
+  const navigation = panel.querySelector('.review-navigation');
+  const sorter = panel.querySelector('.review-sort');
+  const previousButton = panel.querySelector('.review-prev');
   const nextButton = panel.querySelector('.review-next');
+  const contentView = document.getElementById('content-view');
+  const initialView = contentView.value;
+  const availableViews = new Set([...contentView.options].map(option => option.value));
+  const filters = [...panel.querySelectorAll('[data-status]')];
   const position = panel.querySelector('.review-position');
   const rangeQuote = panel.querySelector('.review-quote');
   const undo = panel.querySelector('.review-undo');
   const restore = undo.querySelector('.review-restore');
-  const title = (main.querySelector('h1')?.textContent || document.title).trim().slice(0, 220);
+  const pageTitle = () => (main.querySelector('h1')?.textContent || document.title).trim().slice(0, 220);
+  let title = pageTitle();
+  let renderedView = initialView;
+  let committedAddress = new URL(location.href);
+  let pending = null;
+  let order = sortPreference.read() === 'time' ? 'time' : 'page';
+  let compare = compareNotes(new Map(), order);
+  sorter.value = order;
   let notes = [];
   let owner = false;
   let status = 'open';
-  const cursors = { open: { id: null, following: [] }, done: { id: null, following: [] } };
+  const cursors = { open: null, done: null };
   let visibleNotes = [];
+  let previousNote;
   let nextNote;
   const noteRows = new Map();
   let focusTarget = pageTarget(main);
@@ -130,6 +158,7 @@ export async function initReview(main, session) {
 
   function choose(target) {
     openPanel(true);
+    if (pending) return;
     if (busy || input.value.trim()) {
       notice('A szövegmezőben van egy el nem mentett megjegyzés.', true);
       input.focus();
@@ -157,79 +186,173 @@ export async function initReview(main, session) {
 
   function noteUrl(note) {
     const address = new URL(note.route, session.root);
-    const view = new URL(location.href).searchParams.get('nezet');
-    if (view) address.searchParams.set('nezet', view);
+    address.searchParams.set('nezet', renderedView);
     address.searchParams.set('review-note', note.id);
     return address;
   }
 
   function updateStep() {
     const cursor = cursors[status];
-    const index = visibleNotes.findIndex(note => note.id === cursor.id);
-    if (index !== -1) cursor.following = visibleNotes.slice(index + 1).map(note => note.id);
-    // Remember the continuation when the selected note leaves this filter.
-    const nextId = cursor.following.find(id => noteRows.has(id));
-    nextNote = cursor.id ? visibleNotes.find(note => note.id === nextId) : visibleNotes[0];
-    nextButton.disabled = !nextNote;
-    nextButton.setAttribute('aria-label', status === 'done' ? 'Következő kész megjegyzés' : 'Következő teendő');
+    const index = visibleNotes.findIndex(note => note.id === cursor?.id);
+    // A completed or deleted note still tells us where to continue in this filter.
+    previousNote = index >= 0 ? visibleNotes[index - 1] :
+      cursor && visibleNotes.findLast(note => compare(note, cursor) < 0);
+    nextNote = index >= 0 ? visibleNotes[index + 1] :
+      cursor ? visibleNotes.find(note => compare(note, cursor) > 0) : visibleNotes[0];
+    previousButton.disabled = Boolean(pending) || !previousNote;
+    nextButton.disabled = Boolean(pending) || !nextNote;
+    previousButton.title = previousNote ? '' : 'Nincs előző megjegyzés.';
     nextButton.title = nextNote ? '' : 'Nincs következő megjegyzés.';
     position.textContent = index < 0 ? '' : (index + 1) + ' / ' + visibleNotes.length;
     for (const [id, item] of noteRows) {
       const link = item.querySelector('.review-jump');
-      const selected = id === cursor.id;
+      const selected = id === cursor?.id;
       item.classList.toggle('is-current', selected);
+      item.querySelector('.review-current').hidden = !selected;
       if (selected) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
     }
   }
 
-  function showNote(note) {
-    const address = new URL(location.href);
-    address.searchParams.set('review-note', note.id);
-    history.replaceState(history.state, '', address);
-    cursors[status].id = note.id;
-    updateStep();
-    revealNote(main, note);
-    noteRows.get(note.id)?.scrollIntoView({ block: 'nearest' });
+  function alignCard(id) {
+    const item = noteRows.get(id);
+    if (!item || panel.hidden) return;
+    noteList.style.paddingBottom = '';
+    const inset = parseFloat(getComputedStyle(panel).paddingTop);
+    const top = panel.getBoundingClientRect().top + panel.clientTop + inset;
+    const target = panel.scrollTop + item.getBoundingClientRect().top - top - navigation.getBoundingClientRect().height;
+    // Leave enough space below the final card for it to reach the toolbar.
+    const extra = target - (panel.scrollHeight - panel.clientHeight);
+    if (extra > 0) noteList.style.paddingBottom = Math.ceil(extra) + 'px';
+    panel.scrollTop = Math.max(0, target);
   }
 
-  nextButton.addEventListener('click', () => {
-    if (!nextNote) return;
-    if (nextNote.route === session.route) {
-      showNote(nextNote);
-      return;
+  function setStatus(next) {
+    status = next;
+    for (const button of filters) button.setAttribute('aria-pressed', String(button.dataset.status === status));
+    renderNotes();
+  }
+
+  function showNote(note, smooth = true) {
+    cursors[note.status] = note;
+    if (status !== note.status) setStatus(note.status);
+    else updateStep();
+    revealNote(main, note, { smooth });
+    alignCard(note.id);
+  }
+
+  function finishPending() {
+    pending = null;
+    input.readOnly = false;
+    updateStep();
+  }
+
+  async function navigate(address, note, { fromHistory = false } = {}) {
+    const route = reviewRoute(address, session.root);
+    if (route === null) return;
+    const requested = address.searchParams.get('nezet');
+    const view = availableViews.has(requested) ? requested : initialView;
+    const replaceArticle = route !== session.route || view !== renderedView;
+    if (pending) {
+      pending.abort();
+      finishPending();
     }
-    if (busy || input.value.trim()) {
+    if (replaceArticle && (busy || input.value.trim())) {
+      if (fromHistory) history.replaceState(history.state, '', committedAddress);
       notice('Az oldalváltás előtt mentsd el a megjegyzésedet.', true);
-      input.focus();
+      openPanel(true, true);
       return;
     }
-    location.assign(noteUrl(nextNote));
+
+    if (replaceArticle) {
+      const controller = new AbortController();
+      pending = controller;
+      input.readOnly = true;
+      updateStep();
+      try {
+        await openPage(address, view, { signal: controller.signal, fromHistory });
+        session.route = route;
+        renderedView = view;
+        title = pageTitle();
+        showTarget(pageTarget(main));
+        positionPin(null);
+      } catch {
+        if (controller.signal.aborted) return;
+        if (fromHistory) history.replaceState(history.state, '', committedAddress);
+        notice('A megjegyzés oldala nem tölthető be. Próbáld újra.', true);
+        message.scrollIntoView({ block: 'nearest' });
+        return;
+      } finally {
+        if (pending === controller) finishPending();
+      }
+    } else if (!fromHistory) {
+      history.replaceState(history.state, '', address);
+    }
+
+    committedAddress = address;
+    notice('');
+    if (note) {
+      showNote(notes.find(item => item.id === note.id) || note, !replaceArticle && !fromHistory);
+    } else {
+      clearNote();
+      cursors[status] = null;
+      updateStep();
+      if (replaceArticle) {
+        let fragment;
+        try { fragment = document.getElementById(decodeURIComponent(address.hash.slice(1))); }
+        catch { /* A malformed fragment has no target. */ }
+        if (fragment) fragment.scrollIntoView({ behavior: 'instant' });
+        else window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    }
+  }
+
+  async function jumpTo(note) {
+    if (note) await navigate(noteUrl(note), note);
+  }
+
+  async function step(button, note, otherButton) {
+    const focused = document.activeElement === button;
+    await jumpTo(note);
+    if (!focused || pending || document.activeElement !== document.body) return;
+    const destination = [button, otherButton, sorter].find(control => !control.disabled);
+    destination.focus({ preventScroll: true });
+  }
+
+  previousButton.addEventListener('click', () => step(previousButton, previousNote, nextButton));
+  nextButton.addEventListener('click', () => step(nextButton, nextNote, previousButton));
+  window.addEventListener('popstate', () => {
+    const address = new URL(location.href);
+    const route = reviewRoute(address, session.root);
+    const id = address.searchParams.get('review-note');
+    const note = notes.find(item => item.id === id && item.route === route);
+    void navigate(address, note, { fromHistory: true });
   });
 
   function renderNotes() {
     noteList.replaceChildren();
+    noteList.style.paddingBottom = '';
     noteRows.clear();
-    visibleNotes = [];
-    panel.querySelector('[data-status="open"]').textContent = 'Teendők (' + notes.filter(n => n.status === 'open').length + ')';
-    panel.querySelector('[data-status="done"]').textContent = 'Kész (' + notes.filter(n => n.status === 'done').length + ')';
-    const shown = notes.filter(n => n.status === status && reviewId.test(n.id) && routePattern.test(n.route));
-    if (!shown.length) {
+    filters[0].textContent = 'Teendők (' + notes.filter(n => n.status === 'open').length + ')';
+    filters[1].textContent = 'Kész (' + notes.filter(n => n.status === 'done').length + ')';
+    visibleNotes = notes.filter(n => n.status === status && reviewId.test(n.id) && routePattern.test(n.route)).sort(compare);
+    if (!visibleNotes.length) {
       add(noteList, 'p', 'review-empty', status === 'open' ? 'Még nincs nyitott megjegyzés.' : 'Még nincs késznek jelölt megjegyzés.');
       updateStep();
       return;
     }
-    const groups = new Map();
-    const byId = new Map(shown.map(note => [note.id, note]));
-    for (const note of shown) {
-      if (!groups.has(note.route)) {
-        const group = add(noteList, 'section', 'review-group');
+    let group;
+    let lastRoute;
+    for (const note of visibleNotes) {
+      if (note.route !== lastRoute) {
+        group = add(noteList, 'section', 'review-group');
         add(group, 'h4', '', note.page_title);
-        groups.set(note.route, group);
+        lastRoute = note.route;
       }
-      const item = add(groups.get(note.route), 'article', 'review-note');
+      const item = add(group, 'article', 'review-note');
       item.dataset.noteId = note.id;
       noteRows.set(note.id, item);
+      add(item, 'span', 'review-current', 'Aktuális').hidden = true;
       if (note.section && note.section !== note.page_title) add(item, 'p', 'review-section', note.section);
       const target = note.locator?.quote || note.locator?.label;
       if (target && note.locator?.kind !== 'page') add(item, 'blockquote', 'review-quote', target);
@@ -239,10 +362,10 @@ export async function initReview(main, session) {
       const row = add(item, 'div', 'review-actions');
       const jump = add(row, 'a', 'review-jump', 'Ugrás a helyére');
       jump.href = noteUrl(note);
-      if (note.route === session.route) jump.addEventListener('click', event => {
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      jump.addEventListener('click', event => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        showNote(note);
+        jumpTo(note);
       });
       if (owner) {
         const mark = add(row, 'button', 'review-mark', note.status === 'open' ? 'Kész' : 'Újranyitás');
@@ -278,12 +401,13 @@ export async function initReview(main, session) {
         });
       }
     }
-    visibleNotes = [...noteList.querySelectorAll('[data-note-id]')].map(item => byId.get(item.dataset.noteId));
     updateStep();
+    alignCard(cursors[status]?.id);
   }
 
   async function refresh() {
-    const result = await session.rpc('dzs_review_list');
+    const [result, index] = await Promise.all([session.rpc('dzs_review_list'), orderReady]);
+    compare = compareNotes(index, order);
     owner = result.role === 'owner';
     notes = Array.isArray(result.notes) ? result.notes : [];
     panel.querySelector('.review-identity').textContent = result.name;
@@ -304,10 +428,10 @@ export async function initReview(main, session) {
     restore.disabled = true;
     try {
       const { note } = await session.rpc('dzs_review_set_deleted', { p_id: id, p_deleted: false });
-      notes = [note, ...notes.filter(n => n.id !== id)].sort((a, b) => b.created_at.localeCompare(a.created_at));
+      notes = [note, ...notes.filter(n => n.id !== id)];
       if (undoId === id) dismissUndo();
-      const filter = panel.querySelector(note.status === 'done' ? '[data-status="done"]' : '[data-status="open"]');
-      filter.click();
+      const filter = filters.find(button => button.dataset.status === note.status);
+      setStatus(note.status);
       filter.focus({ preventScroll: true });
       notice('Megjegyzés visszaállítva.');
     } catch (error) {
@@ -325,14 +449,31 @@ export async function initReview(main, session) {
     catch (error) { notice(messages[error.message] || messages.network, true); }
     finally { button.disabled = false; }
   });
-  for (const button of panel.querySelectorAll('[data-status]')) button.addEventListener('click', () => {
-    status = button.dataset.status;
-    panel.querySelectorAll('[data-status]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+  for (const button of filters) button.addEventListener('click', () => {
+    setStatus(button.dataset.status);
+    const note = cursors[status];
+    if (noteRows.has(note?.id) && note.route === session.route) {
+      const address = noteUrl(note);
+      history.replaceState(history.state, '', address);
+      committedAddress = address;
+      showNote(note);
+    } else {
+      clearNote();
+      const address = new URL(location.href);
+      address.searchParams.delete('review-note');
+      history.replaceState(history.state, '', address);
+      committedAddress = address;
+    }
+  });
+  sorter.addEventListener('change', async () => {
+    order = sorter.value;
+    sortPreference.write(order);
+    compare = compareNotes(await orderReady, order);
     renderNotes();
   });
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (busy || !active || !input.value.trim()) return;
+    if (pending || busy || !active || !input.value.trim()) return;
     const body = input.value.trim();
     if (!submission || submission.body !== body) submission = { id: crypto.randomUUID(), body };
     busy = save.disabled = true;
@@ -344,7 +485,7 @@ export async function initReview(main, session) {
       notes = [result.note, ...notes.filter(n => n.id !== result.note.id)];
       submission = null;
       input.value = '';
-      panel.querySelector('[data-status="open"]').click();
+      setStatus('open');
       notice('Megjegyzés elmentve.');
     } catch (error) { notice((messages[error.message] || messages.network) + ' A beírt szöveg megmaradt.', true); }
     finally { busy = save.disabled = false; }
@@ -397,9 +538,8 @@ export async function initReview(main, session) {
       const jump = notes.find(n => n.id === session.jumpTo && n.route === session.route);
       if (jump) {
         openPanel(true);
-        if (jump.status === 'done') panel.querySelector('[data-status="done"]').click();
         requestAnimationFrame(() => {
-          showNote(jump);
+          showNote(jump, false);
           if (!nextButton.disabled) nextButton.focus({ preventScroll: true });
         });
       }
