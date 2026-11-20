@@ -298,5 +298,8 @@
   },
   "csapat/doncsev-vitalij.html": {
     "booking": "https://dzsufizio.salonic.hu/employees/31379/?placeId=8226"
+  },
+  "panaszok.html": {
+    "compactComplaints": true
   }
 }

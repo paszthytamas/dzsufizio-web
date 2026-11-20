@@ -107,7 +107,7 @@ function replaceBookingLinks(html, destination, comparing) {
   return updated;
 }
 
-export function renderRevisions(source, { replace = [], remove = [], move, booking }) {
+export function renderRevisions(source, { replace = [], remove = [], move, booking, compactComplaints }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -130,6 +130,12 @@ export function renderRevisions(source, { replace = [], remove = [], move, booki
   if (booking) {
     modified = replaceBookingLinks(modified, booking, false);
     comparison = replaceBookingLinks(comparison, booking, true);
+  }
+  if (compactComplaints) {
+    const grid = '<div class="complaints-grid">';
+    const compactGrid = '<div class="complaints-grid complaints-grid--compact">';
+    modified = replaceOnce(modified, grid, compactGrid);
+    comparison = replaceOnce(comparison, grid, compactGrid);
   }
   return { modified, comparison };
 }

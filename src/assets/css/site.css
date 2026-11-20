@@ -1427,3 +1427,13 @@ main:focus {
 .revision-booking .button {
   text-decoration:inherit;
 }
+
+.complaints-grid.complaints-grid--compact {
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+}
+
+.complaints-grid--compact .complaint-image {
+  display:block;
+  block-size:clamp(112px,15vw,168px);
+  aspect-ratio:auto;
+}
