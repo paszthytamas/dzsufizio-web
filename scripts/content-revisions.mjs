@@ -144,37 +144,68 @@ function escapeExerciseText(value) {
   })[character]);
 }
 
-function renderExercise({ id, title, intro, steps }) {
+function renderExercise({ id, title, intro, steps }, number, coverTemplate) {
   if (!/^\d+$/.test(id)) throw new Error('Hibás TikTok-azonosító: ' + id);
   const heading = escapeExerciseText(title);
   const description = intro ? '<p>' + escapeExerciseText(intro) + '</p>\n' : '';
   const instructions = steps.map(step => '<li>' + escapeExerciseText(step) + '</li>').join('\n');
-  const player = 'https://www.tiktok.com/player/v1/' + id + '?autoplay=0&amp;controls=1&amp;description=1&amp;music_info=0';
-  const permalink = 'https://www.tiktok.com/@dzsufizio/video/' + id;
+  const player = coverTemplate
+    .replaceAll('7297618909971090720', id)
+    .replaceAll('Alkarnyújtás asztalnál', () => heading);
   return '<section class="exercise" aria-labelledby="gyakorlat-' + id + '">\n' +
-    '<div class="exercise-instructions">\n<h4 id="gyakorlat-' + id + '">' + heading + '</h4>\n' +
+    '<div class="exercise-instructions">\n<h4 id="gyakorlat-' + id + '">5.' + number + '. ' + heading + '</h4>\n' +
     description + '<ol class="steps-list">\n' + instructions + '\n</ol>\n</div>\n' +
-    '<figure class="media-player tiktok compact">\n' +
-    '<details class="video-embed" data-embed="' + player + '" data-title="' + heading + '">\n' +
-    '<summary class="video-summary"><span class="video-closed-label">▶ Videó lejátszása</span>' +
-    '<span class="video-open-label">Lejátszó bezárása</span></summary>\n' +
-    '<div class="play-space" data-player></div>\n' +
-    '</details>\n' +
-    '<figcaption><a href="' + permalink + '" class="player-link" target="_blank" rel="noopener noreferrer" ' +
-    'aria-label="' + heading + ' megnyitása a TikTokon">Megnyitás a TikTokon</a></figcaption>\n' +
-    '</figure>\n</section>';
+    player + '\n</section>';
 }
 
-function additionalExercises(html, { before, title, items }, comparing) {
-  const destination = '<h2 id="' + before + '">';
-  const exercises = items.map(renderExercise).join('\n');
-  const block = '<section class="exercise-group" aria-labelledby="teniszkonyok-videok">\n' +
-    '<h3 id="teniszkonyok-videok">' + escapeExerciseText(title) + '</h3>\n' +
-    exercises + '\n</section>';
-  return replaceOnce(html, destination, (comparing ? mark('ins', block, true) : block) + '\n' + destination);
+function renderExerciseChapter(html, items, comparing) {
+  const heading = '<h2 id="resz-27">';
+  const start = html.indexOf(heading);
+  const end = html.indexOf('<h2 id="resz-38">', start);
+  if (start === -1 || end === -1) throw new Error('Hiányzik az otthoni gyakorlatok fejezete.');
+  const original = html.slice(start, end);
+  const oldTitle = original.match(/^<h2 id="resz-27">([^<]+)<\/h2>/)?.[1];
+  const oldStretch = original.indexOf('<h3 id="resz-31">');
+  const oldGroup = original.match(/<div class="exercise-group">\s*<h3>([^<]+)<\/h3>\s*<p>([^<]+)<\/p>/);
+  const golfExercises = [...original.matchAll(/<section class="exercise">[\s\S]*?<\/section>/g)];
+  if (!oldTitle || !oldGroup || oldStretch === -1 || oldStretch >= oldGroup.index || golfExercises.length !== 2) {
+    throw new Error('Megváltozott az otthoni gyakorlatok eredeti szerkezete.');
+  }
+
+  const title = '5. Otthoni gyakorlat teniszkönyökre';
+  const differenceTitle = '5.1. Mi a különbség a golfkönyök és a teniszkönyök között?';
+  const difference = replaceOnce(oldGroup[2],
+    ' A két alábbi videó golfkönyökhöz készült; más területet céloznak, mint a fenti teniszkönyök-gyakorlatok.', '');
+  const text = (before, after) => comparing ? compareText(before, after) : after;
+  const added = block => comparing ? mark('ins', block, true) : block;
+  const removedStretch = comparing ? mark('del', original.slice(oldStretch, oldGroup.index).trimEnd(), true) + '\n' : '';
+  const coverTemplate = singleBlock(golfExercises[0][0], /<figure class="media-player tiktok\b[^"]*">[\s\S]*?<\/figure>/g,
+    'data-embed="https://www.tiktok.com/player/v1/7297618909971090720?');
+  const golfVideos = golfExercises.map(([exercise]) => exercise.replace('<h3>', '<h4>').replace('</h3>', '</h4>')).join('\n');
+  const tennisVideos = items.map((item, index) => added(renderExercise(item, index + 5, coverTemplate))).join('\n');
+  const updated = [
+    heading + text(oldTitle, title) + '</h2>',
+    '<h3>' + text(oldGroup[1], differenceTitle) + '</h3>',
+    '<p>' + text(oldGroup[2], difference) + '</p>',
+    paragraph(original, 'resz-28'),
+    '<section class="exercise-group" aria-labelledby="golfkonyok-gyakorlatok">',
+    '<h3 id="golfkonyok-gyakorlatok">Golfkönyök-gyakorlatok</h3>',
+    added('<p>A lassú könyökhajlítás mindkét gyakorlatsorhoz használható bemelegítésként.</p>'),
+    '<h4 id="resz-29">5.2. Lassú könyökhajlítás és -nyújtás</h4>',
+    paragraph(original, 'resz-30'),
+    removedStretch + golfVideos,
+    '</section>',
+    '<section class="exercise-group" aria-labelledby="teniszkonyok-videok">',
+    '<h3 id="teniszkonyok-videok">Teniszkönyök-gyakorlatok</h3>',
+    tennisVideos,
+    '</section>',
+    '',
+  ].join('\n');
+  const updatedChapter = replaceOnce(html, original, updated);
+  return replaceOnce(updatedChapter, '<a href="#resz-27">' + oldTitle + '</a>', '<a href="#resz-27">' + title + '</a>');
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, additionalExercises: extraExercises }) {
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, separateTikTok: videoSection, exerciseChapter }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -216,9 +247,9 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
     modified = separateTikTok(modified, videoSection, false);
     comparison = separateTikTok(comparison, videoSection, true);
   }
-  if (extraExercises) {
-    modified = additionalExercises(modified, extraExercises, false);
-    comparison = additionalExercises(comparison, extraExercises, true);
+  if (exerciseChapter) {
+    modified = renderExerciseChapter(modified, exerciseChapter.items, false);
+    comparison = renderExerciseChapter(comparison, exerciseChapter.items, true);
   }
   return { modified, comparison };
 }
