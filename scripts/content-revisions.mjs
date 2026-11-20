@@ -107,7 +107,15 @@ function replaceBookingLinks(html, destination, comparing) {
   return updated;
 }
 
-export function renderRevisions(source, { replace = [], remove = [], move, booking, compactComplaints }) {
+function replaceParagraph(html, id, content, comparing) {
+  const original = paragraph(html, id);
+  const updated = original.slice(0, original.indexOf('>') + 1) + content + '</p>';
+  if (!comparing) return replaceOnce(html, original, updated);
+  const old = original.replace(/\s+id="[^"]+"/g, '');
+  return replaceOnce(html, original, mark('del', old, true) + '\n' + mark('ins', updated, true));
+}
+
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -119,6 +127,10 @@ export function renderRevisions(source, { replace = [], remove = [], move, booki
     const block = paragraph(source, id);
     modified = replaceOnce(modified, block + '\n', '');
     comparison = replaceOnce(comparison, block, mark('del', block, true));
+  }
+  for (const [id, content] of paragraphs) {
+    modified = replaceParagraph(modified, id, content, false);
+    comparison = replaceParagraph(comparison, id, content, true);
   }
   if (move) {
     const old = section(source, move).replace(/\s+id="[^"]+"/g, '');

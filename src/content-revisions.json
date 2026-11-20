@@ -35,6 +35,11 @@
       [
         "A tapasz alkalmazását érdemes szakemberrel egyeztetni.",
         "Rövid távon segíthet enyhíteni a panaszt, de a tapasz alkalmazását érdemes szakemberrel egyeztetni."
+      ],
+      [
+        "A kézzel végzett lazító vagy mobilizáló fogások kiegészítő szerepe egyénileg mérlegelhető. A Cochrane 2024-es áttekintése szerint a manuális módszerek és a gyakorlatok kis mértékben csökkenthetik a fájdalmat és a mindennapi tevékenységek nehézségét, de az eredmények bizonytalanok, és a javulás tartóssága sem garantált. Ebből nem következik, hogy egy adott fogás vagy a Dzsufizio módszer® biztos megoldást jelent teniszkönyökre.",
+        "A kézzel végzett lazító vagy mobilizáló fogások kiegészítő szerepe egyénileg mérlegelhető. A Cochrane 2024-es áttekintése szerint a manuális módszerek és a gyakorlatok csökkenthetik a fájdalmat. Ebből nem következik, hogy egy adott fogás vagy a Dzsufizio módszer® biztos megoldást jelent teniszkönyökre.",
+        "resz-40"
       ]
     ]
   },
@@ -43,6 +48,11 @@
       [
         "masszázst, lazító és mobilizáló fogásokat",
         "masszázst, csontkovácsolást, lazító és mobilizáló fogásokat"
+      ],
+      [
+        "A kézzel végzett lágyrész- és ízületi fogások bizonyos rotátorköpeny-ínpanaszoknál rövid távú fájdalomcsökkentő kiegészítésként mérlegelhetők. A pillanatnyi könnyebbség mellett a mozgás és a terhelhetőség alakulását is követni kell.",
+        "A kézzel végzett lágyrész- és ízületi fogások bizonyos rotátorköpeny-ínpanaszoknál fájdalomcsökkentő kiegészítésként mérlegelhetők. A könnyebbség mellett a mozgás és a terhelhetőség alakulását is követni kell.",
+        "resz-88"
       ]
     ]
   },
@@ -109,17 +119,50 @@
       [
         "Ha közben szünetet szeretnél, vagy azt kéred, hogy egy fogás maradjon ki, szólj nyugodtan.",
         "Ha közben szünetet szeretnél, bármi kellemetlen, vagy azt kéred, hogy egy fogás maradjon ki, szólj nyugodtan."
+      ],
+      [
+        "Rövid nyomást vagy feszülést érezhetsz, és előfordulhat, hogy hangot is hallasz. Az érzet személyenként eltér. Ha fáj vagy kellemetlen, jelezd: megállunk, és megbeszéljük, hogyan tovább.",
+        "Rövid nyomást vagy feszülést érezhetsz, és előfordulhat, hogy hangot is hallasz. Az érzet személyenként eltér. Ha az előkészületek vagy a fogás közben fájdalmat vagy kellemetlenséget érzel, jelezd. Megállunk, és megbeszéljük, milyen másik testhelyzet vagy fogás illik hozzád.",
+        "resz-44"
+      ],
+      [
+        "A hang nem jelenti azt, hogy egy csontot visszatettünk a helyére. A roppanásból azt sem lehet megmondani, hogy csökken-e a fájdalom. A fogás után arra figyelünk, mit érzel és hogyan esik a mozgás.",
+        "A hang nem jelenti azt, hogy egy csontot visszatettünk a helyére. A roppanás hangerejéből önmagában nem lehet megállapítani, változott-e a fájdalom. A fogás után megkérdezzük, mit érzel, és megnézzük, változott-e a mozgástartományod vagy egy korábban egyeztetett mozdulat kivitelezése.",
+        "resz-19"
       ]
     ],
     "move": [
       "resz-8",
       "resz-51"
+    ],
+    "paragraphs": [
+      [
+        "resz-46",
+        "Átmeneti érzékenység, izomfájdalom vagy merevség előfordulhat. Az alkalom után egyeztethetünk a terhelésről és az otthoni teendőkről. Gerincen végzett kimozgatás után ritka, súlyos szövődményekről is beszámoltak. <strong>Ha erős, romló vagy szokatlan tünetet tapasztalsz, kérj orvosi segítséget.</strong> <a href=\"https://www.nccih.nih.gov/health/spinal-manipulation-what-you-need-to-know\" target=\"_blank\" rel=\"noopener noreferrer\">[3]</a>"
+      ],
+      [
+        "resz-10",
+        "Friss sérülés után jelentkező erős fájdalom, lázzal járó hátfájás, új vagy romló zsibbadás, érzéskiesés, romló mozgásképesség vagy izomgyengeség esetén előbb kérj orvosi segítséget. Ha a derékfájdalomhoz új vizeletürítési nehézség vagy vizelet- vagy széklettartási zavar társul, sürgős ellátásra van szükség. <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a> <strong>Hirtelen beszédzavar, féloldali gyengeség vagy eszméletvesztés esetén azonnal hívd a 112-t.</strong> Az Egészségvonal útmutatói <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/s-sz/stroke.html\" target=\"_blank\" rel=\"noopener noreferrer\">stroke</a> és <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/e-e/eszmeletvesztes.html\" target=\"_blank\" rel=\"noopener noreferrer\">eszméletvesztés</a> esetére."
+      ]
     ]
   },
   "derekfajas.html": {
     "move": [
       "resz-8",
       "resz-57"
+    ],
+    "replace": [
+      [
+        "A következő lépést az első alkalom és a visszajelzésed alapján beszéljük meg. Ha a fájdalom tartósan fennáll vagy erősödik, érdemes az okát orvossal tisztázni.",
+        "A következő lépést az első alkalom és a visszajelzésed alapján beszéljük meg. Ha a fájdalom tartósan fennáll vagy erősödik, érdemes orvossal tisztázni az okát. Akkor is kérj orvosi tanácsot, ha több alkalom után sincs számottevő javulás.",
+        "resz-56"
+      ]
+    ],
+    "paragraphs": [
+      [
+        "resz-54",
+        "Ha új lábzsibbadás társul a derékfájdalomhoz, foglalás előtt kérj orvosi vizsgálatot. <strong>Ha mindkét lábadban új zsibbadás vagy gyengeség jelentkezik, kérj azonnali sürgősségi ellátást.</strong> Új vagy romló izomgyengeséggel, illetve ha a lábadat egyre nehezebben mozgatod, sürgősen fordulj orvoshoz. <a href=\"https://egeszsegvonal.gov.hu/egeszseg-a-z/d/derekfajdalom.html\" target=\"_blank\" rel=\"noopener noreferrer\">[1]</a> <a href=\"https://www.nhs.uk/conditions/back-pain/\" target=\"_blank\" rel=\"noopener noreferrer\">[2]</a>"
+      ]
     ]
   },
   "fascia-kes.html": {
@@ -301,5 +344,13 @@
   },
   "panaszok.html": {
     "compactComplaints": true
+  },
+  "blog/csontkovacsolas-biztonsaga.html": {
+    "paragraphs": [
+      [
+        "resz-54",
+        "Átmeneti érzékenység, merevség vagy fájdalomfokozódás előfordulhat. Ez jellemzően néhány napon belül enyhül. <strong>Ha a tünet erős, romlik vagy szokatlan, kérj orvosi tanácsot.</strong> Ha az enyhébb tünetekkel kapcsolatban kérdésed van, keress bennünket, és átbeszéljük a további lépéseket."
+      ]
+    ]
   }
 }
