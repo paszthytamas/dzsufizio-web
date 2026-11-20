@@ -295,7 +295,7 @@ function renderExerciseChapter(html, items, comparing) {
   return replaceOnce(updatedChapter, '<a href="#resz-27">' + oldTitle + '</a>', '<a href="#resz-27">' + title + '</a>');
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], move, booking, compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter }) {
+export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], insertAfter = [], move, booking, compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter }) {
   let modified = source;
   let comparison = source;
   for (const [before, after, id] of replace) {
@@ -311,6 +311,12 @@ export function renderRevisions(source, { replace = [], remove = [], paragraphs 
   for (const [id, content] of paragraphs) {
     modified = replaceParagraph(modified, id, content, false);
     comparison = replaceParagraph(comparison, id, content, true);
+  }
+  for (const [id, content] of insertAfter) {
+    const current = paragraph(modified, id);
+    const compared = paragraph(comparison, id);
+    modified = replaceOnce(modified, current, current + '\n' + content);
+    comparison = replaceOnce(comparison, compared, compared + '\n' + mark('ins', content, true));
   }
   if (move) {
     const old = section(source, move).replace(/\s+id="[^"]+"/g, '');
