@@ -421,11 +421,82 @@
     "removeInstagramCard": "DCXBoSDIhWs"
   },
   "csapat/virag-tamas.html": {
-    "remove": [ "resz-89" ],
-    "insertAfter": [
-      [ "resz-97", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/virag-tamas-kezeles.webp\" class=\"prose-media\" alt=\"Virág Tamás egy hanyatt fekvő vendég karját vezeti és támasztja.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-89"
     ],
-    "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226"
+    "insertAfter": [
+      [
+        "resz-97",
+        "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/virag-tamas-kezeles.webp\" class=\"prose-media\" alt=\"Virág Tamás egy hanyatt fekvő vendég karját vezeti és támasztja.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>"
+      ],
+      [
+        "resz-100",
+        "<p class=\"word-p\" id=\"resz-106\">Ezek az apróságok ritkán jutnak eszünkbe elsőként, amikor magyarázatot keresünk. Addigra gyakran már túl vagyunk néhány internetes keresésen, és a ChatGPT-től is megkérdeztük, hogy érdemes-e még tartós tejet vennünk.</p>"
+      ]
+    ],
+    "booking": "https://dzsufizio.salonic.hu/employees/27843/?placeId=8226",
+    "paragraphs": [
+      [
+        "resz-87",
+        "Gyerekkorom óta meghatározó része az életemnek a sport."
+      ],
+      [
+        "resz-91",
+        "Először sportedzőként és személyi edzőként végeztem, majd az anatómia és a reumatológia iránti érdeklődésem továbbvitt az egészségügy, a gyógymasszázs, később pedig a manuálterápia világába."
+      ],
+      [
+        "resz-94",
+        "Ez a felismerés indított el azon az úton, amelyen ma is járok: folyamatosan tanulni, és a megszerzett tudással másoknak is segíteni, legyen szó sportolóról vagy valakiről, akinek a hét legkomolyabb fizikai kihívása a bevásárlás felcipelése."
+      ],
+      [
+        "resz-96",
+        "Aktív sportolói éveimet hátrahagyva, a harmincas éveimben már én is találkozom reggeli derékfájással, merev nyakkal, izomgörccsel és olyan mozdulatokkal, amelyek után az ember egy pillanatra megáll, és átgondolja az életét. Szóval ismerős, amikor szeretnél egyszerűen csak felkelni, lehajolni, edzeni vagy végigdolgozni egy napot, de a testednek ehhez külön véleménye van."
+      ],
+      [
+        "resz-97",
+        "A munkám során ezért különösen fontosnak tartom megérteni, <strong>mi válthatja ki, és mi tarthatja fenn a panaszaidat</strong>."
+      ],
+      [
+        "resz-98",
+        "Amikor fáj valamink, természetes, hogy szeretnénk megtalálni azt az egy dolgot, ami az egészért felelős. Egy rossz mozdulatot. Egy régi sérülést. Egy „elcsúszott” alkatrészt, amit valaki visszatesz, és mehetünk tovább. A valóság viszont sokszor ennél árnyaltabb: <strong>a terhelésünk, a mozgási szokásaink, a pihenésünk és a stressz</strong> együtt alakíthatják, hogyan érezzük magunkat."
+      ],
+      [
+        "resz-100",
+        "Ülőmunka közben például könnyen azon kapjuk magunkat, hogy a vállunk a fülünk mellett, a fejünk pedig már majdnem bent van a monitorban. Ha órákig alig változtatunk ezen, a nap végére jelentkezhet <strong>nyak-vállövi merevség, kellemetlenség</strong>. Vagy ott a féloldalas válltáska, amelyben a szükséges holmikon kívül biztonság kedvéért egy kisebb háztartást is magunkkal viszünk. Egyik sem automatikusan a fájdalom oka, de érdemes lehet megnézni, nálad számítanak-e."
+      ]
+    ],
+    "replaceDisclosure": {
+      "summary": "Bővebben arról, miért érdekel az is, hogyan telnek a napjaid",
+      "lines": [
+        "<details class=\"profile-extra\">",
+        "<summary id=\"resz-103\">A hétköznapokba illő változtatások</summary>",
+        "<p class=\"word-p\" id=\"hasznalhato-kapaszkodok\">Én abban szeretnék segíteni, hogy a sok lehetséges magyarázat között találjunk néhány <strong>valóban használható kapaszkodót</strong>. Megnézzük, mi befolyásolja a panaszaidat, min érdemes változtatni, és mi az, ami miatt teljesen feleslegesen aggódsz.</p>",
+        "<p class=\"word-p\" id=\"munka-hobbi-csalad\">Lehetőleg úgy, hogy közben ne kelljen feladnod a munkádat, a hobbidat vagy a családodat. Utóbbi egyébként sem része a kezelési tervnek.</p>",
+        "<p class=\"word-p\" id=\"otthoni-gyakorlatok\">Sokszor <strong>néhány észszerű változtatással</strong> is el lehet indulni: egy kis tudatos odafigyeléssel, a terhelés átgondolásával, szükség esetén néhány otthoni gyakorlattal. Olyannal, amit ténylegesen meg is tudsz csinálni, akár a tévé előtt. A kedvenc sorozatodról sem kell feltétlenül lemondanod miatta.</p>",
+        "</details>",
+        "<details class=\"profile-extra\">",
+        "<summary>Stressz és fájdalom</summary>",
+        "<p class=\"word-p\" id=\"stressz-bevezeto\">És van még valami, ami mellett nem szeretnék elmenni: a stressz.</p>",
+        "<p class=\"word-p\" id=\"resz-108\">Erről személyesen szívesen tartok egy kisebb mesedélutánt is. Eskü, hasznos lesz.</p>",
+        "<h3 id=\"resz-107\">Hogyan reagál a testünk?</h3>",
+        "<p class=\"word-p\" id=\"resz-109\">A stresszt hajlamosak vagyunk úgy kezelni, mintha kizárólag fejben történne, közben a testünk is aktívan részt vesz benne. Megváltozhat a légzésünk, megfeszülhetnek az izmaink, romolhat az alvásunk, és működésbe lépnek a szervezet stresszrendszerei. Ennek részeként többek között adrenalin és kortizol szabadul fel. Ezek teljesen normális, szükséges folyamatok: segítenek alkalmazkodni a kihívásokhoz. A nehézség akkor kezdődhet, ha a készenléti állapot tartóssá válik, és kevés lehetőségünk marad regenerálódni.</p>",
+        "<h3 id=\"fajdalomerzekenyseg\">Fokozott fájdalomérzékenység</h3>",
+        "<p class=\"word-p\" id=\"resz-110\">A tartós stressz a fájdalmat feldolgozó idegrendszeri folyamatokat is befolyásolhatja, és hozzájárulhat a fokozott fájdalomérzékenységhez. Ehhez kapcsolódik <strong>a szenzitizáció fogalma</strong>: leegyszerűsítve az idegrendszer érzékenyebben reagálhat a beérkező jelzésekre. Olyan ez, mintha a riasztónkat túl érzékenyre állítanák. Korábban egy betörési kísérlet kellett a szirénához, most meg a szomszéd macskája is elég hozzá.</p>",
+        "<p class=\"word-p\" id=\"fajdalom-es-terheles\">Ilyenkor egy egyébként elviselhető terhelés is fájdalmasabbnak érződhet, és bizonyos esetekben korábban fájdalmatlan ingerek is fájdalmat válthatnak ki. <strong>A fájdalom tehát valós</strong>, miközben az erőssége nem feltétlenül mutatja meg pontosan, mekkora szöveti probléma áll mögötte. Ez nem minden panasz magyarázata, de fontos része lehet a képnek.</p>",
+        "<p class=\"word-p\" id=\"resz-111\">És mielőtt a kortizolt kinevezzük minden bajunk felelősének: a folyamat ennél összetettebb. Tartós stressznél a stresszrendszer szabályozása változhat meg; nem egyszerűen arról van szó, hogy „sok a kortizol, ezért minden fáj”. <strong>A stressz és a fájdalom ráadásul kölcsönösen erősíthetik egymást.</strong> Fáj, ezért aggódsz és rosszabbul alszol; kialvatlanul, feszülten pedig nehezebb elviselni a fájdalmat. Kész is a körforgás, amelyre valószínűleg senki nem szeretett volna előfizetni.</p>",
+        "</details>",
+        "<details class=\"profile-extra\">",
+        "<summary>Mi változhat meg nyaraláskor?</summary>",
+        "<p class=\"word-p\" id=\"resz-112\">Gondolj egy jól sikerült nyaralásra. Kellemes idő, kevesebb kötelezettség, több pihenés. Előfordult már, hogy olyankor a nyakad, vállad vagy derekad is kevésbé fájt?</p>",
+        "<h3 id=\"pihenes-es-fajdalom\">Pihenés és fájdalomérzet</h3>",
+        "<p class=\"word-p\" id=\"fajdalomcsillapito-rendszerek\">Ebben a szervezet saját fájdalomcsillapító rendszerei is szerepet kaphatnak. Az endorfinok és az endokannabinoidok hozzájárulhatnak a fájdalom csökkenéséhez és a kellemes közérzethez. A köznyelvben „boldogsághormonként” emlegetett dopamin, szerotonin és oxitocin szintén részt vesznek a hangulat, a jutalmazás, a kapcsolódás és a fájdalom szabályozásában – bár nem mind hormon, és a hatásuk sem egyforma. A szervezetünkben nincs olyan egyszerű kapcsoló, amely leállítja a kortizolt, és elindítja helyette a boldogságot. Pedig kétségtelenül lenne rá kereslet.</p>",
+        "<p class=\"word-p\" id=\"nyaralas-es-terheles\">Nyaralás közben tehát több minden változhat egyszerre: az alvásod, a mozgásod, a figyelmed, a terhelésed és az, mennyire érzed magad felszabadultnak. Ezek együtt befolyásolhatják a fájdalomélményt.</p>",
+        "<h3 id=\"hazateres\">Vissza a hétköznapokba</h3>",
+        "<p class=\"word-p\" id=\"visszatero-panaszok\">Aztán hazafelé megpillantod az „Üdvözöljük Magyarországon!” táblát, eszedbe jut a másnapi munka, a megválaszolatlan üzenetek és az elintéznivalók, és idővel a megszokott panaszaid is visszatérhetnek. Ilyenkor könnyű rögtön a párnára vagy az autóülésre gyanakodni. Lehet, hogy azoknak is volt szerepük, de érdemes a teljes képet megnézni.</p>",
+        "</details>",
+        "<p class=\"word-p\" id=\"resz-113\">Ezért érdekel a fájó testrészed mellett az is, <strong>hogyan telnek a napjaid</strong>. Szeretném, ha értenéd, mi befolyásolhatja a panaszaidat, és milyen lehetőségeink vannak a javulásra. A személyre szabott kezelés, a megfelelő mozgás és a regeneráció támogatása ebben egyaránt helyet kaphat – természetesen a kompetenciahatáraimon belül.</p>"
+      ]
+    }
   },
   "csapat/vizi-kristof.html": {
     "remove": [ "resz-201" ],

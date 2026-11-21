@@ -192,6 +192,15 @@ function singleBlock(html, pattern, attribute) {
   return matches[0];
 }
 
+function replaceProfileDisclosure(html, { summary, lines }, comparing) {
+  const previous = singleBlock(html, /<details class="profile-extra">[\s\S]*?<\/details>/g,
+    '<summary>' + summary + '</summary>');
+  const replacement = lines.join('\n');
+  if (!comparing) return replaceOnce(html, previous, replacement);
+  const removed = previous.replace(/\s+id="[^"]+"/g, '');
+  return replaceOnce(html, previous, mark('del', removed, true) + '\n' + mark('ins', replacement, true));
+}
+
 function removeInstagramCard(html, id, comparing) {
   const card = singleBlock(html, /<article class="guest-card">[\s\S]*?<\/article>/g,
     'data-ig-permalink="https://www.instagram.com/reel/' + id + '/"');
@@ -295,9 +304,16 @@ function renderExerciseChapter(html, items, comparing) {
   return replaceOnce(updatedChapter, '<a href="#resz-27">' + oldTitle + '</a>', '<a href="#resz-27">' + title + '</a>');
 }
 
-export function renderRevisions(source, { replace = [], remove = [], paragraphs = [], insertAfter = [], move, booking, compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter }) {
+export function renderRevisions(source, {
+  replace = [], remove = [], paragraphs = [], insertAfter = [], move, booking,
+  compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter, replaceDisclosure,
+}) {
   let modified = source;
   let comparison = source;
+  if (replaceDisclosure) {
+    modified = replaceProfileDisclosure(modified, replaceDisclosure, false);
+    comparison = replaceProfileDisclosure(comparison, replaceDisclosure, true);
+  }
   for (const [before, after, id] of replace) {
     if (/[<>&]/.test(before + after)) throw new Error('A szövegcsere csak szöveget tartalmazhat.');
     modified = replaceText(modified, before, after, id);
