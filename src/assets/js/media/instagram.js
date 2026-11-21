@@ -85,56 +85,128 @@ function initPlayers(slots) {
 }
 
 
-function initReelGallery(gallery) {
+function initReelGallery(gallery, initialView) {
   const list = gallery.querySelector('[data-reel-cards]');
   const controls = gallery.querySelector('[data-reel-controls]');
+  const count = controls.querySelector('[data-reel-count]');
   const cards = Array.from(list.children);
-  for (let index = cards.length - 1; index > 0; index--) {
+  const pagedCards = cards.slice();
+  for (let index = pagedCards.length - 1; index > 0; index--) {
     const other = Math.floor(Math.random() * (index + 1));
-    [cards[index], cards[other]] = [cards[other], cards[index]];
+    [pagedCards[index], pagedCards[other]] = [pagedCards[other], pagedCards[index]];
   }
-  list.append(...cards);
 
   const events = new AbortController();
   const options = { signal: events.signal };
-  const count = controls.querySelector('[data-reel-count]');
+  const warmedPlayers = new Map();
   let position = 0;
-  let disposePlayer;
+  let view;
+  let pagedOpen = gallery.open;
+  let disposeGrid;
 
-  function showCard() {
-    disposePlayer?.();
-    for (const [index, card] of cards.entries()) card.hidden = index !== position;
-    count.textContent = (position + 1) + ' / ' + cards.length;
-    disposePlayer = gallery.open ? initPlayers(cards[position].querySelectorAll(reelSelector)) : undefined;
+  function stopCard(card) {
+    warmedPlayers.get(card)?.();
+    warmedPlayers.delete(card);
+  }
+
+  function clearPlayers() {
+    disposeGrid?.();
+    disposeGrid = undefined;
+    for (const card of warmedPlayers.keys()) stopCard(card);
+  }
+
+  function select(offset) {
+    return pagedCards[(position + offset + pagedCards.length) % pagedCards.length];
+  }
+
+  function showPage() {
+    const active = select(0);
+    const nearby = new Set(gallery.open ? [select(1), select(-1)] : []);
+    nearby.delete(active);
+    for (const card of pagedCards) {
+      const warm = nearby.has(card);
+      card.hidden = card !== active && !warm;
+      card.inert = warm;
+      card.toggleAttribute('data-reel-preload', warm);
+      if (!gallery.open || card.hidden) stopCard(card);
+    }
+    count.textContent = (position + 1) + ' / ' + pagedCards.length;
+    if (!gallery.open) return;
+
+    // Keep the neighbours laid out and ready to reveal while they are invisible.
+    for (const card of [active, ...nearby]) {
+      if (!warmedPlayers.has(card)) {
+        warmedPlayers.set(card, initPlayers(card.querySelectorAll(reelSelector)));
+      }
+    }
   }
 
   function move(direction) {
-    position = (position + direction + cards.length) % cards.length;
-    showCard();
+    // Removing the departed player also stops any video that was playing.
+    stopCard(select(0));
+    position = (position + direction + pagedCards.length) % pagedCards.length;
+    showPage();
+  }
+
+  function setView(next) {
+    if (view === next) return;
+    if (view === 'paged') pagedOpen = gallery.open;
+    clearPlayers();
+    view = next;
+    const grid = view === 'grid';
+    gallery.classList.toggle('is-grid', grid);
+    list.classList.toggle('is-paged', !grid);
+    controls.hidden = grid || cards.length < 2;
+    gallery.open = grid || pagedOpen;
+    if (grid) {
+      list.append(...cards);
+      for (const card of cards) {
+        card.hidden = false;
+        card.inert = false;
+        card.removeAttribute('data-reel-preload');
+      }
+      disposeGrid = initPlayers(list.querySelectorAll(reelSelector));
+    } else {
+      list.append(...pagedCards);
+      showPage();
+    }
   }
 
   controls.querySelector('[data-reel-prev]').addEventListener('click', () => move(-1), options);
   controls.querySelector('[data-reel-next]').addEventListener('click', () => move(1), options);
-  gallery.addEventListener('toggle', showCard, options);
-  list.classList.add('is-paged');
-  controls.hidden = false;
-  showCard();
+  gallery.addEventListener('toggle', () => {
+    if (view === 'paged') showPage();
+  }, options);
+  setView(initialView);
 
-  return () => {
-    events.abort();
-    disposePlayer?.();
-    list.classList.remove('is-paged');
-    controls.hidden = true;
-    for (const card of cards) card.hidden = false;
+  return {
+    setView,
+    dispose() {
+      events.abort();
+      clearPlayers();
+      gallery.classList.remove('is-grid');
+      list.classList.remove('is-paged');
+      controls.hidden = true;
+      for (const card of cards) {
+        card.hidden = false;
+        card.inert = false;
+        card.removeAttribute('data-reel-preload');
+      }
+    },
   };
 }
 
-export function initInstagram(page) {
+export function initInstagram(page, { galleryView = 'paged' } = {}) {
   const players = initPlayers([...page.querySelectorAll(reelSelector)].filter(slot => !slot.closest(gallerySelector)));
-  const galleries = [...page.querySelectorAll(gallerySelector)].map(initReelGallery);
+  const galleries = [...page.querySelectorAll(gallerySelector)].map(gallery => initReelGallery(gallery, galleryView));
 
-  return () => {
-    players?.();
-    for (const dispose of galleries) dispose();
+  return {
+    setGalleryView(view) {
+      for (const gallery of galleries) gallery.setView(view);
+    },
+    dispose() {
+      players?.();
+      for (const gallery of galleries) gallery.dispose();
+    },
   };
 }
