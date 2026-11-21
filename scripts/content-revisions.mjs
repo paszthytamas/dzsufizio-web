@@ -208,29 +208,40 @@ function renderReelCard(id, label) {
     '</figure>\n</article>';
 }
 
-function renderProfileReels(html, { ids, name, bookingAnchor }, comparing) {
-  const current = singleBlock(html, /<section class="profile-videos"[^>]*>[\s\S]*?<\/section>/g, 'id="videok"');
-  if (!/^resz-\d+$/.test(bookingAnchor) || !html.includes('<h2 id="' + bookingAnchor + '">')) {
-    throw new Error('A videók utáni foglalási cím hiányzik.');
-  }
-  const existingCards = [...current.matchAll(/<article class="guest-card">[\s\S]*?<\/article>/g)].map(([card]) => card);
-  const existingIds = [...current.matchAll(/data-ig-permalink="https:\/\/www\.instagram\.com\/reel\/([A-Za-z0-9_-]+)\/"/g)].map(([, id]) => id);
-  if (!existingCards.length || existingCards.length !== existingIds.length || !ids.length ||
-      new Set([...existingIds, ...ids]).size !== existingIds.length + ids.length) {
+function profileVideoSection(html) {
+  return singleBlock(html, /<section class="profile-videos"[^>]*>[\s\S]*?<\/section>/g, 'id="videok"');
+}
+
+function renderProfileReels(html, { ids, name }, comparing) {
+  const section = profileVideoSection(html);
+  const existingIds = [...section.matchAll(/data-ig-permalink="https:\/\/www\.instagram\.com\/reel\/([A-Za-z0-9_-]+)\/"/g)].map(([, id]) => id);
+  if (!ids.length || new Set([...existingIds, ...ids]).size !== existingIds.length + ids.length) {
     throw new Error('Hiányzó vagy ismétlődő bemutatkozó videó.');
   }
   const added = ids.map(id => {
     const card = renderReelCard(id, name + ' munkája');
     return comparing ? mark('ins', card, true) : card;
   });
-  const count = existingCards.length + added.length;
+  const ending = section.match(/<\/div>\s*<\/section>$/)?.[0];
+  if (!ending) throw new Error('A profilvideók kártyalistája hiányzik.');
+  const updated = section.slice(0, -ending.length).trimEnd() + '\n' + added.join('\n') + '\n' + ending;
+  return replaceOnce(html, section, updated);
+}
+
+export function renderProfileVideoGallery(html, { open = false } = {}) {
+  const section = profileVideoSection(html);
+  const bookingAnchor = html.match(/<h2 id="(resz-\d+)">Időpontfoglalás<\/h2>/)?.[1];
+  const cards = section.match(/<div class="gallery profile-video-gallery">([\s\S]+)<\/div>\s*<\/section>$/)?.[1].trim();
+  const count = cards?.match(/\bdata-ig-permalink=/g)?.length;
+  if (!count || !bookingAnchor) throw new Error('A profilvideók vagy a foglalási cím hiányzik.');
+
   const updated = [
     '<section class="profile-videos" id="videok" aria-labelledby="profilvideok-cim">',
     '  <div class="profile-video-header">',
     '    <h2 id="profilvideok-cim">Videók a munkámról</h2>',
     '    <a class="profile-video-skip" href="#' + bookingAnchor + '">Ugrás az időpontfoglaláshoz</a>',
     '  </div>',
-    '  <details class="profile-reels" data-reel-gallery>',
+    '  <details class="profile-reels" data-reel-gallery' + (open ? ' open' : '') + '>',
     '    <summary>Videógaléria <span class="profile-reel-total">' + count + ' videó</span></summary>',
     '    <div class="profile-reel-controls" data-reel-controls role="group" aria-label="Videógaléria lapozása" hidden>',
     '      <button class="button alt" type="button" data-reel-prev>Előző</button>',
@@ -238,13 +249,12 @@ function renderProfileReels(html, { ids, name, bookingAnchor }, comparing) {
     '      <button class="button alt" type="button" data-reel-next>Következő</button>',
     '    </div>',
     '    <div class="gallery profile-video-gallery" data-reel-cards>',
-    ...existingCards,
-    ...added,
+    cards,
     '    </div>',
     '  </details>',
     '</section>',
   ].join('\n');
-  return replaceOnce(html, current, updated);
+  return replaceOnce(html, section, updated);
 }
 
 function replaceProfileDisclosure(html, { summary, lines }, comparing) {

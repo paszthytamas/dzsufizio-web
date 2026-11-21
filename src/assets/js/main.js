@@ -1,5 +1,6 @@
 import { initAnchors, initNavigation } from './navigation.js';
 import { rotateTeam } from './team.js';
+import { preference } from './preferences.js';
 import { initTikTok } from './media/tiktok.js';
 
 function currentModule(relative) {
@@ -27,15 +28,51 @@ const [
 ]);
 const main = document.querySelector('main');
 const review = readReviewSession();
-let disposeInstagram;
+const scope = document.querySelector('.brand').pathname;
+const imagePreference = preference(scope, 'profile-illustrations');
+const galleryPreference = preference(scope, 'profile-gallery-view');
+const aiButton = document.getElementById('profile-ai-toggle');
+const galleryButton = document.getElementById('profile-gallery-toggle');
+let showImages = imagePreference.read() !== 'hidden';
+let galleryView = galleryPreference.read() === 'grid' ? 'grid' : 'paged';
+let instagram;
+
+function showIllustration() {
+  const image = main.querySelector('#kezelesi-illusztracio');
+  aiButton.hidden = !image;
+  if (!image) return;
+  const figure = image.closest('ins.revision-block') ?? image;
+  figure.hidden = !showImages;
+  aiButton.textContent = showImages ? 'AI képek elrejtése' : 'AI képek felfedése';
+}
+
+function showGalleryButton() {
+  galleryButton.hidden = !main.querySelector('[data-reel-gallery]');
+  galleryButton.textContent = galleryView === 'paged' ? 'Videók rácsnézetben' : 'Videók lapozással';
+}
+
+aiButton.addEventListener('click', () => {
+  showImages = !showImages;
+  imagePreference.write(showImages ? 'visible' : 'hidden');
+  showIllustration();
+});
+galleryButton.addEventListener('click', () => {
+  galleryView = galleryView === 'paged' ? 'grid' : 'paged';
+  galleryPreference.write(galleryView);
+  instagram.setGalleryView(galleryView);
+  showGalleryButton();
+});
+
 function activateArticle() {
-  disposeInstagram?.();
+  instagram?.dispose();
   if (matchMedia('(max-width: 760px)').matches) {
     for (const index of main.querySelectorAll('.quick-sidebar')) index.open = false;
   }
   initContents(main);
   rotateTeam(main);
-  disposeInstagram = initInstagram(main);
+  showIllustration();
+  instagram = initInstagram(main, { galleryView });
+  showGalleryButton();
 }
 
 await initContentView(main);

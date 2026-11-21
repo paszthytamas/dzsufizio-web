@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderRevisions } from './content-revisions.mjs';
+import { renderProfileVideoGallery, renderRevisions } from './content-revisions.mjs';
 import { reviewAnchorPaths, reviewIndex } from './review-index.mjs';
 
 const project = fileURLToPath(new URL('..', import.meta.url));
@@ -77,6 +77,9 @@ function renderMediaSlot(page, fragment) {
 
 function renderContent(page, fragment, root, useRevisedImages = false) {
   let content = renderMediaSlot(page, fragment);
+  if (page.path?.startsWith('csapat/')) {
+    content = renderProfileVideoGallery(content, { open: page.path === 'csapat/krasznai-mate' });
+  }
   if (useRevisedImages) {
     content = content.replace(/(<img\b[^>]*?\ssrc="\{\{root\}\})(assets\/images\/[^"]+)(")/gi,
       (match, prefix, path, suffix) => imageRevisions[path] ? prefix + imageRevisions[path] + suffix : match);

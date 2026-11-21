@@ -509,14 +509,34 @@
   white-space:nowrap;
 }
 
+.profile-reels.is-grid {
+  padding:0;
+  border:0;
+  background:transparent;
+}
+
+.profile-reels.is-grid > summary {
+  display:none;
+}
+
 .profile-reels .profile-video-gallery.is-paged {
+  position:relative;
   display:block;
   max-width:26rem;
   margin:0 auto;
 }
 
-.profile-reels [data-reel-cards] > [hidden] {
+.profile-reels [data-reel-cards] > [hidden],
+.profile-card #kezelesi-illusztracio[hidden],
+.profile-card .revision-block[hidden] {
   display:none;
+}
+
+.profile-reels [data-reel-preload] {
+  position:absolute;
+  inset:0 0 auto;
+  visibility:hidden;
+  pointer-events:none;
 }
 
 .profile-reels .ig-shell {
