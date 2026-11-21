@@ -3,8 +3,10 @@ const instagramOrigin = 'https://www.instagram.com';
 const headerHeight = 54;
 const footerHeight = 154;
 
-export function initInstagram(page) {
-  const slots = page.querySelectorAll('[data-ig-permalink]');
+const reelSelector = '[data-ig-permalink]';
+const gallerySelector = '[data-reel-gallery]';
+
+function initPlayers(slots) {
   if (!slots.length) return;
 
   const players = new Map();
@@ -79,5 +81,60 @@ export function initInstagram(page) {
       slot.classList.remove('is-ready');
     }
     players.clear();
+  };
+}
+
+
+function initReelGallery(gallery) {
+  const list = gallery.querySelector('[data-reel-cards]');
+  const controls = gallery.querySelector('[data-reel-controls]');
+  const cards = Array.from(list.children);
+  for (let index = cards.length - 1; index > 0; index--) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [cards[index], cards[other]] = [cards[other], cards[index]];
+  }
+  list.append(...cards);
+
+  const events = new AbortController();
+  const options = { signal: events.signal };
+  const count = controls.querySelector('[data-reel-count]');
+  let position = 0;
+  let disposePlayer;
+
+  function showCard() {
+    disposePlayer?.();
+    for (const [index, card] of cards.entries()) card.hidden = index !== position;
+    count.textContent = (position + 1) + ' / ' + cards.length;
+    disposePlayer = gallery.open ? initPlayers(cards[position].querySelectorAll(reelSelector)) : undefined;
+  }
+
+  function move(direction) {
+    position = (position + direction + cards.length) % cards.length;
+    showCard();
+  }
+
+  controls.querySelector('[data-reel-prev]').addEventListener('click', () => move(-1), options);
+  controls.querySelector('[data-reel-next]').addEventListener('click', () => move(1), options);
+  gallery.addEventListener('toggle', showCard, options);
+  list.classList.add('is-paged');
+  controls.hidden = false;
+  showCard();
+
+  return () => {
+    events.abort();
+    disposePlayer?.();
+    list.classList.remove('is-paged');
+    controls.hidden = true;
+    for (const card of cards) card.hidden = false;
+  };
+}
+
+export function initInstagram(page) {
+  const players = initPlayers([...page.querySelectorAll(reelSelector)].filter(slot => !slot.closest(gallerySelector)));
+  const galleries = [...page.querySelectorAll(gallerySelector)].map(initReelGallery);
+
+  return () => {
+    players?.();
+    for (const dispose of galleries) dispose();
   };
 }
