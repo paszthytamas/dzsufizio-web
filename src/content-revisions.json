@@ -97,9 +97,8 @@
     ]
   },
   "csapat/kirilla-tibor.html": {
-    "remove": [ "resz-142" ],
-    "insertAfter": [
-      [ "resz-147", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/kirilla-tibor-kezeles.webp\" class=\"prose-media\" alt=\"Kirilla Tibor egy vendég alkarján dolgozik lekerekített fasciakéssel.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-142"
     ],
     "replace": [
       [
@@ -110,9 +109,8 @@
     "booking": "https://dzsufizio.salonic.hu/employees/18448/?placeId=8226"
   },
   "csapat/varga-zoltan.html": {
-    "remove": [ "resz-182" ],
-    "insertAfter": [
-      [ "resz-188", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/varga-zoltan-kezeles.webp\" class=\"prose-media\" alt=\"Varga Zoltán egy hason fekvő vendég felső hátát masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-182"
     ],
     "replace": [
       [
@@ -406,16 +404,30 @@
     ]
   },
   "csapat/krasznai-mate.html": {
-    "remove": [ "resz-68" ],
-    "insertAfter": [
-      [ "resz-76", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/krasznai-mate-kezeles.webp\" class=\"prose-media\" alt=\"Krasznai Máté egy oldalt fekvő vendég hátán és vállán dolgozik.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-68"
     ],
-    "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226"
+    "booking": "https://dzsufizio.salonic.hu/employees/18331/?placeId=8226",
+    "profileReels": {
+      "ids": [
+        "DRR-a6VjBg0",
+        "DeoKGUNgKcx",
+        "Db-zALQofM9",
+        "DanO_4HAqHd",
+        "DYUek7xItwe",
+        "DV28ij9jI3J",
+        "DTK_wwojEqi",
+        "DQt7L8njCOW",
+        "DIlWhYWo08t",
+        "C7eidSKIqBH"
+      ],
+      "name": "Krasznai Máté",
+      "bookingAnchor": "resz-83"
+    }
   },
   "csapat/kuti-gergo.html": {
-    "remove": [ "resz-122" ],
-    "insertAfter": [
-      [ "resz-128", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/kuti-gergo-kezeles.webp\" class=\"prose-media\" alt=\"Kuti Gergő egy hason fekvő vendég vádliját masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-122"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/18444/?placeId=8226",
     "removeInstagramCard": "DCXBoSDIhWs"
@@ -425,10 +437,6 @@
       "resz-89"
     ],
     "insertAfter": [
-      [
-        "resz-97",
-        "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/virag-tamas-kezeles.webp\" class=\"prose-media\" alt=\"Virág Tamás egy hanyatt fekvő vendég karját vezeti és támasztja.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>"
-      ],
       [
         "resz-100",
         "<p class=\"word-p\" id=\"resz-106\">Ezek az apróságok ritkán jutnak eszünkbe elsőként, amikor magyarázatot keresünk. Addigra gyakran már túl vagyunk néhány internetes keresésen, és a ChatGPT-től is megkérdeztük, hogy érdemes-e még tartós tejet vennünk.</p>"
@@ -486,7 +494,7 @@
         "<p class=\"word-p\" id=\"resz-111\">És mielőtt a kortizolt kinevezzük minden bajunk felelősének: a folyamat ennél összetettebb. Tartós stressznél a stresszrendszer szabályozása változhat meg; nem egyszerűen arról van szó, hogy „sok a kortizol, ezért minden fáj”. <strong>A stressz és a fájdalom ráadásul kölcsönösen erősíthetik egymást.</strong> Fáj, ezért aggódsz és rosszabbul alszol; kialvatlanul, feszülten pedig nehezebb elviselni a fájdalmat. Kész is a körforgás, amelyre valószínűleg senki nem szeretett volna előfizetni.</p>",
         "</details>",
         "<details class=\"profile-extra\">",
-        "<summary>Mi változhat meg nyaraláskor?</summary>",
+        "<summary>Aktív pihenés és hatásai</summary>",
         "<p class=\"word-p\" id=\"resz-112\">Gondolj egy jól sikerült nyaralásra. Kellemes idő, kevesebb kötelezettség, több pihenés. Előfordult már, hogy olyankor a nyakad, vállad vagy derekad is kevésbé fájt?</p>",
         "<h3 id=\"pihenes-es-fajdalom\">Pihenés és fájdalomérzet</h3>",
         "<p class=\"word-p\" id=\"fajdalomcsillapito-rendszerek\">Ebben a szervezet saját fájdalomcsillapító rendszerei is szerepet kaphatnak. Az endorfinok és az endokannabinoidok hozzájárulhatnak a fájdalom csökkenéséhez és a kellemes közérzethez. A köznyelvben „boldogsághormonként” emlegetett dopamin, szerotonin és oxitocin szintén részt vesznek a hangulat, a jutalmazás, a kapcsolódás és a fájdalom szabályozásában – bár nem mind hormon, és a hatásuk sem egyforma. A szervezetünkben nincs olyan egyszerű kapcsoló, amely leállítja a kortizolt, és elindítja helyette a boldogságot. Pedig kétségtelenül lenne rá kereslet.</p>",
@@ -499,37 +507,32 @@
     }
   },
   "csapat/vizi-kristof.html": {
-    "remove": [ "resz-201" ],
-    "insertAfter": [
-      [ "resz-208", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/vizi-kristof-kezeles.webp\" class=\"prose-media\" alt=\"Vizi Kristóf egy ülő vendég csuklóját és alkarját támasztja meg.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-201"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31120/?placeId=8226"
   },
   "csapat/szilagyi-bianka.html": {
-    "remove": [ "resz-162" ],
-    "insertAfter": [
-      [ "resz-168", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/szilagyi-bianka-kezeles.webp\" class=\"prose-media\" alt=\"Szilágyi Bianka kineziológiai tapaszt helyez fel egy vendég vállára.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-162"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31270/?placeId=8226"
   },
   "csapat/bukovszki-mate.html": {
-    "remove": [ "resz-241" ],
-    "insertAfter": [
-      [ "resz-246", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/bukovszki-mate-kezeles.webp\" class=\"prose-media\" alt=\"Bukovszki Máté egy ülő vendég bokáját támasztja meg a kezelőágy mellett.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-241"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31375/?placeId=8226"
   },
   "csapat/horvath-bence.html": {
-    "remove": [ "resz-221" ],
-    "insertAfter": [
-      [ "resz-229", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/horvath-bence-kezeles.webp\" class=\"prose-media\" alt=\"Horváth Bence egy ülő vendég alkarját masszírozza.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-221"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31377/?placeId=8226"
   },
   "csapat/doncsev-vitalij.html": {
-    "remove": [ "resz-260" ],
-    "insertAfter": [
-      [ "resz-268", "<figure class=\"article-illus\" id=\"kezelesi-illusztracio\"><img src=\"{{root}}assets/images/modositott/csapat/doncsev-vitalij-kezeles.webp\" class=\"prose-media\" alt=\"Doncsev Vitalij egy oldalt fekvő vendég vállát kezeli.\" width=\"1280\" height=\"720\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"word-caption\">AI-val készült illusztráció.</figcaption></figure>" ]
+    "remove": [
+      "resz-260"
     ],
     "booking": "https://dzsufizio.salonic.hu/employees/31379/?placeId=8226"
   },

@@ -192,6 +192,61 @@ function singleBlock(html, pattern, attribute) {
   return matches[0];
 }
 
+function renderReelCard(id, label) {
+  if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new Error('Hibás Instagram-azonosító: ' + id);
+  const url = 'https://www.instagram.com/reel/' + id + '/';
+  const title = escapeExerciseText(label);
+  const linkAttrs = ' href="' + url + '" target="_blank" rel="noopener noreferrer"';
+  return '<article class="guest-card">\n' +
+    '<figure class="media-player instagram compact">\n' +
+    '  <div class="ig-shell" data-ig-permalink="' + url + '" data-ig-title="' + title + '">\n' +
+    '    <a class="ig-poster"' + linkAttrs + ' aria-label="Megnyitás az Instagramon: ' + title + '">' +
+    '<span class="ig-play" aria-hidden="true">▶</span><span class="ig-placeholder-label">Megnyitás az Instagramon</span></a>\n' +
+    '    <div class="ig-mount" inert></div>\n' +
+    '  </div>\n' +
+    '  <figcaption><a class="player-link"' + linkAttrs + '>Megnyitás az Instagramon</a></figcaption>\n' +
+    '</figure>\n</article>';
+}
+
+function renderProfileReels(html, { ids, name, bookingAnchor }, comparing) {
+  const current = singleBlock(html, /<section class="profile-videos"[^>]*>[\s\S]*?<\/section>/g, 'id="videok"');
+  if (!/^resz-\d+$/.test(bookingAnchor) || !html.includes('<h2 id="' + bookingAnchor + '">')) {
+    throw new Error('A videók utáni foglalási cím hiányzik.');
+  }
+  const existingCards = [...current.matchAll(/<article class="guest-card">[\s\S]*?<\/article>/g)].map(([card]) => card);
+  const existingIds = [...current.matchAll(/data-ig-permalink="https:\/\/www\.instagram\.com\/reel\/([A-Za-z0-9_-]+)\/"/g)].map(([, id]) => id);
+  if (!existingCards.length || existingCards.length !== existingIds.length || !ids.length ||
+      new Set([...existingIds, ...ids]).size !== existingIds.length + ids.length) {
+    throw new Error('Hiányzó vagy ismétlődő bemutatkozó videó.');
+  }
+  const added = ids.map(id => {
+    const card = renderReelCard(id, name + ' munkája');
+    return comparing ? mark('ins', card, true) : card;
+  });
+  const count = existingCards.length + added.length;
+  const updated = [
+    '<section class="profile-videos" id="videok" aria-labelledby="profilvideok-cim">',
+    '  <div class="profile-video-header">',
+    '    <h2 id="profilvideok-cim">Videók a munkámról</h2>',
+    '    <a class="profile-video-skip" href="#' + bookingAnchor + '">Ugrás az időpontfoglaláshoz</a>',
+    '  </div>',
+    '  <details class="profile-reels" data-reel-gallery>',
+    '    <summary>Videógaléria <span class="profile-reel-total">' + count + ' videó</span></summary>',
+    '    <div class="profile-reel-controls" data-reel-controls role="group" aria-label="Videógaléria lapozása" hidden>',
+    '      <button class="button alt" type="button" data-reel-prev>Előző</button>',
+    '      <p class="profile-reel-count" data-reel-count role="status"></p>',
+    '      <button class="button alt" type="button" data-reel-next>Következő</button>',
+    '    </div>',
+    '    <div class="gallery profile-video-gallery" data-reel-cards>',
+    ...existingCards,
+    ...added,
+    '    </div>',
+    '  </details>',
+    '</section>',
+  ].join('\n');
+  return replaceOnce(html, current, updated);
+}
+
 function replaceProfileDisclosure(html, { summary, lines }, comparing) {
   const previous = singleBlock(html, /<details class="profile-extra">[\s\S]*?<\/details>/g,
     '<summary>' + summary + '</summary>');
@@ -306,7 +361,7 @@ function renderExerciseChapter(html, items, comparing) {
 
 export function renderRevisions(source, {
   replace = [], remove = [], paragraphs = [], insertAfter = [], move, booking,
-  compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter, replaceDisclosure,
+  compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter, replaceDisclosure, profileReels,
 }) {
   let modified = source;
   let comparison = source;
@@ -362,6 +417,10 @@ export function renderRevisions(source, {
   if (exerciseChapter) {
     modified = renderExerciseChapter(modified, exerciseChapter.items, false);
     comparison = renderExerciseChapter(comparison, exerciseChapter.items, true);
+  }
+  if (profileReels) {
+    modified = renderProfileReels(modified, profileReels, false);
+    comparison = renderProfileReels(comparison, profileReels, true);
   }
   return { modified, comparison };
 }
