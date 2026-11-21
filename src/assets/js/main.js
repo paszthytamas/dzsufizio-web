@@ -3,6 +3,18 @@ import { rotateTeam } from './team.js';
 import { preference } from './preferences.js';
 import { initTikTok } from './media/tiktok.js';
 
+// Match Datawrapper height messages to the iframe that sent them.
+window.addEventListener('message', event => {
+  if (event.origin !== 'https://datawrapper.dwcdn.net') return;
+  const heights = event.data?.['datawrapper-height'];
+  if (!heights) return;
+  for (const frame of document.querySelectorAll('iframe[data-datawrapper-chart]')) {
+    if (frame.contentWindow !== event.source) continue;
+    const height = Number(heights[frame.dataset.datawrapperChart]);
+    if (Number.isFinite(height) && height > 0) frame.style.height = height + 'px';
+  }
+});
+
 function currentModule(relative) {
   const url = new URL(relative, import.meta.url);
   url.search = new URL(import.meta.url).search;

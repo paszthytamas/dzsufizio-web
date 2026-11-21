@@ -1471,96 +1471,10 @@ main:focus {
   aspect-ratio:auto;
 }
 
-.prevalence-chart {
-  margin:1.25rem 0;
-  padding:clamp(.8rem, 2.5vw, 1.25rem);
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--paper);
-}
-
-.prevalence-chart figcaption {
-  margin:0;
-  color:var(--ink);
-  line-height:1.35;
-}
-
-.prevalence-chart figcaption span {
+.datawrapper-chart {
   display:block;
-  margin-top:.35rem;
-  color:var(--muted);
-  font-size:.875rem;
-}
-
-.prevalence-chart-key {
-  display:flex;
-  align-items:center;
-  gap:.4rem;
-  margin:.85rem 0 .55rem;
-  font-size:.82rem;
-}
-
-.prevalence-chart-key::before {
-  content:"";
-  flex:none;
-  width:.65rem;
-  height:.65rem;
-  border-radius:2px;
-  background:var(--leaf);
-}
-
-.prevalence-chart-bars {
-  display:grid;
-  gap:.35rem;
-  padding:0;
-  margin:0;
-  list-style:none;
-}
-
-.article-card .body-copy .prevalence-chart-bars li {
-  display:grid;
-  grid-template-columns:minmax(0, 1.3fr) minmax(0, 1fr) 5.5ch;
-  align-items:center;
-  gap:.55rem;
-  margin:0;
-  font-size:.875rem;
-  line-height:1.35;
-  text-align:left;
-  overflow-wrap:anywhere;
-}
-
-.prevalence-chart-bars li.is-musculoskeletal {
-  font-weight:700;
-}
-
-.prevalence-chart-track {
-  height:.65rem;
-  background:#dfe4dd;
-  border-radius:4px;
-}
-
-.prevalence-chart-track::before {
-  content:"";
-  display:block;
-  width:calc(var(--share) * 100% / 30);
-  height:100%;
-  border-radius:inherit;
-  background:#858e8a;
-}
-
-.is-musculoskeletal .prevalence-chart-track::before {
-  background:var(--leaf);
-}
-
-.prevalence-chart-value {
-  white-space:nowrap;
-  text-align:right;
-  font-variant-numeric:tabular-nums;
-}
-
-.prevalence-chart-notes {
-  margin-top:.65rem;
-  font-size:.78rem;
-  line-height:1.45;
-  color:var(--muted);
+  width:0;
+  min-width:100%;
+  border:0;
+  margin-block:1rem;
 }

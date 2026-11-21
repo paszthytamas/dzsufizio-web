@@ -1,4 +1,7 @@
 {
+  "blog.html": {
+    "linkBlogAuthor": true
+  },
   "home.html": {
     "replace": [
       [
@@ -16,6 +19,11 @@
     ]
   },
   "blog/nyakfajas.html": {
+    "linkBlogAuthor": true,
+    "insertAfter": [
+      ["resz-6","<p class=\"word-p\">A tartós nyaki problémák is sokakat érintenek. A KSH 2025-ös felmérésében a 15 éves és idősebb lakosság <strong>7,5%-a</strong> jelzett a megelőző 12 hónapban fennálló, orvos által megállapított krónikus nyaki fájdalmat vagy egyéb nyaki gerincproblémát. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>\n{{ksh-chart}}"],
+      ["resz-75","<p class=\"word-p\" id=\"word-forras-11\">[11] <a href=\"https://www.ksh.hu/s/kiadvanyok/egeszsegi-allapot-es-egeszsegmagatartas-2025/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">KSH – Egészségi állapot és egészségmagatartás, 2025, 6. ábra.</a></p>"]
+    ],
     "remove": [
       "resz-51"
     ],
@@ -27,6 +35,7 @@
     ]
   },
   "blog/teniszkonyok.html": {
+    "linkBlogAuthor": true,
     "replace": [
       [
         "masszázst, mobilizáló és lazító fogásokat",
@@ -72,6 +81,7 @@
     }
   },
   "blog/vallfajdalom.html": {
+    "linkBlogAuthor": true,
     "replace": [
       [
         "masszázst, lazító és mobilizáló fogásokat",
@@ -594,9 +604,14 @@
     ]
   },
   "panaszok.html": {
+    "insertAfter": [
+      ["resz-4","<section aria-labelledby=\"ksh-mozgasszervi-adatok\">\n<h2 id=\"ksh-mozgasszervi-adatok\">Mennyire gyakoriak a mozgásszervi panaszok?</h2>\n<p class=\"word-p\">A KSH 2025-ös felmérésében a derék- és hátpanaszok a második helyen szerepeltek az orvos által megállapított krónikus egészségi problémák között. A tíz leggyakoribb kategória közül négy a mozgásszervi egészséghez kapcsolódik.</p>\n{{ksh-chart}}\n<p class=\"word-p\">A mindennapokban az számít, melyik mozdulat okoz nehézséget, és mióta tart a panasz. A Dzsufiziónál ezt beszéljük át az első alkalom elején. Bizonyos derék- és hátpanaszoknál a fizikai közérzetet javító alkalom része lehet a kíméletes mobilizáció vagy a <a href=\"{{root}}csontkovacsolas/\">csontkovácsolás</a>. Gyulladásos ízületi betegség esetén a reumatológiai ellátás adja a kiindulópontot.</p>\n</section>"]
+    ],
+    "tocInsertions": [["resz-5", "ksh-mozgasszervi-adatok", "Mennyire gyakoriak a mozgásszervi panaszok?"]],
     "compactComplaints": true
   },
   "blog/csontkovacsolas-biztonsaga.html": {
+    "linkBlogAuthor": true,
     "paragraphs": [
       [
         "resz-54",
@@ -614,6 +629,11 @@
     ]
   },
   "blog/becsipodott-a-derekad.html": {
+    "linkBlogAuthor": true,
+    "insertAfter": [
+      ["resz-3","<p class=\"word-p\">A tartós derék- és hátpanaszok is gyakoriak. A KSH 2025-ös felmérésében a 15 éves és idősebb lakosság <strong>18%-a</strong> számolt be orvos által megállapított krónikus derék- vagy hátpanaszról a felmérést megelőző 12 hónapra vonatkozóan. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>\n{{ksh-chart}}"],
+      ["resz-109","<p class=\"word-p\" id=\"word-forras-11\">[11] <a href=\"https://www.ksh.hu/s/kiadvanyok/egeszsegi-allapot-es-egeszsegmagatartas-2025/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">KSH – Egészségi állapot és egészségmagatartás, 2025, 6. ábra.</a></p>"]
+    ],
     "videoExercise": {
       "id": "7542111066570951958",
       "headingId": "resz-39",

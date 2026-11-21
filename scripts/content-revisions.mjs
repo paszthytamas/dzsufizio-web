@@ -370,11 +370,17 @@ function renderExerciseChapter(html, items, comparing) {
 }
 
 export function renderRevisions(source, {
-  replace = [], remove = [], paragraphs = [], insertAfter = [], move, booking,
+  replace = [], remove = [], paragraphs = [], insertAfter = [], tocInsertions = [], linkBlogAuthor, move, booking,
   compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter, replaceDisclosure, profileReels,
 }) {
   let modified = source;
   let comparison = source;
+  if (linkBlogAuthor) {
+    const original = '<b>Szerző: Krasznai Máté</b>';
+    const link = '<a href="{{root}}csapat/krasznai-mate/" rel="author">Krasznai Máté</a>';
+    modified = modified.replaceAll(original, '<b>Szerző: ' + link + '</b>');
+    comparison = comparison.replaceAll(original, '<b>Szerző: ' + mark('ins', link) + '</b>');
+  }
   if (replaceDisclosure) {
     modified = replaceProfileDisclosure(modified, replaceDisclosure, false);
     comparison = replaceProfileDisclosure(comparison, replaceDisclosure, true);
@@ -398,6 +404,13 @@ export function renderRevisions(source, {
     const compared = paragraph(comparison, id);
     modified = replaceOnce(modified, current, current + '\n' + content);
     comparison = replaceOnce(comparison, compared, compared + '\n' + mark('ins', content, true));
+  }
+  for (const [before, id, title] of tocInsertions) {
+    const entry = '<li><a href="#' + id + '">' + escapeExerciseText(title) + '</a></li>\n';
+    const modifiedEntry = tocEntry(modified, before);
+    const comparisonEntry = tocEntry(comparison, before);
+    modified = replaceOnce(modified, modifiedEntry, entry + modifiedEntry);
+    comparison = replaceOnce(comparison, comparisonEntry, entry + comparisonEntry);
   }
   if (move) {
     const old = section(source, move).replace(/\s+id="[^"]+"/g, '');

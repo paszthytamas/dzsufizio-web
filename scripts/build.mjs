@@ -9,11 +9,12 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const src = join(project, 'src');
 const dist = join(project, 'dist');
 const readSource = name => readFile(join(src, name), 'utf8');
-const [manifest, layout, notFound, mediaSlot, mainScript, siteStyles, mediaStyles, reviewAssets, revisionPlan, imageRevisions, contentView] = await Promise.all([
+const [manifest, layout, notFound, mediaSlot, kshChart, mainScript, siteStyles, mediaStyles, reviewAssets, revisionPlan, imageRevisions, contentView] = await Promise.all([
   readSource('pages.json').then(JSON.parse),
   readSource('layouts/base.html'),
   readSource('layouts/not-found.html'),
   readSource('components/media-slot.html'),
+  readSource('components/ksh-chart.html'),
   readSource('assets/js/main.js'),
   readSource('assets/css/site.css'),
   readSource('assets/css/media.css'),
@@ -85,6 +86,7 @@ function renderContent(page, fragment, root, useRevisedImages = false) {
       (match, prefix, path, suffix) => imageRevisions[path] ? prefix + imageRevisions[path] + suffix : match);
   }
   return content
+    .replaceAll('{{ksh-chart}}', kshChart.trim())
     .replaceAll('<div class="reader">', '<div class="reader reader--without-toc">')
     .replaceAll('<aside class="side">', '<aside class="side" hidden>')
     .replaceAll('{{root}}', escapeHtml(root))
