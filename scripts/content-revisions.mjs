@@ -369,9 +369,32 @@ function renderExerciseChapter(html, items, comparing) {
   return replaceOnce(updatedChapter, '<a href="#resz-27">' + oldTitle + '</a>', '<a href="#resz-27">' + title + '</a>');
 }
 
+function appendArticleSources(html, sources, comparing) {
+  const articleEnd = '</div></article><aside class="side">';
+  const usesSourceList = html.includes('<section class="article-sources">');
+  const entries = sources.map(([number, url, title]) => {
+    const id = 'word-forras-' + number;
+    const label = '[' + number + '] ';
+    const link = '<a href="' + escapeExerciseText(url) + '" target="_blank" rel="noopener noreferrer">';
+    const text = escapeExerciseText(title);
+
+    if (usesSourceList) {
+      const entry = link + label + text + '</a>';
+      return '<li id="' + id + '">' + (comparing ? mark('ins', entry) : entry) + '</li>';
+    }
+
+    const entry = '<p class="word-p" id="' + id + '">' + label + link + text + '</a></p>';
+    return comparing ? mark('ins', entry, true) : entry;
+  }).join('\n');
+
+  const end = usesSourceList ? '</ul></section>\n' + articleEnd : articleEnd;
+  return replaceOnce(html, end, entries + '\n' + end);
+}
+
 export function renderRevisions(source, {
   replace = [], remove = [], paragraphs = [], insertAfter = [], tocInsertions = [], linkBlogAuthor, move, booking,
   compactComplaints, removeInstagramCard: removedReel, videoExercise, exerciseChapter, replaceDisclosure, profileReels,
+  appendSources = [],
 }) {
   let modified = source;
   let comparison = source;
@@ -444,6 +467,10 @@ export function renderRevisions(source, {
   if (profileReels) {
     modified = renderProfileReels(modified, profileReels, false);
     comparison = renderProfileReels(comparison, profileReels, true);
+  }
+  if (appendSources.length) {
+    modified = appendArticleSources(modified, appendSources, false);
+    comparison = appendArticleSources(comparison, appendSources, true);
   }
   return { modified, comparison };
 }

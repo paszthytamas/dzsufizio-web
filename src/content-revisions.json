@@ -35,6 +35,12 @@
     ]
   },
   "blog/teniszkonyok.html": {
+    "appendSources": [
+      [11,"https://www.bmj.com/content/bmj/333/7575/939.full.pdf","Bisset és mtsai. (2006) – A teniszkönyök fájdalma kivárásra beosztott csoportban, 1. és 2. táblázat"]
+    ],
+    "insertAfter": [
+      ["resz-43","<p class=\"word-p\" id=\"statisztika-teniszkonyok\">Egy BMJ-vizsgálatban a kivárásra beosztott csoport átlagos fájdalompontszáma a vizsgálat kezdetén 61,3, hat hét múlva 51 volt a 0–100-as skálán. Egy évnél 13,9 pont volt az átlag. A résztvevők terhelési tanácsokat kaptak, és a követés során többen más ellátást is igénybe vettek. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>\n<p class=\"word-p\">Ha már egy bögre megemelése vagy a szerszám megfogása is fáj, egy <a href=\"#resz-45\">személyes egyeztetésen</a> átbeszélhetjük, melyik mozdulat okoz gondot, és hogyan igazíthatod hozzá az alkar terhelését.</p>"]
+    ],
     "linkBlogAuthor": true,
     "replace": [
       [
@@ -81,6 +87,9 @@
     }
   },
   "blog/vallfajdalom.html": {
+    "insertAfter": [
+      ["resz-114","<h3 id=\"vallfajdalom-a-mindennapokban\">Miben akadályoz a vállfájdalom?</h3>\n<p class=\"word-p\">Az öltözködés, a polcra nyúlás vagy az érintett oldalon alvás is jó példa arra, hogyan hat a vállfájdalom a napodra. Az első alkalomra gondold át, melyik mozdulatnál érzed a panaszt, mit kellett miatta módosítanod, és mit szeretnél újra kényelmesen végezni. Ebből indulunk ki, amikor megbeszéljük, milyen közérzetjavító fogások illenek a helyzetedhez.</p>"]
+    ],
     "linkBlogAuthor": true,
     "replace": [
       [
@@ -95,6 +104,12 @@
     ]
   },
   "bokafajdalom.html": {
+    "appendSources": [
+      [5,"https://pubmed.ncbi.nlm.nih.gov/34961654/","Michels és mtsai. (2022) – Fennmaradó fájdalom az első külső bokarándulás után"]
+    ],
+    "insertAfter": [
+      ["resz-15","<p class=\"word-p\" id=\"statisztika-bokarandulas\">Az első külső bokarándulást követően egy 15 vizsgálatot összesítő elemzésben három hónapnál 48,6%, hat hónapnál 21,5%, egy évnél 6,7% volt a még fájdalmat jelzők becsült aránya. A háromhavi becslés bizonytalansága nagy volt, a 95%-os konfidenciaintervallum 23,6% és 73,5% közé esett. <a href=\"#word-forras-5\"><sup>[5]</sup></a></p>\n<p class=\"word-p\">Ha még mindig fáj a bokád séta, lépcsőzés vagy sport közben, a <a href=\"#word-elso-alkalom\">személyes egyeztetésen</a> mondd el, melyik terhelésnél érzed, és mihez szeretnél visszatérni.</p>"]
+    ],
     "move": [
       "resz-7",
       "resz-43"
@@ -629,8 +644,12 @@
     ]
   },
   "blog/becsipodott-a-derekad.html": {
+    "appendSources": [
+      [12,"https://researchnow.flinders.edu.au/files/140336961/Wallwork_Clinical_P2024.pdf#page=11","Wallwork és mtsai. (2024) – A derékfájás lefolyása, 3. táblázat"]
+    ],
     "linkBlogAuthor": true,
     "insertAfter": [
+      ["resz-83","<p class=\"word-p\" id=\"statisztika-derekfajas\">Egy 2024-es kutatási összefoglalóban a friss derékfájással bevont csoportok átlagos fájdalompontszáma a vizsgálat kezdetén 56, hat hét múlva 26 volt a 0–100-as skálán. A becsült átlag a 26. héten 22, az 52. héten 21 pont volt. A követés a vizsgálatba lépéstől indult, és az adatok különböző ellátási környezetekből származnak. <a href=\"#word-forras-12\"><sup>[12]</sup></a></p>\n<p class=\"word-p\">Ha a felállás, a séta vagy a cipőfelvétel hetek óta nehéz, érdemes átbeszélni, hogyan térhetsz vissza fokozatosan ezekhez a mozdulatokhoz. Ebben a célzott otthoni gyakorlatok és a gyógytorna is szerepet kaphatnak. A <a href=\"#resz-87\">Dzsufiziónál végzett manuális fogások</a> az állapotodtól függően a mozgásprogram kiegészítői lehetnek.</p>"],
       ["resz-3","<p class=\"word-p\">A tartós derék- és hátpanaszok is gyakoriak. A KSH 2025-ös felmérésében a 15 éves és idősebb lakosság <strong>18%-a</strong> számolt be orvos által megállapított krónikus derék- vagy hátpanaszról a felmérést megelőző 12 hónapra vonatkozóan. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>\n{{ksh-chart}}"],
       ["resz-109","<p class=\"word-p\" id=\"word-forras-11\">[11] <a href=\"https://www.ksh.hu/s/kiadvanyok/egeszsegi-allapot-es-egeszsegmagatartas-2025/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">KSH – Egészségi állapot és egészségmagatartás, 2025, 6. ábra.</a></p>"]
     ],
