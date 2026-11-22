@@ -35,6 +35,12 @@
     ]
   },
   "blog/teniszkonyok.html": {
+    "appendSources": [
+      [11,"https://research.monash.edu/en/publications/persistent-tennis-elbow-symptoms-have-little-prognostic-value-a-s/","Ikonen és mtsai. (2022) – A teniszkönyök tüneteinek lefolyása"]
+    ],
+    "insertAfter": [
+      ["resz-43","<p class=\"word-p\" id=\"kutatasi-adat\">Egy kutatási összefoglalóban a placebo- vagy kezelés nélküli kontrollcsoportokból 213 résztvevőnél közöltek egyéves adatot az általános javulásról. Közülük 189-en, vagyis 89%-uk összességében javulást tapasztalt. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>"]
+    ],
     "linkBlogAuthor": true,
     "replace": [
       [
@@ -81,6 +87,12 @@
     }
   },
   "blog/vallfajdalom.html": {
+    "appendSources": [
+      [18,"https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2844659","Ibounig és mtsai. (2026) – MRI-eltérések tünetes és tünetmentes vállakban, 3. táblázat"]
+    ],
+    "insertAfter": [
+      ["resz-79","<p class=\"word-p\" id=\"kutatasi-adat\">Egy 602 fős finn vizsgálatban az MRI a panaszmentes vállak becslés szerint 6,5%-ánál, a tünetes vállak 14,6%-ánál mutatott ki teljes vastagságú rotátorköpeny-szakadást. <a href=\"#word-forras-18\"><sup>[18]</sup></a></p>"]
+    ],
     "linkBlogAuthor": true,
     "replace": [
       [
@@ -95,6 +107,12 @@
     ]
   },
   "bokafajdalom.html": {
+    "appendSources": [
+      [5,"https://pubmed.ncbi.nlm.nih.gov/34961654/","Michels és mtsai. (2022) – Fennmaradó tünetek az első külső oldali bokarándulás után"]
+    ],
+    "insertAfter": [
+      ["resz-15","<p class=\"word-p\" id=\"kutatasi-adat\">Egy első, külső oldali bokarándulás után a fájdalom még hónapokig érezhető lehet. Egy 15 vizsgálatot összegző elemzés becslése szerint három hónapnál 48,6%, hat hónapnál 21,5%, egy évnél 6,7% számolt be fennmaradó fájdalomról. A korai becslések bizonytalansága nagyobb volt. <a href=\"#word-forras-5\"><sup>[5]</sup></a></p>"]
+    ],
     "move": [
       "resz-7",
       "resz-43"
@@ -143,6 +161,12 @@
     ]
   },
   "csipofajdalom.html": {
+    "appendSources": [
+      [6,"https://www.bmj.com/content/bmj/351/bmj.h5983.full.pdf","Kim és mtsai. (2015) – A csípőfájdalom és a röntgenen látható ízületi kopás összefüggése"]
+    ],
+    "insertAfter": [
+      ["resz-16","<p class=\"word-p\" id=\"kutatasi-adat\">Egy 946 résztvevős amerikai vizsgálatban a gyakran fájó csípők 15,6%-ánál látták röntgenen az ízületi kopás jeleit. A kutatók a legtöbb napon jelentkező fájdalmat tekintették gyakorinak. <a href=\"#word-forras-6\"><sup>[6]</sup></a></p>"]
+    ],
     "move": [
       "resz-7",
       "resz-44"
@@ -155,6 +179,12 @@
     ]
   },
   "csontkovacsolas.html": {
+    "appendSources": [
+      [6,"https://www.cochrane.org/evidence/CD008112_what-are-benefits-and-risks-spinal-manipulative-therapy-chronic-low-back-pain","Cochrane, de Zoete és mtsai. (2026) – Gerincmanipuláció tartós derékfájás esetén"]
+    ],
+    "insertAfter": [
+      ["resz-25","<p class=\"word-p\" id=\"kutatasi-adat\">Egy Cochrane-összefoglaló szerint tartós derékfájással élő felnőtteknél a gerincmanipulációt vagy -mobilizációt vizsgáló csoportok fájdalompontszáma egy hónapnál átlagosan 4,7 ponttal volt alacsonyabb a 0–100-as skálán, mint más konzervatív ellátás mellett. Az átlagos különbség kicsi, a bizonyíték bizonyossága alacsony. <a href=\"#word-forras-6\"><sup>[6]</sup></a></p>"]
+    ],
     "replace": [
       [
         "merevebbnek érzed a hátadat;",
@@ -620,6 +650,12 @@
     ]
   },
   "masszazs.html": {
+    "appendSources": [
+      [4,"https://www.cochrane.org/evidence/CD004871_massage-neck-pain","Cochrane, Gross és mtsai. (2024) – Masszázs nyakfájás esetén"]
+    ],
+    "insertAfter": [
+      ["resz-35","<p class=\"word-p\" id=\"kutatasi-adat\">Egy Cochrane-összefoglalóban a hetek vagy hónapok óta nyakfájással élőknél nagyjából 12 hétnél a masszázst kapó csoportok átlagos fájdalompontszáma 3,4 ponttal volt alacsonyabb a 0–100-as skálán, mint placebo-masszázs mellett. A bizonyíték bizonyossága alacsony, és az eredmények a különbség hiányával is összeegyeztethetők. <a href=\"#word-forras-4\"><sup>[4]</sup></a></p>"]
+    ],
     "replace": [
       [
         "A végén megbeszéljük, hogyan érezted magad, és mi esett jól. Ha új vagy erősödő fájdalmat tapasztalsz, kérj egészségügyi tanácsot.",
@@ -629,8 +665,12 @@
     ]
   },
   "blog/becsipodott-a-derekad.html": {
+    "appendSources": [
+      [12,"https://researchnow.flinders.edu.au/files/140336961/Wallwork_Clinical_P2024.pdf#page=11","Wallwork és mtsai. (2024) – A derékfájás lefolyása, 3. táblázat"]
+    ],
     "linkBlogAuthor": true,
     "insertAfter": [
+      ["resz-83","<p class=\"word-p\" id=\"kutatasi-adat\">Egy 2024-es kutatási összefoglalóban a frissen jelentkező derékfájással vizsgált csoportok becsült átlagos fájdalompontszáma a vizsgálat kezdetén 56, hat héttel később 26 volt a 0–100-as skálán. A 26. és az 52. héten 22, illetve 21 pontot becsültek. A hetek a vizsgálatba lépéstől számítandók. <a href=\"#word-forras-12\"><sup>[12]</sup></a></p>"],
       ["resz-3","<p class=\"word-p\">A tartós derék- és hátpanaszok is gyakoriak. A KSH 2025-ös felmérésében a 15 éves és idősebb lakosság <strong>18%-a</strong> számolt be orvos által megállapított krónikus derék- vagy hátpanaszról a felmérést megelőző 12 hónapra vonatkozóan. <a href=\"#word-forras-11\"><sup>[11]</sup></a></p>\n{{ksh-chart}}"],
       ["resz-109","<p class=\"word-p\" id=\"word-forras-11\">[11] <a href=\"https://www.ksh.hu/s/kiadvanyok/egeszsegi-allapot-es-egeszsegmagatartas-2025/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">KSH – Egészségi állapot és egészségmagatartás, 2025, 6. ábra.</a></p>"]
     ],
